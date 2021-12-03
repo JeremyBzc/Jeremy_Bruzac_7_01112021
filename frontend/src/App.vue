@@ -6,7 +6,7 @@
           <b-navbar-nav>
             <b-nav-item href="/">Accueil</b-nav-item>
             <b-nav-item href="/about">L'entreprise</b-nav-item>
-            <b-nav-item href="#">Le Forum</b-nav-item>
+            <b-nav-item href="/forum">Le Forum</b-nav-item>
             <!-- Navbar dropdowns -->
             <b-nav-item-dropdown text="Compte" right>
               <b-dropdown-item href="/login"
