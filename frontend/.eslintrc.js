@@ -6,9 +6,10 @@ module.exports = {
   },
   parserOptions: {
     parser: 'babel-eslint',
+    ecmaVersion: 6
   },
   extends: [
-    '@nuxtjs',
+    "plugin:vue/base",
     'prettier',
     'prettier/vue',
     'plugin:prettier/recommended',
