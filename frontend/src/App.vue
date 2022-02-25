@@ -6,11 +6,11 @@
           <b-navbar-nav>
             <b-nav-item href="/">Accueil</b-nav-item>
             <b-nav-item href="/about">L'entreprise</b-nav-item>
-            <b-nav-item href="/forum">Le Forum</b-nav-item>
+            <b-nav-item v-if="register" href="/forum">Le Forum</b-nav-item>
             <!-- Navbar dropdowns -->
             <b-nav-item-dropdown text="Compte" right>
               <b-dropdown-item href="/login"
-                ><b-button variant="outline-success"
+                ><b-button v-if="register" variant="outline-success"
                   >Se connecter</b-button
                 ></b-dropdown-item
               >
@@ -115,5 +115,25 @@
   img {
     display: inline-block;
   }
+  .GroupoLogo {
+    display: flex;
+    height: 100px;
+    width: 100px;
+  }
+  img {
+    margin: 0;
+    padding: 0;
+  }
 }
 </style>
+
+<script>
+export default {
+  data() {
+    return {
+      register: false,
+      brand: 'Groupomania',
+    }
+  },
+}
+</script>

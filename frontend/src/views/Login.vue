@@ -44,7 +44,10 @@
           </div>
         </form>
       </div>
-      <div class="col-6 bg-light shadow p-3 mb-5 bg-white rounded">
+      <div
+        v-if="register"
+        class="col-6 bg-light shadow p-3 mb-5 bg-white rounded"
+      >
         <form>
           <p class="h4 text-center mb-4 border border-success">Se connecter</p>
           <label for="defaultFormLoginEmailEx" class="grey-text"
@@ -72,3 +75,15 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'Login',
+
+  data() {
+    return {
+      register: false,
+    }
+  },
+}
+</script>

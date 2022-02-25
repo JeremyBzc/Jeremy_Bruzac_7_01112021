@@ -9,11 +9,12 @@
       style="max-width: 20rem"
       class="mb-2"
     >
-      <b-card-text>
-        Comment maintenir une organisation en méthode agile avec des équipes à
-        distance ?
-      </b-card-text>
-
+      <b-card-text v-for="article in articles" :key="article.description">{{
+        article
+      }}</b-card-text>
+      <div v-for="article in articles" :key="article.id">
+        {{ article.description }}
+      </div>
       <b-button href="#" variant="primary">Lire l'actualité</b-button>
     </b-card>
   </div>
@@ -24,6 +25,32 @@ export default {
   name: 'ActuCards',
   props: {
     msg: String,
+  },
+  data() {
+    return {
+      articles: [
+        {
+          id: 2234,
+          title: "Le coup d'oeil",
+          image: './assets/images/socks_green.jpg',
+          description: 'blabla',
+        },
+
+        {
+          id: 2235,
+          title,
+          image: './assets/images/socks_blue.jpg',
+          description: 'blabla2',
+        },
+        {
+          id: 2236,
+          title,
+          image: './assets/images/socks_blue.jpg',
+          description: 'blabla3',
+        },
+      ],
+      reviews: [],
+    }
   },
 }
 </script>

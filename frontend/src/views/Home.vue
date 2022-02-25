@@ -9,7 +9,9 @@
         title="Groupomania"
       >
         <b-card-text>
-          Une entreprise de qualité qui valorise ses employés au quotidien
+          <h3>
+            Une entreprise de qualité qui valorise ses employés au quotidien
+          </h3>
         </b-card-text>
       </b-card>
     </div>
