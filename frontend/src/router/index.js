@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Forum from '../views/Forum.vue'
+import Post from '../views/Post.vue'
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,11 @@ const routes = [
     path: '/forum',
     name: 'Forum',
     component: Forum,
+  },
+  {
+    path: '/forum/:id',
+    name: 'Forum',
+    component: Post,
   },
 ]
 

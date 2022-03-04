@@ -10,7 +10,7 @@
             <!-- Navbar dropdowns -->
             <b-nav-item-dropdown text="Compte" right>
               <b-dropdown-item href="/login"
-                ><b-button v-if="register" variant="outline-success"
+                ><b-button variant="outline-success"
                   >Se connecter</b-button
                 ></b-dropdown-item
               >
