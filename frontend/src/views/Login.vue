@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <div class="container d-flex">
+    <div class="container d-flex justify-content-center">
       <div class="col-6 bg-light shadow p-3 mb-5 bg-white rounded">
         <form>
           <p class="h4 text-center mb-4 border border-success">S'inscrire</p>
@@ -43,6 +43,7 @@
             required
             v-model="inputRegister.password"
           />
+          <a href="/login">Déjà inscrit ? Connectez-vous !</a>
           <div class="text-center mt-4">
             <button
               class="btn btn-success"

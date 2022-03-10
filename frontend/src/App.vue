@@ -7,8 +7,14 @@
             <b-nav-item href="/">Accueil</b-nav-item>
             <b-nav-item href="/about">L'entreprise</b-nav-item>
             <b-nav-item v-if="register" href="/forum">Le Forum</b-nav-item>
+            <b-nav-item v-if="register" href="/profile">Profile</b-nav-item>
             <!-- Navbar dropdowns -->
             <b-nav-item-dropdown text="Compte" right>
+              <b-dropdown-item v-if="register" href="/profile"
+                ><b-button variant="outline-success"
+                  >Votre profile</b-button
+                ></b-dropdown-item
+              >
               <b-dropdown-item href="/login"
                 ><b-button variant="outline-success"
                   >Se connecter</b-button

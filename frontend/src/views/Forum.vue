@@ -13,20 +13,34 @@
       </div>
     </div>
     <div class="container">
-      <h2>Evênements</h2>
+      <h2 class="bg-light border my-4">Evênements</h2>
       <div class="col-12 d-flex justify-content-between">
         <PostForm v-for="(Post, index) in Posts" :key="index" :post="Post" />
       </div>
-      <h2>Vie en entreprise</h2>
+      <h2 class="bg-light border my-4">Vie en entreprise</h2>
       <div class="col-12 d-flex justify-content-between">
         <PostForm v-for="(Post, index) in Posts" :key="index" :post="Post" />
       </div>
-      <h2>Le Blabla</h2>
+      <h2 class="bg-light border my-4">Le Blabla</h2>
       <div class="col-12 d-flex justify-content-between">
         <PostForm v-for="(Post, index) in Posts" :key="index" :post="Post" />
       </div>
-      <h2>Écrire une publication</h2>
-      <div class="container"></div>
+      <div class="container jumbotron">
+        <h2>Créer une publication</h2>
+        <form action="/ma-page-de-traitement" method="post">
+          <div>
+            <label for="title">Titre :</label>
+            <input type="text" id="title" name="title" />
+          </div>
+          <div>
+            <label for="msg">Votre Message :</label>
+            <textarea id="msg" name="message"></textarea>
+          </div>
+          <div aria-label="Ajouter à votre publication">
+            Ajouter à votre publication
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>

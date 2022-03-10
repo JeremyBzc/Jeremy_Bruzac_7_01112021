@@ -1,8 +1,21 @@
 const express = require('express');
+const { Sequelize } = require('sequelize');
 
 const app = express();
 
 app.use(express.json());
+
+const sequelize = new Sequelize('GroupomaniaDB', 'root', 'ClimbUpToNeverGoDown!', {
+  host: 'localhost',
+  dialect: 'mysql',
+});
+
+try {
+  sequelize.authenticate();
+  console.log('La connection a été établie avec succès !');
+} catch (error) {
+  console.error('Impossible de se connecter à la base de donnée', error);
+}
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -12,34 +25,31 @@ app.use((req, res, next) => {
   });
 
 // EXEMPLE COURS À MODIF POUR LE PROJET 
-app.post('/api/stuff', (req, res, next) => {
+/* app.post('/api/post', (req, res, next) => {
     console.log(req.body);
     res.status(201).json({
-        message: 'Objet créé'
+        message: 'Publication créé'
     });
 
 });
-app.get('/api/stuff', (req, res, next) => {
-    const stuff = [
+app.get('/api/post', (req, res, next) => {
+    const post = [
       {
-        _id: 'oeihfzeoi',
+        id: 'oeihfzeoi',
         title: 'Mon premier objet',
-        description: 'Les infos de mon premier objet',
-        imageUrl: 'https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg',
-        price: 4900,
-        userId: 'qsomihvqios',
+        content: 'Les infos de mon premier objet',
+        user: Jerem,
       },
       {
-        _id: 'oeihfzeomoihi',
+        id: 'oeihfzeoi',
         title: 'Mon deuxième objet',
-        description: 'Les infos de mon deuxième objet',
-        imageUrl: 'https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg',
-        price: 2900,
-        userId: 'qsomihvqios',
+        content: 'Les infos de mon premier objet',
+        user: Jerem,
       },
     ];
-    res.status(200).json(stuff);
+    res.status(200).json(post);
   });
+*/
 // FIN DE L'EXEMPLE
 
 module.exports = app;
