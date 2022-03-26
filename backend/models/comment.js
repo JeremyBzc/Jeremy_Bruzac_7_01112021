@@ -5,11 +5,6 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Comment extends Model {
     static associate(models) {
-     models.Comment.belongsTo(models.User, {
-       foreignKey: {
-         allowNull: false,
-       },
-     });
      models.Comment.belongsTo(models.Post, {
       foreignKey: {
         allowNull: false,

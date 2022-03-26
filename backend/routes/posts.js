@@ -1,17 +1,24 @@
 const express = require('express');
-const router = express.Routeur();
+const router = express.Router();
 
-// Future Middleware d'authentification
+const postCtrl = require('../controllers/posts');
+const commentCtrl = require('../controllers/comment');
+const auth = require('../middleware/auth');
+const multer = require('../middleware/multer-config');
 
-// Future Logique métier messages controllers
 
-// Les routes
-router.get("/"); // Get Posts
-router.get("/users/:userId"); // Get Posts 
-router.get("/:postId"); // Get one Post
-router.post("/"); // Send Post
-router.put("/:postId"); // Update Post
-router.delete("/:postId"); // Delete Post
+// Les routes posts
+router.post('/', auth, multer, postCtrl.createPost);
+router.delete('/:id', auth, postCtrl.deletePost); 
+router.get('/:id', auth, postCtrl.getOnePost);
+router.get('/', auth, postCtrl.getAllPost); 
+
+// Les routes comments liés au posts
+router.post('/:postId/comment', auth, commentCtrl.createComment); 
+router.delete('/:postId/comments/:id', auth, commentCtrl.deleteComment); 
+router.get('/:postId/comments', auth, commentCtrl.getAllComment);
+
+
 
 // On Export
 module.exports = router;

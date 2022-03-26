@@ -1,16 +1,27 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// const { Sequelize } = require('sequelize');
+const path = require('path');
+const { sequelize } = require('./models/index');
 
 // Imports Routes
 const userRoutes = require('./routes/users');
 const postRoutes = require('./routes/posts');
 
+// Import variables environnements
+const dotEnv = require('dotenv');
+dotEnv.config();
 
-// Instantiate server
+// Check connection DB
+try {
+    sequelize.authenticate();
+    console.log('Connecté à la base de données MySQL !');
+} catch (error) {
+    console.log('Impossible de se connecter, erreur suivante :', error);
+}; 
+
+
+// Instantiate server with express
 const app = express();
-
-app.use(express.json());
 
 // CORS
 app.use((req, res, next) => {
@@ -20,6 +31,9 @@ app.use((req, res, next) => {
     next();
 
 });
+
+app.use(express.json());
+
 // Config Body parser + forcer le parse dans des objets inclus dans d'autres objets
 app.use(bodyParser.urlencoded({ extended: true }));
 // On parse du Json
@@ -28,6 +42,6 @@ app.use(bodyParser.json());
 // Les Routes
 app.use('/api/auth', userRoutes);
 app.use('/api/posts', postRoutes);
-app.use('/api/')
+app.use('/api/postId/comments', postRoutes);
 
 module.exports = app;
