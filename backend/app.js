@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const helmet = require('helmet');
 const { sequelize } = require('./models/index');
 
 // Imports Routes
@@ -32,16 +33,19 @@ app.use((req, res, next) => {
 
 });
 
-app.use(express.json());
-
 // Config Body parser + forcer le parse dans des objets inclus dans d'autres objets
 app.use(bodyParser.urlencoded({ extended: true }));
 // On parse du Json
 app.use(bodyParser.json());
 
-// Les Routes
+//Gestion de l'enregistrement des images dans le dossier image
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
+// Utilsation des Routes
 app.use('/api/auth', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/postId/comments', postRoutes);
+
+app.use(helmet());
 
 module.exports = app;

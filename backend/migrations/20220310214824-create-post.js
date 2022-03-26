@@ -24,13 +24,13 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      attachment: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
       likes: {
         allowNull: false,
         type: Sequelize.INTEGER
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,

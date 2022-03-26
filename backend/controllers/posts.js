@@ -1,15 +1,22 @@
 // Import models
 const models = require('../models/post');
+const fs = require('fs');
 
 
 // Create Post
 exports.createPost = (req, res, next) => {
+  if (!req.body) {
+    res.status(400).send({
+      message: "Le contenu ne peut pas être vide !"
+    })
+  }
     const post = models.Post.create({
         userId: req.body.userId,
         title: req.body.title,
         content: req.body.content,
         likes : 0,
-    })
+        attachment: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}`: null,
+    });
     post
     .save()
     .then(() => res.status(201).json({ message: "Publication créée !"}))
