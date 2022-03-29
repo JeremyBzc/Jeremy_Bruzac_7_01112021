@@ -9,12 +9,23 @@ const models = require('../models');
 const dotEnv = require('dotenv');
 dotEnv.config();
 
+// Import regex email
+const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$/;
 
 exports.signup = (req, res, next) => {
-
+  //Check if values == empty
     if (req.body.email == null || req.body.firstName == null || req.body.lastName == null || req.body.password == null) {
       return res.status(400).json({ error: 'Champs manquants !'})
     }
+  //Check email'convention
+    if (!EMAIL_REGEX.test(req.body.email)) {
+      return res.status(400).json({ error: "L'email n'est pas valide"});
+    }
+    if (!PASSWORD_REGEX.test(req.body.password)) {
+      return res.status(400).json({ error: "Mot de passe invalide ! Doit être entre 4 et 8 caractères incluant 1 Majuscule, 1 Minuscule et 1 chiffre."});
+    }
+  
     // Check if unique email in Database
     models.User.findOne({
       attributes: ['email'],
