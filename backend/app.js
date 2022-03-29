@@ -7,6 +7,7 @@ const { sequelize } = require('./models/index');
 // Imports Routes
 const userRoutes = require('./routes/users');
 const postRoutes = require('./routes/posts');
+const profileRoutes = require('./routes/profiles');
 
 // Import variables environnements
 const dotEnv = require('dotenv');
@@ -45,6 +46,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/auth', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/postId/comments', postRoutes);
+app.use('/api/profiles', profileRoutes);
 
 app.use(helmet());
 

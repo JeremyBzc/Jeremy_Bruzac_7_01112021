@@ -22,6 +22,7 @@ exports.signup = (req, res, next) => {
     if (!EMAIL_REGEX.test(req.body.email)) {
       return res.status(400).json({ error: "L'email n'est pas valide"});
     }
+  //Check password'convention
     if (!PASSWORD_REGEX.test(req.body.password)) {
       return res.status(400).json({ error: "Mot de passe invalide ! Doit être entre 4 et 8 caractères incluant 1 Majuscule, 1 Minuscule et 1 chiffre."});
     }
