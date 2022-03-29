@@ -11,25 +11,32 @@ dotEnv.config();
 
 
 exports.signup = (req, res, next) => {
+   console.log(req.body);
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
-            const user = models.User.create({
+            const user = models.User.build({
                 email: req.body.email,
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 password: hash,
                 isAdmin: false,
+                
             });
-            user.save()
+            if (user.email == null || user.firstName == null || user.lastName == null || user.password == null) {
+              return res.status(400).json({ 'error': 'Champs manquants !'})
+            } else {
+              user.save()
               .then(() => res.status(201).json({ message: 'Utilisateur créé !'}))
               .catch(error => res.status(400).json({ error }));
+            }  
         })
         .catch(error => res.status(500).json({ error }));
 };
 
 exports.login = (req, res, next) => {
-  models.User.findOne({ email: req.body.email })
+  models.User.findOne({ where: { email: req.body.email } })
     .then(user => {
+      console.log(user);
       if (!user) {
         return res.status(401).json({ error: 'Utilisateur non trouvé !'});
       }
@@ -39,7 +46,7 @@ exports.login = (req, res, next) => {
                 return res.status(401).json({ error: "Mot de passe incorrect !"})
             }
             res.status(200).json({
-                userId: user.id,
+                user: user,
                 token: jwt.sign(
                   { userId: user.id },
                   process.env.DB_TOKEN_SECRET,
