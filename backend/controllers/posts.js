@@ -41,7 +41,6 @@ exports.createPost = (req, res, next) => {
         attachment: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}`: null,
     });
     post
-    .save()
     .then(() => res.status(201).json({ message: "Publication créée !"}))
     .catch(error => res.status(400).json({ error: "Echec de la publication" }));
 };
