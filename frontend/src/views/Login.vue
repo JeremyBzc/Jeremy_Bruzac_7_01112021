@@ -93,7 +93,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+import authService from '../services/authService'
+
 export default {
   name: 'Login',
 
@@ -110,17 +111,19 @@ export default {
     }
   },
   methods: {
-    onregister() {
+    async onRegister() {
       let inputValues = {
         lastName: this.inputRegister.lastName,
         firstName: this.inputRegister.firstName,
         email: this.inputRegister.email,
         password: this.inputRegister.password,
       }
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(this.inputValues),
+      try {
+        const res = await authService.registerUser(inputValues)
+        console.log(res.data)
+        this.register = true
+      } catch (error) {
+        console.log(error.error)
       }
     },
 

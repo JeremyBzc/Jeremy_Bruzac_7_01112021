@@ -1,15 +1,18 @@
 // Import models
-const models = require('../models/comment');
+const models = require('../models');
 
 //Create comment
 exports.createComment = (req, res, next) => {
-    const comment = models.Comment.create({
-        userId: res.locals.userId,
-        postId: req.params.postId,
+    const userId = req.locals.userId;
+    models.Post.findOne({
+        where: { id: req.params.postId}
+    })
+    models.Comment.create({
+        UserId: userId,
+        PostId: req.params.postId,
         content: req.body.content,
-    });
-    comment
-    .save()
+        likes: 0,
+    })
     .then(() => res.status(201).json({ message: "Commentaire créé", comment}))
     .catch((error) => res.status(400).json({ error }));
 }
