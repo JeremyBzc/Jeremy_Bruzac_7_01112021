@@ -1,11 +1,17 @@
 // Import models
-const models = require('../models/post');
+const models = require('../models/');
 const fs = require('fs');
 
 // Get All Post
 exports.getAllPost = (req, res, next) => {
+  const fields = req.query.fields;
+  // const limit = parseInt(req.query.limit);
+  // const offset = parseInt(req.query.offset);
+  const order = req.query.order;
+
   models.Post.findAll({
-    order: [["createdAt"]],
+    order: [ order != null ? order.split(":") : ["createdAt", "DESC"]],
+    attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
     include : [
       {
         model: models.User,
@@ -35,19 +41,20 @@ exports.createPost = (req, res, next) => {
       message: "Le contenu ne peut pas être vide !"
     })
   }
-  models.User.findOne({
+  
+    models.User.findOne({
     where: { id: userId  },
   })
   .then(() => {
       models.Post.create({
-      userId: userId,
+      UserId: userId,
       title: req.body.title,
       content: req.body.content,
       likes : 0,
       attachment: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}`: null,
   })
     .then(() => res.status(201).json({ message: "Publication créée !"}))
-    .catch((error) => res.status(400).json({ error: "Echec de la publication" }));
+    .catch((error) => res.status(500).json({ error: "Echec de la publication" }));
   })
   .catch((err) => {
     return res.status(500).json({ error: err });
