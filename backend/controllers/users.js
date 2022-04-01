@@ -47,7 +47,7 @@ exports.signup = (req, res, next) => {
                 res.status(201).json({
                   userId: user.id,
                   token: jwt.sign(
-                    { userId: user.id },
+                    { userId: user.id, isAdmin: user.isAdmin },
                     process.env.DB_TOKEN_SECRET,
                     { expiresIn: '24h'},
                   ),
@@ -77,7 +77,7 @@ exports.login = (req, res, next) => {
             return res.status(200).json({
               userId: userFound.id,
               token: jwt.sign(
-                { userId: userFound.id },
+                { userId: userFound.id, isAdmin : userFound.isAdmin },
                 process.env.DB_TOKEN_SECRET,
                 { expiresIn: '24h'},
               ),

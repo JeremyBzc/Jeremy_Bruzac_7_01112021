@@ -28,21 +28,30 @@ exports.getOnePost = (req, res, next) => {
 
 // Create Post
 exports.createPost = (req, res, next) => {
+  const userId = res.locals.userId;
+
   if (!req.body) {
     res.status(400).send({
       message: "Le contenu ne peut pas être vide !"
     })
   }
-    const post = models.Post.create({
-        userId: req.body.userId,
-        title: req.body.title,
-        content: req.body.content,
-        likes : 0,
-        attachment: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}`: null,
-    });
-    post
+  models.User.findOne({
+    where: { id: userId  },
+  })
+  .then(() => {
+      models.Post.create({
+      userId: userId,
+      title: req.body.title,
+      content: req.body.content,
+      likes : 0,
+      attachment: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}`: null,
+  })
     .then(() => res.status(201).json({ message: "Publication créée !"}))
-    .catch(error => res.status(400).json({ error: "Echec de la publication" }));
+    .catch((error) => res.status(400).json({ error: "Echec de la publication" }));
+  })
+  .catch((err) => {
+    return res.status(500).json({ error: err });
+  })
 };
 
 // Edit Post

@@ -6,26 +6,29 @@
           <p class="h4 text-center mb-4 border border-success">S'inscrire</p>
           <label for="lastname" class="grey-text">Votre nom</label>
           <input
+            placeholder="Doe"
             type="text"
             id="lastname"
             name="lastname"
             class="form-control"
             required
-            v-model="inputRegister.lastname"
+            v-model="inputRegister.lastName"
           />
           <br />
           <label for="firstname" class="grey-text">Votre prénom</label>
           <input
+            placeholder="John"
             type="text"
             id="firstname"
             name="firstname"
             class="form-control"
             required
-            v-model="inputRegister.firstname"
+            v-model="inputRegister.firstName"
           />
           <br />
           <label for="email" class="grey-text">Votre E-mail</label>
           <input
+            placeholder="JohnDoe@groupomania.com"
             type="email"
             id="email"
             name="email"
@@ -36,6 +39,7 @@
           <br />
           <label for="password" class="grey-text">Votre Mot de passe</label>
           <input
+            placeholder="Axptdrl1"
             type="password"
             id="password"
             name="password"
@@ -89,6 +93,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'Login',
 
@@ -97,8 +102,8 @@ export default {
       register: false,
 
       inputRegister: {
-        lastname: '',
-        firstname: '',
+        lastName: '',
+        firstName: '',
         email: '',
         password: '',
       },
@@ -107,20 +112,25 @@ export default {
   methods: {
     onregister() {
       let inputValues = {
-        lastname: this.inputRegister.lastname,
-        firstname: this.inputRegister.firstname,
+        lastName: this.inputRegister.lastName,
+        firstName: this.inputRegister.firstName,
         email: this.inputRegister.email,
         password: this.inputRegister.password,
       }
-      console.log(inputValues)
-      // SUITE CHEMIN REQUETE
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(this.inputValues),
+      }
     },
+
+    login() {},
   },
   computed: {
     completed() {
       return (
-        this.inputRegister.lastname.length > 0 &&
-        this.inputRegister.firstname.length > 0 &&
+        this.inputRegister.lastName.length > 0 &&
+        this.inputRegister.firstName.length > 0 &&
         this.inputRegister.email.length > 0 &&
         this.inputRegister.password.length > 0
       )
