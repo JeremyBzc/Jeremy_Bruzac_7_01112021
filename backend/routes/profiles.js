@@ -8,6 +8,6 @@ const auth = require('../middleware/auth');
 // Les routes
 router.get("/:id", auth, profileCtrl.getUserProfile);
 router.put("/:id", auth, profileCtrl.editUserProfile);
-// router.get("/:id", auth, profileCtrl.deleteUserProfile);
+router.delete("/:id", auth, profileCtrl.deleteUserProfile);
 
 module.exports = router;

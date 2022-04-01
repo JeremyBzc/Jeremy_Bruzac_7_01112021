@@ -29,6 +29,8 @@ exports.editUserProfile = (req, res, next) => {
     const userId = res.locals.userId;
     const isAdmin = res.locals.isAdmin;
     const bio = req.body.bio;
+    const lastName = req.body.lastName;
+    const firstName = req.body.firstName;
 
     models.User.findOne({
         attributes: ['id', 'bio'],
@@ -39,9 +41,14 @@ exports.editUserProfile = (req, res, next) => {
             return res.status(403).json({ error: 'Utilisateur non autorisé !'});
         }
         userFound.update({
-            bio: (bio ? bio : userFound.bio)
+            bio: (bio ? bio : userFound.bio),
+            lastName: (lastName ? lastName : userFound.lastName),
+            firstName: (firstName ? firstName : userFound.firstName),
         })
-        .then((userFound))
+        .then(() => {
+            return res.status(202).json({ Message: "Modifications effectuées !"});
+            
+        })
         .catch(() => {
             return res.status(500).json({ error: "Échec de l'édit utilisateur"});
         })
@@ -49,7 +56,12 @@ exports.editUserProfile = (req, res, next) => {
     .catch(() => {
         return res.status(404).json({ error: "Utilisateur non trouvé"});
     })
-
-
-
+};
+// Delete USER
+exports.deleteUserProfile = (req, res, next) => {
+    models.User.destroy({
+        where: { id: res.locals.userId },
+    })
+    .then(() => res.status(200).json({ message: "Utilisateur supprimé"}))
+    .catch((error) => res.status(400).json({ error }));
 }
