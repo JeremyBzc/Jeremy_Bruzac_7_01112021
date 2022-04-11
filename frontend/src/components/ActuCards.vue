@@ -1,6 +1,8 @@
 <template>
   <div class="card">
     <b-card
+      v-for="article in articles"
+      :key="article.image"
       title="Le coup d'oeil"
       img-src="https://www.programmez.com/sites/default/files/experts_photos/kevin-abittan.jpg"
       img-alt="Image"
@@ -10,7 +12,7 @@
       class="mb-2"
     >
       <b-card-text v-for="article in articles" :key="article.description">{{
-        article
+        article.description
       }}</b-card-text>
       <div v-for="article in articles" :key="article.id">
         {{ article.description }}
@@ -33,20 +35,20 @@ export default {
           id: 2234,
           title: "Le coup d'oeil",
           image: './assets/images/socks_green.jpg',
-          description: 'blabla',
+          description: 'Une révélation',
         },
 
         {
           id: 2235,
-          title,
+          title: 'Pour le Télétravail ?',
           image: './assets/images/socks_blue.jpg',
-          description: 'blabla2',
+          description: 'Diminution du stress',
         },
         {
           id: 2236,
-          title,
+          title: 'Travailler en chaussettes ?',
           image: './assets/images/socks_blue.jpg',
-          description: 'blabla3',
+          description: 'Un confort assuré',
         },
       ],
       reviews: [],

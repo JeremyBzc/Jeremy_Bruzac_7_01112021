@@ -2,25 +2,42 @@
   <div id="app">
     <div id="nav">
       <div>
-        <b-navbar type="light" variant="success">
+        <b-navbar
+          type="light"
+          variant="success"
+          class="d-flex justify-content-between"
+        >
+          <div>
+            <img
+              src="https://adrien-brunelliere.com/wp-content/uploads/2021/06/Logo_groupomania_inverse-removebg-preview.png"
+              width="200"
+              alt="Logo Groupomania"
+            />
+          </div>
           <b-navbar-nav>
-            <b-nav-item href="/">Accueil</b-nav-item>
-            <b-nav-item href="/about">L'entreprise</b-nav-item>
-            <b-nav-item v-if="register" href="/forum">Le Forum</b-nav-item>
-            <b-nav-item v-if="register" href="/profile">Profile</b-nav-item>
+            <b-nav-item class="pr-4" to="/">Accueil</b-nav-item>
+            <b-nav-item class="pr-4" to="/about">L'entreprise</b-nav-item>
+            <b-nav-item class="pr-4" to="/forum" v-if="!isLimitedAccess"
+              >Le Forum</b-nav-item
+            >
             <!-- Navbar dropdowns -->
             <b-nav-item-dropdown text="Compte" right>
-              <b-dropdown-item v-if="register" href="/profile"
+              <b-dropdown-item v-if="!isLimitedAccess" to="/profile"
                 ><b-button variant="outline-success"
                   >Votre profile</b-button
                 ></b-dropdown-item
               >
-              <b-dropdown-item href="/login"
+              <b-dropdown-item v-if="!isLimitedAccess" to="/profile"
+                ><b-button variant="outline-success"
+                  >Se déconnecter</b-button
+                ></b-dropdown-item
+              >
+              <b-dropdown-item v-if="isLimitedAccess" to="/login"
                 ><b-button variant="outline-success"
                   >Se connecter</b-button
                 ></b-dropdown-item
               >
-              <b-dropdown-item href="/login"
+              <b-dropdown-item v-if="isLimitedAccess" to="/login"
                 ><b-button variant="outline-success"
                   >S'inscrire</b-button
                 ></b-dropdown-item
@@ -29,10 +46,8 @@
           </b-navbar-nav>
         </b-navbar>
       </div>
-      <!-- <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> -->
     </div>
-    <router-view />
+    <router-view></router-view>
     <footer class="bg-success text-center text-white">
       <!-- Grid container -->
       <div class="container p-4 pb-0">
@@ -112,23 +127,12 @@
 #nav {
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: #ffffff;
 
     &.router-link-exact-active {
-      color: #42b983;
+      background-color: rgba($color: #ffffff, $alpha: 0.4);
+      border-radius: 25px;
     }
-  }
-  img {
-    display: inline-block;
-  }
-  .GroupoLogo {
-    display: flex;
-    height: 100px;
-    width: 100px;
-  }
-  img {
-    margin: 0;
-    padding: 0;
   }
 }
 </style>
@@ -137,9 +141,14 @@
 export default {
   data() {
     return {
-      register: false,
       brand: 'Groupomania',
+      register: true,
     }
+  },
+  computed: {
+    isLimitedAccess() {
+      return this.$store.state.limitedAccess
+    },
   },
 }
 </script>
