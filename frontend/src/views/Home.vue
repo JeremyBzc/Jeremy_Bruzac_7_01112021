@@ -7,6 +7,7 @@
         img-alt="Image Entreprise"
         text-variant="success"
         title="Groupomania"
+        class="Banner"
       >
         <b-card-text>
           <h3>

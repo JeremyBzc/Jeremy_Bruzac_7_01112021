@@ -7,12 +7,8 @@
           variant="success"
           class="d-flex justify-content-between"
         >
-          <div>
-            <img
-              src="https://adrien-brunelliere.com/wp-content/uploads/2021/06/Logo_groupomania_inverse-removebg-preview.png"
-              width="200"
-              alt="Logo Groupomania"
-            />
+          <div class="Brand">
+            <img src="@/assets/Logo_groupomania2.png" alt="Logo Groupomania" />
           </div>
           <b-navbar-nav>
             <b-nav-item class="pr-4" to="/">Accueil</b-nav-item>
@@ -132,6 +128,25 @@
     &.router-link-exact-active {
       background-color: rgba($color: #ffffff, $alpha: 0.4);
       border-radius: 25px;
+    }
+    .b-nav-item-dropdown:active {
+      background-color: rgba($color: #ffffff, $alpha: 0.4);
+      border-radius: 25px;
+    }
+
+    &.dropdown-item:hover,
+    .dropdown-item:focus {
+      color: #16181b;
+      background-color: transparent;
+    }
+  }
+  .Brand {
+    height: 50px;
+    width: 25%;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
     }
   }
 }
