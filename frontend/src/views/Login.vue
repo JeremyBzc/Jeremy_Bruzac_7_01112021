@@ -1,38 +1,95 @@
 <template>
   <div class="login">
     <div class="container d-flex justify-content-center">
-      <div
-        v-if="isRegister"
-        class="col-6 bg-light shadow p-3 mb-5 bg-white rounded"
-      >
+      <div class="col-6 bg-light shadow p-3 mb-5 bg-white rounded">
         <form>
-          <p class="h4 text-center mb-4 border border-success">Se connecter</p>
-          <label for="defaultFormLoginEmailEx" class="grey-text"
-            >Votre email</label
+          <h1
+            class="h4 text-center mb-4 border border-success"
+            v-if="mode == 'login'"
           >
-          <input
-            placeholder="JohnDoe@groupomania.com"
-            type="email"
-            id="emaillog"
-            name="emaillog"
-            class="form-control"
-            required
-            v-model="inputLogin.email"
-          />
+            Se connecter
+          </h1>
+          <h1 class="h4 text-center mb-4 border border-success" v-else>
+            S'inscrire
+          </h1>
+          <p v-if="mode == 'login'">
+            Vous n'avez pas de compte ?
+            <a class="card__action" @click="switchToCreatedAccount()"
+              >Créer un compte</a
+            >
+          </p>
+          <p v-else>
+            Vous avez déjà un compte ?
+            <a class="card__action" @click="switchToLogin()">Se connecter</a>
+          </p>
+          <div>
+            <input
+              v-if="mode == 'login'"
+              placeholder="Adresse Mail"
+              type="email"
+              id="emaillog"
+              name="emaillog"
+              class="form-control"
+              required
+              v-model="inputLogin.email"
+            />
+            <input
+              v-else
+              placeholder="Adresse Mail"
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              required
+              v-model="inputRegister.email"
+            />
+          </div>
           <br />
-          <label for="defaultFormLoginPasswordEx" class="grey-text"
-            >Votre Mot de passe</label
-          >
-          <input
-            placeholder="Axptdrl1"
-            type="password"
-            id="passwordlog"
-            name="passwordlog"
-            class="form-control"
-            required
-            v-model="inputLogin.password"
-          />
-          <div class="text-center mt-4">
+          <div v-if="mode == 'create'">
+            <input
+              placeholder="Nom"
+              type="text"
+              id="lastname"
+              name="lastname"
+              class="form-control"
+              required
+              v-model="inputRegister.lastName"
+            />
+            <br />
+            <input
+              placeholder="Prénom"
+              type="text"
+              id="firstname"
+              name="firstname"
+              class="form-control"
+              required
+              v-model="inputRegister.firstName"
+            />
+          </div>
+          <br />
+          <div>
+            <input
+              v-if="mode == 'login'"
+              placeholder="Mot de passe"
+              type="password"
+              id="passwordlog"
+              name="passwordlog"
+              class="form-control"
+              required
+              v-model="inputLogin.password"
+            />
+            <input
+              v-else
+              placeholder="Mot de passe"
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+              required
+              v-model="inputRegister.password"
+            />
+          </div>
+          <div v-if="mode == 'login'" class="text-center mt-4">
             <button
               class="btn btn-success"
               type="submit"
@@ -42,56 +99,7 @@
               Se connecter
             </button>
           </div>
-        </form>
-      </div>
-      <div v-else class="col-6 bg-light shadow p-3 mb-5 bg-white rounded">
-        <form>
-          <p class="h4 text-center mb-4 border border-success">S'inscrire</p>
-          <label for="lastname" class="grey-text">Votre nom</label>
-          <input
-            placeholder="Doe"
-            type="text"
-            id="lastname"
-            name="lastname"
-            class="form-control"
-            required
-            v-model="inputRegister.lastName"
-          />
-          <br />
-          <label for="firstname" class="grey-text">Votre prénom</label>
-          <input
-            placeholder="John"
-            type="text"
-            id="firstname"
-            name="firstname"
-            class="form-control"
-            required
-            v-model="inputRegister.firstName"
-          />
-          <br />
-          <label for="email" class="grey-text">Votre E-mail</label>
-          <input
-            placeholder="JohnDoe@groupomania.com"
-            type="email"
-            id="email"
-            name="email"
-            class="form-control"
-            required
-            v-model="inputRegister.email"
-          />
-          <br />
-          <label for="password" class="grey-text">Votre Mot de passe</label>
-          <input
-            placeholder="Axptdrl1"
-            type="password"
-            id="password"
-            name="password"
-            class="form-control"
-            required
-            v-model="inputRegister.password"
-          />
-          <a href="/login" v-if="isRegister">Déjà inscrit ? Connectez-vous !</a>
-          <div class="text-center mt-4">
+          <div v-else class="text-center mt-4">
             <button
               class="btn btn-success"
               type="submit"
@@ -125,7 +133,7 @@ export default {
         email: '',
         password: '',
       },
-      isRegister: true,
+      mode: 'login',
     }
   },
   methods: {
@@ -141,6 +149,13 @@ export default {
         console.log('les informations saisies sont incorrectes')
       }
       return
+    },
+
+    switchToCreatedAccount() {
+      this.mode = 'create'
+    },
+    switchToLogin() {
+      this.mode = 'login'
     },
 
     async onRegister() {
