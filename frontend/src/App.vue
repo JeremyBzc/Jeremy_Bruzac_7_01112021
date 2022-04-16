@@ -18,12 +18,12 @@
             >
             <!-- Navbar dropdowns -->
             <b-nav-item-dropdown text="Compte" right>
-              <b-dropdown-item v-if="!isLimitedAccess" to="/profile"
+              <b-dropdown-item v-if="!isLimitedAccess" to="/profiles"
                 ><b-button variant="outline-success"
                   >Votre profile</b-button
                 ></b-dropdown-item
               >
-              <b-dropdown-item v-if="!isLimitedAccess" to="/profile"
+              <b-dropdown-item v-if="!isLimitedAccess" to="/profiles"
                 ><b-button variant="outline-success"
                   >Se déconnecter</b-button
                 ></b-dropdown-item

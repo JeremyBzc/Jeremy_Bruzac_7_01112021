@@ -39,7 +39,7 @@ const routes = [
     component: Post,
   },
   {
-    path: '/profile',
+    path: '/profiles',
     name: 'Profile',
     component: Profile,
   },

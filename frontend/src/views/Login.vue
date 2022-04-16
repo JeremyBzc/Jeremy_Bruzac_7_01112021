@@ -2,154 +2,121 @@
   <div class="login">
     <div class="container d-flex justify-content-center">
       <div class="col-6 bg-light shadow p-3 mb-5 bg-white rounded">
-        <form>
-          <h1
-            class="h4 text-center mb-4 border border-success"
-            v-if="mode == 'login'"
+        <h1
+          class="h4 text-center mb-4 border border-success"
+          v-if="mode == 'login'"
+        >
+          Se connecter
+        </h1>
+        <h1 class="h4 text-center mb-4 border border-success" v-else>
+          S'inscrire
+        </h1>
+        <p v-if="mode == 'login'">
+          Vous n'avez pas de compte ?
+          <a class="card__action" @click="switchToCreatedAccount()"
+            >Créer un compte</a
           >
-            Se connecter
-          </h1>
-          <h1 class="h4 text-center mb-4 border border-success" v-else>
+        </p>
+        <p v-else>
+          Vous avez déjà un compte ?
+          <a class="card__action" @click="switchToLogin()">Se connecter</a>
+        </p>
+        <div class="form-row">
+          <input
+            v-model="email"
+            placeholder="Adresse Mail"
+            type="email"
+            class="form-control"
+          />
+        </div>
+        <br />
+        <div class="form-row" v-if="mode == 'create'">
+          <input
+            v-model="firstName"
+            placeholder="Prénom"
+            type="text"
+            class="form-control"
+          />
+          <input
+            v-model="lastName"
+            placeholder="Nom"
+            type="text"
+            class="form-control"
+          />
+        </div>
+        <br />
+        <div class="form-row">
+          <input
+            v-model="password"
+            placeholder="Mot de passe"
+            type="password"
+            class="form-control"
+          />
+        </div>
+        <div class="form-row" v-if="mode == 'login' && status == 'error_login'">
+          Adresse mail ou mot de passe invalide !
+        </div>
+        <div
+          class="form-row"
+          v-if="mode == 'create' && status == 'error_create'"
+        >
+          Adresse mail déjà utilisée !
+        </div>
+        <div v-if="mode == 'login'" class="text-center mt-4">
+          <button
+            class="btn btn-success"
+            type="submit"
+            :disabled="!validatedFields"
+            @click.prevent="login()"
+          >
+            <span v-if="status == 'loading'">Connexion en cours...</span>
+            <span v-else>Se connecter</span>
+          </button>
+        </div>
+        <div v-else class="text-center mt-4">
+          <button
+            class="btn btn-success"
+            type="submit"
+            :disabled="!validatedFields"
+            @click.prevent="onRegister()"
+          >
             S'inscrire
-          </h1>
-          <p v-if="mode == 'login'">
-            Vous n'avez pas de compte ?
-            <a class="card__action" @click="switchToCreatedAccount()"
-              >Créer un compte</a
-            >
-          </p>
-          <p v-else>
-            Vous avez déjà un compte ?
-            <a class="card__action" @click="switchToLogin()">Se connecter</a>
-          </p>
-          <div>
-            <input
-              v-if="mode == 'login'"
-              placeholder="Adresse Mail"
-              type="email"
-              id="emaillog"
-              name="emaillog"
-              class="form-control"
-              required
-              v-model="inputLogin.email"
-            />
-            <input
-              v-else
-              placeholder="Adresse Mail"
-              type="email"
-              id="email"
-              name="email"
-              class="form-control"
-              required
-              v-model="inputRegister.email"
-            />
-          </div>
-          <br />
-          <div v-if="mode == 'create'">
-            <input
-              placeholder="Nom"
-              type="text"
-              id="lastname"
-              name="lastname"
-              class="form-control"
-              required
-              v-model="inputRegister.lastName"
-            />
-            <br />
-            <input
-              placeholder="Prénom"
-              type="text"
-              id="firstname"
-              name="firstname"
-              class="form-control"
-              required
-              v-model="inputRegister.firstName"
-            />
-          </div>
-          <br />
-          <div>
-            <input
-              v-if="mode == 'login'"
-              placeholder="Mot de passe"
-              type="password"
-              id="passwordlog"
-              name="passwordlog"
-              class="form-control"
-              required
-              v-model="inputLogin.password"
-            />
-            <input
-              v-else
-              placeholder="Mot de passe"
-              type="password"
-              id="password"
-              name="password"
-              class="form-control"
-              required
-              v-model="inputRegister.password"
-            />
-          </div>
-          <div v-if="mode == 'login'" class="text-center mt-4">
-            <button
-              class="btn btn-success"
-              type="submit"
-              :disabled="!completedLogin"
-              @click.prevent="login"
-            >
-              Se connecter
-            </button>
-          </div>
-          <div v-else class="text-center mt-4">
-            <button
-              class="btn btn-success"
-              type="submit"
-              :disabled="!completedRegister"
-              @click.prevent="onRegister"
-            >
-              S'inscrire
-            </button>
-          </div>
-        </form>
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import authService from '../services/authService'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Login',
 
   data() {
     return {
-      inputRegister: {
-        lastName: '',
-        firstName: '',
-        email: '',
-        password: '',
-      },
-      inputLogin: {
-        email: '',
-        password: '',
-      },
+      email: '',
+      firstName: '',
+      lastName: '',
+      password: '',
       mode: 'login',
     }
   },
   methods: {
-    checkUp() {
-      const EMAIL_REGEX =
-        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$/
+    // checkUp() {
+    //   const EMAIL_REGEX =
+    //     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    //   const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$/
 
-      if (
-        !this.checkUp(this.email, EMAIL_REGEX) ||
-        !this.checkUp(this.password, PASSWORD_REGEX)
-      ) {
-        console.log('les informations saisies sont incorrectes')
-      }
-      return
-    },
+    //   if (
+    //     !this.checkUp(this.email, EMAIL_REGEX) ||
+    //     !this.checkUp(this.password, PASSWORD_REGEX)
+    //   ) {
+    //     console.log('les informations saisies sont incorrectes')
+    //   }
+    //   return
+    // },
 
     switchToCreatedAccount() {
       this.mode = 'create'
@@ -158,52 +125,71 @@ export default {
       this.mode = 'login'
     },
 
-    async onRegister() {
-      let inputValues = {
-        lastName: this.inputRegister.lastName,
-        firstName: this.inputRegister.firstName,
-        email: this.inputRegister.email,
-        password: this.inputRegister.password,
-      }
-      try {
-        const res = await authService.registerUser(inputValues)
-        console.log(res.data)
-        // this.$store.register = true
-        this.$router.push('/profile')
-      } catch (error) {
-        console.log(error.error)
-      }
+    onRegister() {
+      const self = this
+      this.$store
+        .dispatch('onRegister', {
+          email: this.email,
+          firstName: this.firstName,
+          lastName: this.lastName,
+          password: this.password,
+        })
+        .then((response) => {
+          self.login()
+          console.log(response)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     },
 
-    async login() {
-      let inputValues = {
-        email: this.inputLogin.email,
-        password: this.inputLogin.password,
-      }
-      try {
-        const res = await authService.loginUser(inputValues)
-        console.log(res.data)
-        this.$store.dispatch('limitedAccess', false)
-        this.$router.push('/profile')
-      } catch (error) {
-        console.log(error.error)
-      }
+    login() {
+      const self = this
+      this.$store
+        .dispatch('login', {
+          email: this.email,
+          password: this.password,
+        })
+        .then(() => {
+          self.$router.push('/profiles')
+          self.$store.dispatch('limitedAccess', false)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+
+      // try {
+      //   const res = await authService.loginUser(inputValues)
+      //   console.log(res.data)
+      //   this.$store.dispatch('limitedAccess', false)
+      //   this.$router.push('/profile')
+      // } catch (error) {
+      //   console.log(error.error)
+      // }
     },
   },
   computed: {
-    completedRegister() {
-      return (
-        this.inputRegister.lastName.length > 0 &&
-        this.inputRegister.firstName.length > 0 &&
-        this.inputRegister.email.length > 0 &&
-        this.inputRegister.password.length > 0
-      )
+    validatedFields() {
+      if (this.mode == 'create') {
+        if (
+          this.email != '' &&
+          this.firstName != '' &&
+          this.lastName != '' &&
+          this.password != ''
+        ) {
+          return true
+        } else {
+          return false
+        }
+      } else {
+        if (this.email != '' && this.password != '') {
+          return true
+        } else {
+          return false
+        }
+      }
     },
-    completedLogin() {
-      return (
-        this.inputLogin.email.length > 0 && this.inputLogin.password.length > 0
-      )
-    },
+    ...mapState(['status']),
   },
 }
 </script>

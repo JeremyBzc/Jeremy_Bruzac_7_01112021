@@ -5,10 +5,7 @@
         <div class="card card-profile shadow">
           <div class="row justify-content-center">
             <div class="col-lg-12 d-flex justify-content-center">
-              <h1>Votre profile utilisateur, Id:</h1>
-              <p v-for="user in users" :key="user.id">
-                {{ user.id }}
-              </p>
+              <h1>Votre profil utilisateur, Id:</h1>
             </div>
           </div>
           <div
@@ -28,23 +25,12 @@
               <div class="col"></div>
             </div>
             <div class="text-center">
-              <h3
-                class="font-weight-light"
-                v-for="user in users"
-                :key="user.firstName"
-              >
-                {{ user.firstName }} {{ user.lastName }}
-              </h3>
+              <h3 class="font-weight-light">Jérémy Bruzac</h3>
               <div class="h5 font-weight-300">
                 <i class="ni location_pin mr-2"></i>Paris, France
               </div>
               <div class="h5 mt-4">
-                <i
-                  class="ni business_briefcase-24 mr-2"
-                  v-for="user in users"
-                  :key="user.bio"
-                  >{{ user.bio }}
-                </i>
+                <i class="ni business_briefcase-24 mr-2">J'adore le bio</i>
               </div>
               <hr class="my-4" />
               <cite>
@@ -62,31 +48,29 @@
 <script>
 // import ProfileForm from '../components/ProfileForm.vue' // POUR CHANGER LES INFOS USER
 import profileService from '../services/profileService'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Profile',
   data() {
-    return {
-      users: [
-        {
-          id: 3000,
-          lastName: 'Bruzac',
-          firstName: 'Jeremy',
-          password: 'blabla',
-          bio: "Je suis une description assez aboutie dans le cadre d'une application qui ne fonctionne pas très bien",
-        },
-      ],
-    }
+    return {}
   },
   methods: {
-    async UserProfile() {
-      const userToken = JSON.parse(localStorage).getItem('userId', 'token')
-      const userId = this.$route.params.userId
-
-      try {
-        const res = await profileService.getUserProfile
-      } catch (error) {}
-    },
+    // async UserProfile() {
+    //   const userToken = JSON.parse(localStorage).getItem('userId', 'token')
+    //   const userId = this.$route.params.userId
+    //   try {
+    //     const res = await profileService.getUserProfile
+    //   } catch (error) {}
+    // },
+  },
+  mounted: function () {
+    console.log(this.$store.state.user)
+    if (this.$store.state.user.userId == -1) {
+      this.$router.push('/login')
+      return
+    }
+    this.$store.dispatch('getUserProfile')
   },
 }
 </script>
