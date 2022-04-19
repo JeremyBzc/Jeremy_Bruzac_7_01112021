@@ -53,11 +53,15 @@
             class="form-control"
           />
         </div>
-        <div class="form-row" v-if="mode == 'login' && status == 'error_login'">
+        <div
+          class="form-row err4"
+          v-if="mode == 'login' && status == 'error_login'"
+          variant="danger"
+        >
           Adresse mail ou mot de passe invalide !
         </div>
         <div
-          class="form-row"
+          class="form-row err4"
           v-if="mode == 'create' && status == 'error_create'"
         >
           Adresse mail déjà utilisée !
@@ -104,19 +108,20 @@ export default {
     }
   },
   methods: {
-    // checkUp() {
-    //   const EMAIL_REGEX =
-    //     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    //   const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$/
+    checkUp() {
+      const EMAIL_REGEX =
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$/
 
-    //   if (
-    //     !this.checkUp(this.email, EMAIL_REGEX) ||
-    //     !this.checkUp(this.password, PASSWORD_REGEX)
-    //   ) {
-    //     console.log('les informations saisies sont incorrectes')
-    //   }
-    //   return
-    // },
+      if (
+        !this.checkUp(this.email, EMAIL_REGEX) ||
+        !this.checkUp(this.password, PASSWORD_REGEX)
+      ) {
+        console.log('les informations saisies sont incorrectes')
+      }
+      return
+    },
+    // CRÉER UNE MÉTHODE CheckUp Validité pour vérifier si l'email et le pass = bon pour éviter le then en cas d'error
 
     switchToCreatedAccount() {
       this.mode = 'create'
@@ -157,16 +162,8 @@ export default {
         .catch((error) => {
           console.log(error)
         })
-
-      // try {
-      //   const res = await authService.loginUser(inputValues)
-      //   console.log(res.data)
-      //   this.$store.dispatch('limitedAccess', false)
-      //   this.$router.push('/profile')
-      // } catch (error) {
-      //   console.log(error.error)
-      // }
     },
+    ...mapState(['limitedAccess']),
   },
   computed: {
     validatedFields() {
@@ -193,3 +190,8 @@ export default {
   },
 }
 </script>
+<style>
+.err4 {
+  color: red;
+}
+</style>

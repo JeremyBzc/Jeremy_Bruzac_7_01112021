@@ -39,39 +39,53 @@ export default new Vuex.Store({
     limitedAccess({ commit }, bool) {
       commit('setLimitedAccess', bool)
     },
-    onRegister: ({ commit }, userInfos) => {
+    onRegister: async ({ commit }, userInfos) => {
       commit('setStatus', 'loading')
-      return new Promise((resolve, reject) => {
-        commit
-        authService
-          .registerUser(userInfos)
-          .then((response) => {
-            commit('setStatus', 'created')
-            resolve(response)
-          })
-          .catch((error) => {
-            commit('setStatus', 'error_create')
-            reject(error)
-          })
-      })
+      try {
+        const user = await authService.registerUser(userInfos)
+        console.log(user.data)
+        commit('setStatus', 'created')
+      } catch {
+        commit('setStatus', 'error_create')
+      } finally {
+        commit('setStatus', 'loaded')
+      }
+      // authService
+      //   .registerUser(userInfos)
+      //   .then((response) => {
+      //     commit('setStatus', 'created')
+      //     resolve(response)
+      //   })
+      //   .catch((error) => {
+      //     commit('setStatus', 'error_create')
+      //     reject(error)
+      //   })
     },
-    login: ({ commit }, userInfos) => {
+    login: async ({ commit }, userInfos) => {
       commit('setStatus', 'loading')
-      return new Promise((resolve, reject) => {
-        authService
-          .loginUser(userInfos)
-          .then((response) => {
-            console.log(userInfos)
-            console.log(response)
-            commit('setStatus', 'Connecté')
-            commit('logUser', response.data)
-            resolve(response)
-          })
-          .catch((error) => {
-            commit('setStatus', 'error_login')
-            reject(error)
-          })
-      })
+      try {
+        const user = await authService.loginUser(userInfos)
+        console.log(user.data)
+        console.log(userInfos);
+        commit('setStatus', 'Connecté')
+        commit('logUser', user.data)
+      } catch {
+        commit('setStatus', 'error_login')
+      } 
+
+      // authService
+      //   .loginUser(userInfos)
+      //   .then((response) => {
+      //     console.log(userInfos)
+      //     console.log(response)
+      //     commit('setStatus', 'Connecté')
+      //     commit('logUser', response.data)
+      //     resolve(response)
+      //   })
+      //   .catch((error) => {
+      //     commit('setStatus', 'error_login')
+      //     reject(error)
+      //   })
     },
     getUserProfile: ({ commit }) => {
       profileService

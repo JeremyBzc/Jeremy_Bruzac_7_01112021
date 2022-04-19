@@ -78,5 +78,12 @@ export default {
       ],
     }
   },
+  mounted: function () {
+    console.log(this.$store.state.user)
+    if (this.$store.state.user.userId == -1) {
+      this.$router.push('/login')
+      return
+    }
+  },
 }
 </script>
