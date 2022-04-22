@@ -162,7 +162,7 @@ export default {
   },
   computed: {
     isLimitedAccess() {
-      return this.$store.state.limitedAccess
+      return this.$store.state.users.limitedAccess
     },
   },
 }

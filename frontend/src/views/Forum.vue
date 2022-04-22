@@ -6,24 +6,14 @@
       </div>
       <div>
         <b-list-group>
-          <b-list-group-item>Les Evênements</b-list-group-item>
-          <b-list-group-item>La vie en entreprise</b-list-group-item>
-          <b-list-group-item>Le Blabla</b-list-group-item>
+          <b-list-group-item>Le Mur</b-list-group-item>
         </b-list-group>
       </div>
     </div>
     <div class="container">
-      <h2 class="bg-light border my-4">Evênements</h2>
+      <h2 class="bg-light border my-4">Le mur</h2>
       <div class="col-12 d-flex justify-content-between">
-        <PostCard v-for="(Post, index) in Posts" :key="index" :post="Post" />
-      </div>
-      <h2 class="bg-light border my-4">Vie en entreprise</h2>
-      <div class="col-12 d-flex justify-content-between">
-        <PostCard v-for="(Post, index) in Posts" :key="index" :post="Post" />
-      </div>
-      <h2 class="bg-light border my-4">Le Blabla</h2>
-      <div class="col-12 d-flex justify-content-between">
-        <PostCard v-for="(Post, index) in Posts" :key="index" :post="Post" />
+        <PostCard v-for="(post, index) in posts" :key="index" :post="post" />
       </div>
       <div class="container jumbotron">
         <div class="container d-flex justify-content-center">
@@ -70,36 +60,14 @@ export default {
   components: {
     PostCard,
   },
-  data() {
-    return {
-      Posts: [
-        {
-          id: 1,
-          title: 'Premier post',
-          author: 'Jérém',
-          date: new Date(),
-          description: 'Je suis une description vraiment aboutie',
-        },
-        {
-          id: 2,
-          title: 'Le réseau LAN',
-          author: 'Kevin',
-          date: new Date(),
-          description: "J'explique le réseau informatique",
-        },
-        {
-          id: 3,
-          title: 'Information sur vos pauses Dej',
-          author: 'Admin',
-          date: new Date(),
-          description: 'Je tiens à vous remercier pour la propreté des locaux',
-        },
-      ],
-    }
+  computed: {
+    posts() {
+      return this.$store.getters.getPosts // Fonction pour retourner les posts
+    },
   },
   mounted: function () {
-    console.log(this.$store.state.user)
-    if (this.$store.state.user.userId == -1) {
+    console.log(this.$store.state.users.user)
+    if (this.$store.state.users.user.userId == -1) {
       this.$router.push('/login')
       return
     }
