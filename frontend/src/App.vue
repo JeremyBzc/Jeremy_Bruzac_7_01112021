@@ -102,7 +102,7 @@
       <!-- Grid container -->
 
       <!-- Copyright -->
-      <div class="text-center p-3">
+      <div id="timestamp" class="text-center p-3">
         © 2021 Copyright:
         <a class="text-white" href="https://mdbootstrap.com/">Groupomania</a>
       </div>

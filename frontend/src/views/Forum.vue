@@ -26,20 +26,39 @@
         <PostForm v-for="(Post, index) in Posts" :key="index" :post="Post" />
       </div>
       <div class="container jumbotron">
-        <h2>Créer une publication</h2>
-        <form action="/ma-page-de-traitement" method="post">
-          <div>
-            <label for="title">Titre :</label>
-            <input type="text" id="title" name="title" />
+        <div class="container d-flex justify-content-center">
+          <div class="col-9 bg-light shadow p-3 mb-5 bg-white rounded">
+            <h1 class="h4 text-center mb-4 border border-success">
+              Créer une publication
+            </h1>
+            <div class="form-row">
+              <input
+                v-model="title"
+                placeholder="Titre"
+                type="text"
+                class="form-control"
+              />
+            </div>
+            <br />
+            <div class="form-row">
+              <textarea
+                v-model="content"
+                placeholder="Contenu"
+                type="textarea"
+                class="form-control"
+              />
+            </div>
+            <div class="text-center mt-4">
+              <button
+                class="btn btn-success"
+                type="submit"
+                :disabled="!validatedFields"
+              >
+                Envoyer
+              </button>
+            </div>
           </div>
-          <div>
-            <label for="msg">Votre Message :</label>
-            <textarea id="msg" name="message"></textarea>
-          </div>
-          <div aria-label="Ajouter à votre publication">
-            Ajouter à votre publication
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>

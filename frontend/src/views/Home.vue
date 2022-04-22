@@ -19,14 +19,12 @@
     <div><h1>DERNIÈRES ACTUALITÉS</h1></div>
     <div class="container">
       <div class="row">
-        <div class="col-4">
-          <ActuCards></ActuCards>
-        </div>
-        <div class="col-4">
-          <ActuCards></ActuCards>
-        </div>
-        <div class="col-4">
-          <ActuCards></ActuCards>
+        <div class="col-12 d-flex justify-content-between">
+          <ActuCards
+            v-for="(Article, index) in Articles"
+            :key="index"
+            :article="Article"
+          />
         </div>
       </div>
     </div>
@@ -37,9 +35,7 @@
       </div>
     </div>
     <div><h1>LA MÉTÉO DU JOUR</h1></div>
-    <div class="container-light">
-      <div>{{ ActuCards }}</div>
-    </div>
+    <div class="container-light"></div>
   </div>
 </template>
 
@@ -51,5 +47,28 @@ import Pillars from '../components/Pillars.vue'
 export default {
   name: 'Home',
   components: { ActuCards, Pillars },
+  data() {
+    return {
+      Articles: [
+        {
+          id: 2234,
+          title: "Le coup d'oeil",
+          description: 'Une révélation',
+          image: '@/assets/icon.png',
+        },
+
+        {
+          id: 2235,
+          title: 'Pour le Télétravail ?',
+          description: 'Diminution du stress',
+        },
+        {
+          id: 2236,
+          title: 'Travailler en chaussettes ?',
+          description: 'Un confort assuré',
+        },
+      ],
+    }
+  },
 }
 </script>

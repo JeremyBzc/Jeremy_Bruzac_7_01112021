@@ -66,12 +66,12 @@ export default new Vuex.Store({
       try {
         const user = await authService.loginUser(userInfos)
         console.log(user.data)
-        console.log(userInfos);
-        commit('setStatus', 'Connecté')
+        console.log(userInfos)
+        commit('setStatus', 'Connected')
         commit('logUser', user.data)
       } catch {
         commit('setStatus', 'error_login')
-      } 
+      }
 
       // authService
       //   .loginUser(userInfos)

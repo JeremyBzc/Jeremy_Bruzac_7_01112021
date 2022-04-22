@@ -37,6 +37,9 @@
                 La clé de la réussite se situe dans le travail d'équipe et
                 l'écoute de l'autre.
               </cite>
+              <button @click="logOut()" class="btn btn-danger">
+                Se Déconnecter
+              </button>
             </div>
           </div>
         </div>
@@ -56,6 +59,12 @@ export default {
     return {}
   },
   methods: {
+    logOut() {
+      this.$store.dispatch('login', {
+        email: '',
+        password: '',
+      })
+    },
     // async UserProfile() {
     //   const userToken = JSON.parse(localStorage).getItem('userId', 'token')
     //   const userId = this.$route.params.userId

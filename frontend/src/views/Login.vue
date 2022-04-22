@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="container d-flex justify-content-center">
-      <div class="col-6 bg-light shadow p-3 mb-5 bg-white rounded">
+      <div class="col-§ bg-light shadow p-3 mb-5 bg-white rounded">
         <h1
           class="h4 text-center mb-4 border border-success"
           v-if="mode == 'login'"
@@ -193,5 +193,8 @@ export default {
 <style>
 .err4 {
   color: red;
+}
+.login {
+  min-height: 700px;
 }
 </style>

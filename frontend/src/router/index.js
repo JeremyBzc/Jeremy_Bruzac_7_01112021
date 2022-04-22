@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import NotFound from '../views/NotFound.vue'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Forum from '../views/Forum.vue'
@@ -13,6 +14,9 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    meta: {
+      title: 'Accueil',
+    },
   },
   {
     path: '/about',
@@ -22,26 +26,49 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    meta: {
+      title: 'A propos',
+    },
   },
   {
     path: '/login',
     name: 'Login',
     component: Login,
+    meta: {
+      title: 'Login',
+    },
   },
   {
     path: '/forum',
     name: 'Forum',
     component: Forum,
+    meta: {
+      title: 'Le Forum',
+    },
   },
   {
     path: '/forum/:id',
     name: 'Forum',
     component: Post,
+    meta: {
+      title: 'Publication',
+    },
   },
   {
     path: '/profiles',
     name: 'Profile',
     component: Profile,
+    meta: {
+      title: 'Mon Profil',
+    },
+  },
+  {
+    path: '*',
+    name: 'NotFound',
+    component: NotFound,
+    meta: {
+      title: '404 Not Found',
+    },
   },
 ]
 
@@ -49,6 +76,11 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
+})
+
+router.afterEach((to, from) => {
+  console.log(from, to)
+  document.title = to.meta.title
 })
 
 export default router
