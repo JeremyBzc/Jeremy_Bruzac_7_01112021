@@ -15,15 +15,15 @@
     <div class="container">
       <h2 class="bg-light border my-4">Evênements</h2>
       <div class="col-12 d-flex justify-content-between">
-        <PostForm v-for="(Post, index) in Posts" :key="index" :post="Post" />
+        <PostCard v-for="(Post, index) in Posts" :key="index" :post="Post" />
       </div>
       <h2 class="bg-light border my-4">Vie en entreprise</h2>
       <div class="col-12 d-flex justify-content-between">
-        <PostForm v-for="(Post, index) in Posts" :key="index" :post="Post" />
+        <PostCard v-for="(Post, index) in Posts" :key="index" :post="Post" />
       </div>
       <h2 class="bg-light border my-4">Le Blabla</h2>
       <div class="col-12 d-flex justify-content-between">
-        <PostForm v-for="(Post, index) in Posts" :key="index" :post="Post" />
+        <PostCard v-for="(Post, index) in Posts" :key="index" :post="Post" />
       </div>
       <div class="container jumbotron">
         <div class="container d-flex justify-content-center">
@@ -65,10 +65,10 @@
 </template>
 
 <script>
-import PostForm from '../components/PostForm.vue'
+import PostCard from '../components/PostCard.vue'
 export default {
   components: {
-    PostForm,
+    PostCard,
   },
   data() {
     return {

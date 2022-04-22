@@ -59,12 +59,12 @@ export default {
     return {}
   },
   methods: {
-    logOut() {
-      this.$store.dispatch('login', {
-        email: '',
-        password: '',
-      })
-    },
+    // logOut() {
+    //   this.$store.dispatch('login', {
+    //     email: '',
+    //     password: '',
+    //   })
+    // },
     // async UserProfile() {
     //   const userToken = JSON.parse(localStorage).getItem('userId', 'token')
     //   const userId = this.$route.params.userId
