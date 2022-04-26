@@ -3,9 +3,10 @@
     <div class="col-12 col-lg-6 mx-auto mb-4">
       <div class="card mb-4 mb-lg-0 border-dark shadow">
         <div class="card-body text-center">
-          <h5 class="post-title">TEST</h5>
-          <p class="post-description">TEST</p>
-          <p class="post-author">TEST</p>
+          <h5 class="post-title">{{ post.title }}</h5>
+          <p class="post-description">{{ post.description }}</p>
+          <p class="post-author">{{ post.author }}</p>
+          <p class="post-date">{{ post.date }}</p>
         </div>
       </div>
     </div>
@@ -14,12 +15,18 @@
 
 <script>
 export default {
-  date() {
-    return {}
-  },
+  name: 'Post',
+  props: ['id'],
+
   created() {
-    let postId = this.$route.params.id
-    console.log(postId)
+    this.$store.dispatch('setCurrentPost', this.id)
+    // let postId = this.$route.params.id
+    // console.log(postId)
+  },
+  computed: {
+    post: async () => {
+      return await this.$store.getters.getCurrentPost
+    },
   },
 }
 </script>

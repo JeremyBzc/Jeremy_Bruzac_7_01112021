@@ -5,7 +5,7 @@
         <div class="card card-profile shadow">
           <div class="row justify-content-center">
             <div class="col-lg-12 d-flex justify-content-center">
-              <h1>Votre profil utilisateur, Id:</h1>
+              <h1>Votre profil utilisateur N° {{ user.id }}</h1>
             </div>
           </div>
           <div
@@ -25,12 +25,14 @@
               <div class="col"></div>
             </div>
             <div class="text-center">
-              <h3 class="font-weight-light">Jérémy Bruzac</h3>
+              <h3 class="font-weight-light">
+                {{ user.firstName + ' ' + user.lastName }}
+              </h3>
               <div class="h5 font-weight-300">
-                <i class="ni location_pin mr-2"></i>Paris, France
+                <p class="ni location_pin mr-2">{{ user.email }}</p>
               </div>
               <div class="h5 mt-4">
-                <i class="ni business_briefcase-24 mr-2">J'adore le bio</i>
+                <i class="ni business_briefcase-24 mr-2">{{ user.bio }}</i>
               </div>
               <hr class="my-4" />
               <cite>
@@ -49,14 +51,14 @@
 </template>
 
 <script>
-// import ProfileForm from '../components/ProfileForm.vue' // POUR CHANGER LES INFOS USER
-import profileService from '../services/profileService'
 import { mapState } from 'vuex'
-
+import profileService from '../services/profileService'
 export default {
   name: 'Profile',
   data() {
-    return {}
+    return {
+      user: null,
+    }
   },
   methods: {
     // logOut() {
@@ -65,21 +67,22 @@ export default {
     //     password: '',
     //   })
     // },
-    // async UserProfile() {
-    //   const userToken = JSON.parse(localStorage).getItem('userId', 'token')
-    //   const userId = this.$route.params.userId
-    //   try {
-    //     const res = await profileService.getUserProfile
-    //   } catch (error) {}
-    // },
   },
-  mounted: function () {
-    console.log(this.$store.state.users.user)
+  async mounted() {
+    console.log(this.$store.state.users.user) // Déplacer dans router vue
     if (this.$store.state.users.user.userId == -1) {
       this.$router.push('/login')
       return
     }
-    this.$store.dispatch('getUserProfile')
+    const response = await profileService.getUserProfile(
+      this.computedUser.userId
+    )
+    this.user = response.data
+  },
+  computed: {
+    ...mapState({
+      computedUser: (state) => state.users.user,
+    }),
   },
 }
 </script>

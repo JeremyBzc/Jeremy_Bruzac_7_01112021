@@ -2,6 +2,24 @@ import apiGrp from '@/services/axios'
 import authService from '@/services/authService'
 import profileService from '@/services/profileService'
 
+let user = localStorage.getItem('userStorage')
+
+if (!user) {
+  user = {
+    userId: -1,
+    token: '',
+  }
+} else {
+  try {
+    user = JSON.parse(user)
+    apiGrp.defaults.headers.common['Authorization'] = user.token
+  } catch {
+    user = {
+      userId: -1,
+      token: '',
+    }
+  }
+}
 export default {
   state: {
     status: '',
@@ -10,25 +28,21 @@ export default {
       userId: -1,
       token: '',
     },
-    userInfos: {
-      firstName: '',
-      lastName: '',
-      bio: '',
-    },
   },
   mutations: {
     setStatus(state, status) {
       state.status = status
     },
     logUser(state, user) {
-      apiGrp.defaults.headers.common['Authorization'] = user.token
+      apiGrp.defaults.headers.common['Authorization'] = 'Bearer ' + user.token
+      localStorage.setItem('userStorage', JSON.stringify(user))
       state.user = user
     },
     setLimitedAccess(state, bool) {
       state.limitedAccess = bool
     },
     userInfos(state, userInfos) {
-      state.userInfos = userInfos
+      state.user = userInfos
     },
   },
   actions: {
@@ -46,51 +60,22 @@ export default {
       } finally {
         commit('setStatus', 'loaded')
       }
-      // authService
-      //   .registerUser(userInfos)
-      //   .then((response) => {
-      //     commit('setStatus', 'created')
-      //     resolve(response)
-      //   })
-      //   .catch((error) => {
-      //     commit('setStatus', 'error_create')
-      //     reject(error)
-      //   })
     },
     login: async ({ commit }, userInfos) => {
       commit('setStatus', 'loading')
       try {
         const user = await authService.loginUser(userInfos)
-        console.log(user.data)
-        console.log(userInfos)
         commit('setStatus', 'Connected')
         commit('logUser', user.data)
       } catch {
         commit('setStatus', 'error_login')
       }
-
-      // authService
-      //   .loginUser(userInfos)
-      //   .then((response) => {
-      //     console.log(userInfos)
-      //     console.log(response)
-      //     commit('setStatus', 'Connecté')
-      //     commit('logUser', response.data)
-      //     resolve(response)
-      //   })
-      //   .catch((error) => {
-      //     commit('setStatus', 'error_login')
-      //     reject(error)
-      //   })
     },
     getUserProfile: ({ commit }) => {
-      profileService
-        .getUserProfile()
-        .then((response) => {
-          console.log(response.data)
-          commit('userInfos', response.data)
-        })
-        .catch(() => {})
+      try {
+        const user = profileService.getUserProfile()
+        commit('userInfos', user.data)
+      } catch (error) {}
     },
   },
 }

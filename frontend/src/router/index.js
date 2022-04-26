@@ -55,9 +55,10 @@ const routes = [
     },
   },
   {
-    path: '/profiles',
+    path: '/profile',
     name: 'Profile',
     component: Profile,
+    props: true,
     meta: {
       title: 'Mon Profil',
     },

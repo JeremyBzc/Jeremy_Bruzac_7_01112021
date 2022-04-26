@@ -54,6 +54,20 @@ export default {
       return state.currentPost
     },
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    setCurrentPost(state, post) {
+      state.currentPost = post
+    },
+  },
+  actions: {
+    setCurrentPost({ commit, state }, postId) {
+      let postFound = {}
+      state.posts.forEach((post) => {
+        if (postId == post.id) {
+          postFound = post
+        }
+      })
+      commit('setCurrentPost', postFound)
+    },
+  },
 }

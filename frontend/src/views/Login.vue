@@ -156,14 +156,14 @@ export default {
           password: this.password,
         })
         .then(() => {
-          self.$router.push('/profiles')
+          self.$router.push('/profile')
           self.$store.dispatch('limitedAccess', false)
         })
         .catch((error) => {
           console.log(error)
         })
     },
-    ...mapState(['limitedAccess']),
+    //...mapState(['limitedAccess']),
   },
   computed: {
     validatedFields() {
@@ -186,7 +186,7 @@ export default {
         }
       }
     },
-    ...mapState(['status']),
+    ...mapState(['status', 'limitedAccess']),
   },
 }
 </script>

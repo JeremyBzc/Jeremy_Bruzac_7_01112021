@@ -1,8 +1,8 @@
 import apiGrp from './axios'
 
 export default {
-  getUserProfile(user) {
-    return apiGrp.get(`profiles/${userId}`, user)
+  getUserProfile(userId) {
+    return apiGrp.get(`profiles/${userId}`)
   },
   editUserProfile(user) {
     return apiGrp.put(`profiles/${userId}`, user)
