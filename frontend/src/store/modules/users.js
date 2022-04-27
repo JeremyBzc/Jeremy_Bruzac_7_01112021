@@ -53,12 +53,10 @@ export default {
       commit('setStatus', 'loading')
       try {
         const user = await authService.registerUser(userInfos)
-        console.log(user.data)
         commit('setStatus', 'created')
+        commit('logUser', user.data)
       } catch {
         commit('setStatus', 'error_create')
-      } finally {
-        commit('setStatus', 'loaded')
       }
     },
     login: async ({ commit }, userInfos) => {

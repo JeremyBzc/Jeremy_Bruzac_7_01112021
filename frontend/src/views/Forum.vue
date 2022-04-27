@@ -20,7 +20,8 @@
       <button v-else @click="switchToEmpty()" class="btn btn-danger">
         Annuler la publication
       </button>
-      <div v-if="mode == 'post'" class="container-post jumbotron">
+      <div v-if="mode == 'empty'" class="container-empty"></div>
+      <div v-else class="container-post jumbotron">
         <div class="container d-flex justify-content-center">
           <div class="col-9 bg-light shadow p-3 mb-5 bg-white rounded">
             <h1 class="h4 text-center mb-4 border border-success">
@@ -61,7 +62,7 @@ export default {
   },
   data() {
     return {
-      mode: 'post',
+      mode: 'empty',
     }
   },
   methods: {

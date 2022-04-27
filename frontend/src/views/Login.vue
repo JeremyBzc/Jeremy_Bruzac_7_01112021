@@ -139,9 +139,8 @@ export default {
           lastName: this.lastName,
           password: this.password,
         })
-        .then((response) => {
+        .then(() => {
           self.login()
-          console.log(response)
         })
         .catch((error) => {
           console.log(error)
