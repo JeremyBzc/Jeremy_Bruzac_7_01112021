@@ -41,6 +41,13 @@ export default {
     userInfos(state, userInfos) {
       state.user = userInfos
     },
+    logout(state) {
+      state.user = {
+        userId: -1,
+        token: '',
+      }
+      localStorage.removeItem('userStorage')
+    },
   },
   actions: {
     limitedAccess({ commit }, bool) {

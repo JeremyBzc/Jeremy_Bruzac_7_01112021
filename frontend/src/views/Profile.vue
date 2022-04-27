@@ -5,7 +5,7 @@
         <div class="card card-profile shadow">
           <div class="row justify-content-center">
             <div class="col-lg-12 d-flex justify-content-center">
-              <h1>Votre profil utilisateur N° {{ user.id }}</h1>
+              <h1>Votre espace personnel</h1>
             </div>
           </div>
           <div
@@ -39,9 +39,11 @@
                 La clé de la réussite se situe dans le travail d'équipe et
                 l'écoute de l'autre.
               </cite>
-              <button @click="logOut()" class="btn btn-danger">
-                Se Déconnecter
-              </button>
+              <div>
+                <button @click="logOut()" class="btn btn-danger">
+                  Se Déconnecter
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -61,12 +63,10 @@ export default {
     }
   },
   methods: {
-    // logOut() {
-    //   this.$store.dispatch('login', {
-    //     email: '',
-    //     password: '',
-    //   })
-    // },
+    logOut() {
+      this.$store.commit('logout')
+      this.$router.push('/login')
+    },
   },
   async mounted() {
     console.log(this.$store.state.users.user) // Déplacer dans router vue
