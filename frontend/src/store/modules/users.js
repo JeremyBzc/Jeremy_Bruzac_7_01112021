@@ -12,7 +12,7 @@ if (!user) {
 } else {
   try {
     user = JSON.parse(user)
-    apiGrp.defaults.headers.common['Authorization'] = user.token
+    apiGrp.defaults.headers.common['Authorization'] = 'Bearer ' + user.token
   } catch {
     user = {
       userId: -1,
@@ -24,10 +24,7 @@ export default {
   state: {
     status: '',
     limitedAccess: true,
-    user: {
-      userId: -1,
-      token: '',
-    },
+    user: user,
   },
   mutations: {
     setStatus(state, status) {
