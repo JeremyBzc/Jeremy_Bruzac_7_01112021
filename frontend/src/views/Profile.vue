@@ -2,48 +2,48 @@
   <div>
     <div class="row">
       <div class="col-xl-8 m-auto order-xl-2 mb-5 mb-xl-0">
-        <div class="card card-profile shadow">
+        <div class="card-profile">
           <div class="row justify-content-center">
             <div class="col-lg-12 d-flex justify-content-center">
               <h1>Votre espace personnel</h1>
             </div>
           </div>
-          <div
-            class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"
-          >
-            <div class="d-flex justify-content-between">
-              <a href="#" class="btn btn-sm btn-info mr-4">Editer</a>
-            </div>
-            <div class="card-profile-image">
-              <a href="#">
-                <img src="../assets/Userdefault.png" />
-              </a>
-            </div>
-          </div>
-          <div class="card-body pt-0 pt-md-4">
-            <div class="row">
-              <div class="col"></div>
-            </div>
-            <div class="text-center">
-              <h3 class="font-weight-light">
-                {{ user.firstName + ' ' + user.lastName }}
-              </h3>
-              <div class="h5 font-weight-300">
-                <p class="ni location_pin mr-2">{{ user.email }}</p>
+          <div class="col-lg-12">
+            <div class="text-center pt-8 pt-md-4 pb-0 pb-md-4">
+              <div class="card-body d-flex align-items-center">
+                <a href="#">
+                  <img src="../assets/Userdefault.png" width="150" />
+                </a>
+                <h3 class="font-weight-bold">
+                  {{ user.firstName + ' ' + user.lastName }}
+                </h3>
               </div>
-              <div class="h5 mt-4">
-                <i class="ni business_briefcase-24 mr-2">{{ user.bio }}</i>
+            </div>
+            <div class="card-body d-flex flex-column align-items-start">
+              <h2>À propos de moi</h2>
+              <div class="d-flex flex-column align-items-start">
+                <p>
+                  {{ user.firstName + ' ' + user.lastName }}
+                </p>
+                <p>Email: {{ user.email }}</p>
               </div>
-              <hr class="my-4" />
-              <cite>
-                La clé de la réussite se situe dans le travail d'équipe et
-                l'écoute de l'autre.
-              </cite>
+            </div>
+            <div class="card-body d-flex flex-column align-items-start">
+              <h2>Biographie</h2>
+              <div class="d-flex flex-column align-items-start">
+                <p>{{ user.bio }}</p>
+              </div>
+            </div>
+            <div class="card-body d-flex flex-column align-items-start">
+              <h2>Informations sur le compte</h2>
               <div>
-                <button @click="logOut()" class="btn btn-danger">
-                  Se Déconnecter
-                </button>
+                <p>Date d'inscription: {{ user.createdAt }}</p>
               </div>
+            </div>
+            <div>
+              <button @click="logOut()" class="btn btn-danger">
+                Se Déconnecter
+              </button>
             </div>
           </div>
         </div>
@@ -87,4 +87,11 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.card-body {
+  border: 2px solid #f0f0f0;
+  border-radius: 25px;
+  margin-bottom: 10px;
+  box-shadow: 10px 5px 15px rgba(128, 128, 128, 0.3);
+}
+</style>

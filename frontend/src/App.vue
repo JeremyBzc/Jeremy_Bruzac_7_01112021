@@ -28,11 +28,6 @@
                   >Se connecter</b-button
                 ></b-dropdown-item
               >
-              <b-dropdown-item v-if="isLimitedAccess" to="/login"
-                ><b-button variant="outline-success"
-                  >S'inscrire</b-button
-                ></b-dropdown-item
-              >
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-navbar>
@@ -41,59 +36,7 @@
     <router-view></router-view>
     <footer class="bg-success text-center text-white">
       <!-- Grid container -->
-      <div class="container p-4 pb-0">
-        <!-- Section: Social media -->
-        <section class="mb-4">
-          <!-- Facebook -->
-          <a
-            class="btn btn-outline-light btn-floating m-1"
-            href="#!"
-            role="button"
-            ><i class="fab fa-facebook-f"></i
-          ></a>
-
-          <!-- Twitter -->
-          <a
-            class="btn btn-outline-light btn-floating m-1"
-            href="#!"
-            role="button"
-            ><i class="fas fa-twitter"></i
-          ></a>
-
-          <!-- Google -->
-          <a
-            class="btn btn-outline-light btn-floating m-1"
-            href="#!"
-            role="button"
-            ><i class="fab fa-google"></i
-          ></a>
-
-          <!-- Instagram -->
-          <a
-            class="btn btn-outline-light btn-floating m-1"
-            href="#!"
-            role="button"
-            ><i class="fab fa-instagram"></i
-          ></a>
-
-          <!-- Linkedin -->
-          <a
-            class="btn btn-outline-light btn-floating m-1"
-            href="#!"
-            role="button"
-            ><i class="fab fa-linkedin-in"></i
-          ></a>
-
-          <!-- Github -->
-          <a
-            class="btn btn-outline-light btn-floating m-1"
-            href="#!"
-            role="button"
-            ><i class="fab fa-github"></i
-          ></a>
-        </section>
-        <!-- Section: Social media -->
-      </div>
+      <div class="container p-4 pb-0"></div>
       <!-- Grid container -->
 
       <!-- Copyright -->

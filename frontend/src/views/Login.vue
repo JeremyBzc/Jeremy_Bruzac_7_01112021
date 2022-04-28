@@ -6,10 +6,10 @@
           class="h4 text-center mb-4 border border-success"
           v-if="mode == 'login'"
         >
-          Se connecter
+          Connection
         </h1>
         <h1 class="h4 text-center mb-4 border border-success" v-else>
-          S'inscrire
+          Inscription
         </h1>
         <p v-if="mode == 'login'">
           Vous n'avez pas de compte ?
@@ -74,7 +74,7 @@
             @click.prevent="login()"
           >
             <span v-if="status == 'loading'">Connexion en cours...</span>
-            <span v-else>Se connecter</span>
+            <span v-else>Continuer</span>
           </button>
         </div>
         <div v-else class="text-center mt-4">
@@ -163,6 +163,12 @@ export default {
         })
     },
     //...mapState(['limitedAccess']),
+  },
+  mounted() {
+    if (this.$store.state.users.user.userId != -1) {
+      this.$router.push('/profile')
+      return
+    }
   },
   computed: {
     validatedFields() {

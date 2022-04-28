@@ -8,7 +8,7 @@ exports.getUserProfile = (req, res, next) => {
   const isAdmin = res.locals.isAdmin;
 
   models.User.findOne({
-    attributes: ["id", "firstName", "lastName", "email", "bio"],
+    attributes: ["id", "firstName", "lastName", "email", "bio", "createdAt"],
     where: { id: req.params.id },
   })
     .then((userFound) => {

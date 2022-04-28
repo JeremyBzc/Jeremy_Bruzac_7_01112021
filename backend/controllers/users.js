@@ -30,12 +30,10 @@ exports.signup = (req, res, next) => {
   }
   //Check password'convention
   if (!PASSWORD_REGEX.test(req.body.password)) {
-    return res
-      .status(400)
-      .json({
-        error:
-          "Mot de passe invalide ! Doit être entre 4 et 8 caractères incluant 1 Majuscule, 1 Minuscule et 1 chiffre.",
-      });
+    return res.status(400).json({
+      error:
+        "Mot de passe invalide ! Doit être entre 4 et 8 caractères incluant 1 Majuscule, 1 Minuscule et 1 chiffre.",
+    });
   }
 
   // Check if unique email in Database
@@ -101,6 +99,7 @@ exports.login = (req, res, next) => {
                 lastName: userFound.lastName,
                 email: userFound.email,
                 bio: userFound.bio,
+                createdAt: userFound.createdAt,
 
                 Message:
                   "Vous êtes bien connecté " +
