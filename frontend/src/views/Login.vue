@@ -1,16 +1,17 @@
 <template>
-  <div class="login">
-    <div class="container d-flex justify-content-center">
-      <div class="col-§ bg-light shadow p-3 mb-5 bg-white rounded">
-        <h1
-          class="h4 text-center mb-4 border border-success"
-          v-if="mode == 'login'"
-        >
-          Connection
-        </h1>
-        <h1 class="h4 text-center mb-4 border border-success" v-else>
-          Inscription
-        </h1>
+  <div
+    class="
+      container-fluid
+      d-flex
+      align-items-center
+      justify-content-center
+      login
+    "
+  >
+    <div>
+      <div class="card-log col-§ bg-light shadow p-3 mb-5 bg-white">
+        <h1 class="h4 text-center mb-4" v-if="mode == 'login'">Connection</h1>
+        <h1 class="h4 text-center mb-4" v-else>Inscription</h1>
         <p v-if="mode == 'login'">
           Vous n'avez pas de compte ?
           <a class="card__action" @click="switchToCreatedAccount()"
@@ -201,5 +202,8 @@ export default {
 }
 .login {
   min-height: 700px;
+}
+.card-log {
+  border-radius: 25px;
 }
 </style>

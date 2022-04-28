@@ -2,48 +2,60 @@
   <div>
     <div class="row">
       <div class="col-xl-8 m-auto order-xl-2 mb-5 mb-xl-0">
-        <div class="card-profile">
+        <div class="card-profile mt-5">
           <div class="row justify-content-center">
-            <div class="col-lg-12 d-flex justify-content-center">
-              <h1>Votre espace personnel</h1>
+            <div class="col-lg-12 bg-success">
+              <h1 class="text-light">Votre espace personnel</h1>
             </div>
           </div>
           <div class="col-lg-12">
             <div class="text-center pt-8 pt-md-4 pb-0 pb-md-4">
-              <div class="card-body d-flex align-items-center">
-                <a href="#">
-                  <img src="../assets/Userdefault.png" width="150" />
-                </a>
-                <h3 class="font-weight-bold">
-                  {{ user.firstName + ' ' + user.lastName }}
-                </h3>
+              <div class="card-body rounded-0 d-flex justify-content-between">
+                <div class="d-flex align-items-center">
+                  <img
+                    class="mr-3"
+                    src="../assets/Userdefault.png"
+                    width="130"
+                  />
+                  <h3 class="font-weight-bold">
+                    {{ user.firstName + ' ' + user.lastName }}
+                  </h3>
+                </div>
+                <div>
+                  <button @click="logOut()" class="btn btn-dark">
+                    Modifier
+                  </button>
+                </div>
               </div>
             </div>
             <div class="card-body d-flex flex-column align-items-start">
               <h2>À propos de moi</h2>
               <div class="d-flex flex-column align-items-start">
-                <p>
-                  {{ user.firstName + ' ' + user.lastName }}
-                </p>
+                <p>Prénom: {{ user.firstName }}</p>
+                <p>Nom: {{ user.lastName }}</p>
                 <p>Email: {{ user.email }}</p>
               </div>
             </div>
             <div class="card-body d-flex flex-column align-items-start">
               <h2>Biographie</h2>
               <div class="d-flex flex-column align-items-start">
-                <p>{{ user.bio }}</p>
+                <p v-if="user.bio">{{ user.bio }}</p>
+                <p v-else>Je suis vide de sens :( Écrivez-moi !</p>
               </div>
             </div>
-            <div class="card-body d-flex flex-column align-items-start">
-              <h2>Informations sur le compte</h2>
-              <div>
+            <div class="card-body d-flex justify-content-between">
+              <div class="d-flex flex-column align-items-start">
+                <h2>Informations sur le compte</h2>
                 <p>Date d'inscription: {{ user.createdAt }}</p>
+                <p class="text-danger font-weight-bold">
+                  Supprimer votre compte
+                </p>
               </div>
-            </div>
-            <div>
-              <button @click="logOut()" class="btn btn-danger">
-                Se Déconnecter
-              </button>
+              <div>
+                <button @click="logOut()" class="btn btn-danger">
+                  Se Déconnecter
+                </button>
+              </div>
             </div>
           </div>
         </div>
