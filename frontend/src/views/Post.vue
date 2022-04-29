@@ -14,12 +14,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'Post',
-  props: ['id'],
 
   created() {
-    this.$store.dispatch('setCurrentPost', this.id)
+    this.$store.dispatch('setCurrentPost', this.computedPost.id)
     // let postId = this.$route.params.id
     // console.log(postId)
   },
@@ -28,6 +28,9 @@ export default {
       return await this.$store.getters.getCurrentPost
     },
   },
+  ...mapState({
+    computedPost: (state) => state.posts.posts,
+  }),
 }
 </script>
 

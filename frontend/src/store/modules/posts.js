@@ -23,27 +23,6 @@ export default {
         date: new Date(),
         description: 'Je tiens à vous remercier pour la propreté des locaux',
       },
-      {
-        id: 4,
-        title: 'Je suis un test',
-        author: 'Admin',
-        date: new Date(),
-        description: 'Je tiens à vous tester',
-      },
-      {
-        id: 5,
-        title: 'Je suis un 2nd test',
-        author: 'Admin',
-        date: new Date(),
-        description: 'Je tiens à vous tester de nouveau',
-      },
-      {
-        id: 6,
-        title: 'Je suis un test demi finaliste',
-        author: 'Admin',
-        date: new Date(),
-        description: 'Je tiens à vous dire aurevoir',
-      },
     ],
   },
   getters: {
