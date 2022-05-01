@@ -6,8 +6,16 @@ import Login from '../views/Login.vue'
 import Forum from '../views/Forum.vue'
 import Post from '../views/Post.vue'
 import Profile from '../views/Profile.vue'
+import store from '../store'
 
 Vue.use(VueRouter)
+const isAuth = (to, from, next) => {
+  if (store.state.userId) {
+    next()
+    return
+  }
+  next('/login')
+}
 
 const routes = [
   {

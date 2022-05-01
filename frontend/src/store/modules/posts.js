@@ -1,52 +1,38 @@
+import postService from '@/services/postService'
+
 export default {
   state: {
+    status: '',
     currentPost: {},
-    posts: [
-      {
-        id: 1,
-        title: 'Premier post',
-        author: 'Jérém',
-        date: new Date(),
-        description: 'Je suis une description vraiment aboutie',
-      },
-      {
-        id: 2,
-        title: 'Le réseau LAN',
-        author: 'Kevin',
-        date: new Date(),
-        description: "J'explique le réseau informatique",
-      },
-      {
-        id: 3,
-        title: 'Information sur vos pauses Dej',
-        author: 'Admin',
-        date: new Date(),
-        description: 'Je tiens à vous remercier pour la propreté des locaux',
-      },
-    ],
+    posts: [],
   },
-  getters: {
-    getPosts(state) {
-      return state.posts
-    },
-    getCurrentPost(state) {
-      return state.currentPost
-    },
-  },
+
   mutations: {
+    setStatus(state, status) {
+      state.status = status
+    },
     setCurrentPost(state, post) {
       state.currentPost = post
     },
+    postInfos(state, postInfos) {
+      state.posts = postInfos
+    },
   },
   actions: {
-    setCurrentPost({ commit, state }, postId) {
-      let postFound = {}
-      state.posts.forEach((post) => {
-        if (postId == post.id) {
-          postFound = post
-        }
-      })
-      commit('setCurrentPost', postFound)
+    getAllPost: ({ commit }) => {
+      try {
+        const post = postService.getAllPost()
+        commit('postInfos', post.data)
+      } catch (error) {}
+    },
+    createPost: async ({ commit }, postInfos) => {
+      console.log(postInfos)
+      try {
+        const post = await postService.createPost(postInfos)
+        console.log('created')
+        commit('setStatus', 'Post created')
+        commit('postInfos', post.data)
+      } catch (error) {}
     },
   },
 }

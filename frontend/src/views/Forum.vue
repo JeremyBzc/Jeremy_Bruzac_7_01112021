@@ -5,7 +5,7 @@
         <h1 class="text-light">Le Forum</h1>
       </div>
       <div class="col-12 d-flex justify-content-between my-5">
-        <PostCard v-for="(post, index) in posts" :key="index" :post="post" />
+        <PostCard />
       </div>
       <div class="my-5">
         <button
@@ -23,10 +23,12 @@
       <div v-else class="container-post">
         <div class="container d-flex justify-content-center">
           <div class="col-9 bg-light shadow p-3 mb-5 bg-white rounded">
-            <h1 class="h4 text-center mb-4">Votre publication</h1>
+            <h1 class="h4 text-center mb-4">
+              Votre publication {{ user.firstName + ' ' + user.lastName }}
+            </h1>
             <div class="form-row">
               <input
-                v-model="title"
+                v-model="post.title"
                 placeholder="Titre"
                 type="text"
                 class="form-control"
@@ -35,14 +37,20 @@
             <br />
             <div class="form-row">
               <textarea
-                v-model="content"
+                v-model="post.content"
                 placeholder="Contenu"
                 type="textarea"
                 class="form-control"
               />
             </div>
             <div class="text-center mt-4">
-              <button class="btn btn-success" type="submit">Envoyer</button>
+              <button
+                @click.prevent="createPost()"
+                class="btn btn-success"
+                type="submit"
+              >
+                Envoyer
+              </button>
             </div>
           </div>
         </div>
@@ -52,7 +60,9 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import PostCard from '../components/PostCard.vue'
+
 export default {
   components: {
     PostCard,
@@ -60,6 +70,12 @@ export default {
   data() {
     return {
       mode: 'empty',
+      post: {
+        userId: this.$store.state.users.user.userId,
+        title: '',
+        content: '',
+        attachement: '',
+      },
     }
   },
   methods: {
@@ -69,17 +85,30 @@ export default {
     switchToEmpty() {
       this.mode = 'empty'
     },
-  },
-  computed: {
-    posts() {
-      return this.$store.getters.getPosts // Fonction pour retourner les posts
+    createPost() {
+      this.$store
+        .dispatch('createPost', this.post)
+        .then(() => {
+          console.log('success')
+          //self.$router.push('/')
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     },
   },
-  mounted: function () {
-    if (this.$store.state.users.user.userId == -1) {
-      this.$router.push('/login')
-      return
-    }
+  computed: {
+    ...mapState({
+      // computedPost: (state) => state.posts.posts,
+      user: (state) => state.users.user,
+      post: (state) => state.posts.post,
+    }),
+  },
+  async mounted() {
+    // if (this.$store.state.users.user.userId == -1) {
+    //   this.$router.push('/login')
+    //   return
+    // }
   },
 }
 </script>

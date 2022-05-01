@@ -5,10 +5,11 @@ export default {
     return apiGrp.get(`posts/${postId}`)
   },
   getAllPost() {
-    return apiGrp.get(`posts/`)
+    return apiGrp.get('posts/')
   },
-  createPost() {
-    return apiGrp.post(`posts/`)
+  createPost(postInfos) {
+    console.log(postInfos)
+    return apiGrp.post('posts/', postInfos)
   },
   //   editPost(postId) {
   //       return apiGrp.put(`posts/${postId}`)
