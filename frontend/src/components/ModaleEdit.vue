@@ -42,9 +42,39 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'ModaleEdit',
-  props: ['displayEditing', 'toggleModaleEditing', 'editUserProfile'],
+  props: ['displayEditing', 'toggleModaleEditing'],
+  data() {
+    return {
+      firstName: '',
+      lastName: '',
+      bio: '',
+    }
+  },
+  methods: {
+    editUserProfile() {
+      this.$store
+        .dispatch('editUserProfile', {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          bio: this.bio,
+        })
+        .then(() => {
+          console.log('Vos informations ont bien été modifiées !')
+          //window.location.reload()
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+  },
+  computed: {
+    ...mapState({
+      computedUser: (state) => state.users.user,
+    }),
+  },
 }
 </script>
 <style scoped>

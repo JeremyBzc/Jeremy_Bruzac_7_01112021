@@ -31,7 +31,6 @@
             <modaleEdit
               v-bind:displayEditing="displayEditing"
               v-bind:toggleModaleEditing="toggleModaleEditing"
-              v-bind:editUserProfile="editUserProfile"
             />
             <div class="card-body d-flex flex-column align-items-start">
               <h2>À propos de moi</h2>
@@ -92,9 +91,6 @@ export default {
       user: null,
       display: false,
       displayEditing: false,
-      firstName: '',
-      lastName: '',
-      bio: '',
     }
   },
   methods: {
@@ -104,18 +100,26 @@ export default {
     toggleModaleEditing() {
       this.displayEditing = !this.displayEditing
     },
-    editProfile() {},
+    // editUserProfile() {
+    //   this.$store
+    //     .dispatch('editUserProfile', {
+    //       firstName: this.firstName,
+    //       lastName: this.lastName,
+    //       bio: this.bio,
+    //     })
+    //     .then(() => {
+    //       console.log('Vos informations ont bien été modifiées !')
+    //     })
+    //     .catch((error) => {
+    //       console.log(error)
+    //     })
+    // },
     logOut() {
       this.$store.commit('logout')
       this.$router.push('/login')
     },
   },
   async mounted() {
-    console.log(this.$store.state.users.user) // Déplacer dans router vue
-    if (this.$store.state.users.user.userId == -1) {
-      this.$router.push('/login')
-      return
-    }
     const response = await profileService.getUserProfile(
       this.computedUser.userId
     )

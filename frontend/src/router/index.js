@@ -7,15 +7,17 @@ import Forum from '../views/Forum.vue'
 import Post from '../views/Post.vue'
 import Profile from '../views/Profile.vue'
 import store from '../store'
+import auth from '../middleware/auth'
+import VueRouterMiddleware from 'vue-route-middleware'
 
 Vue.use(VueRouter)
-const isAuth = (to, from, next) => {
-  if (store.state.userId) {
-    next()
-    return
-  }
-  next('/login')
-}
+// const isAuth = (to, from, next) => {
+//   if (store.state.userId) {
+//     next()
+//     return
+//   }
+//   next('/login')
+// }
 
 const routes = [
   {
@@ -52,6 +54,7 @@ const routes = [
     component: Forum,
     meta: {
       title: 'Le Forum',
+      middleware: auth,
     },
   },
   {
@@ -60,6 +63,7 @@ const routes = [
     component: Post,
     meta: {
       title: 'Publication',
+      middleware: auth,
     },
   },
   {
@@ -69,6 +73,7 @@ const routes = [
     props: true,
     meta: {
       title: 'Mon Profil',
+      middleware: auth,
     },
   },
   {
@@ -86,6 +91,7 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 })
+router.beforeEach(VueRouterMiddleware())
 
 router.afterEach((to, from) => {
   console.log(from, to)

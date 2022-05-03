@@ -4,7 +4,7 @@ export default {
   getUserProfile(userId) {
     return apiGrp.get(`profiles/${userId}`)
   },
-  editUserProfile(user) {
+  editUserProfile(userId, user) {
     return apiGrp.put(`profiles/${userId}`, user)
   },
   deleteUserProfile(user) {

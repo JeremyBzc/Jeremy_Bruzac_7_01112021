@@ -104,12 +104,6 @@ export default {
       post: (state) => state.posts.post,
     }),
   },
-  async mounted() {
-    // if (this.$store.state.users.user.userId == -1) {
-    //   this.$router.push('/login')
-    //   return
-    // }
-  },
 }
 </script>
 <style></style>
