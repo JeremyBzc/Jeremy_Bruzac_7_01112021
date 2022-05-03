@@ -3,10 +3,10 @@
     <div class="col-12 col-lg-6 mx-auto mb-4">
       <div class="card mb-4 mb-lg-0 border-dark shadow">
         <div class="card-body text-center">
-          <h5 class="post-title">{{ post.title }}</h5>
-          <p class="post-description">{{ post.description }}</p>
-          <p class="post-author">{{ post.author }}</p>
-          <p class="post-date">{{ post.date }}</p>
+          <h5 class="post-title">{{ posts.title }}</h5>
+          <p class="post-description">{{ posts.description }}</p>
+          <p class="post-author">{{ posts.author }}</p>
+          <p class="post-date">{{ posts.date }}</p>
         </div>
       </div>
     </div>

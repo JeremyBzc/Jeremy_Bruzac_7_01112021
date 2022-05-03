@@ -77,7 +77,9 @@ export default {
       try {
         const user = profileService.getUserProfile()
         commit('userInfos', user.data)
-      } catch (error) {}
+      } catch (error) {
+        commit('setStatus', 'error_profile')
+      }
     },
   },
 }

@@ -156,18 +156,21 @@ export default {
           password: this.password,
         })
         .then(() => {
-          self.$router.push('/profile')
-          self.$store.dispatch('limitedAccess', false)
+          if (this.$store.state.users.user.userId != -1) {
+            self.$router.push('/profile')
+            self.$store.dispatch('limitedAccess', false)
+          }
         })
         .catch((error) => {
           console.log(error)
         })
     },
-    //...mapState(['limitedAccess']),
+    ...mapState(['limitedAccess']),
   },
   mounted() {
     if (this.$store.state.users.user.userId != -1) {
       this.$router.push('/profile')
+      window.open('Bienvenue !')
       return
     }
   },
