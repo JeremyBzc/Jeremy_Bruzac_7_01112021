@@ -47,9 +47,15 @@
               <div class="d-flex flex-column align-items-start">
                 <h2>Informations sur le compte</h2>
                 <p>Date d'inscription: {{ user.createdAt }}</p>
-                <p class="text-danger font-weight-bold">
-                  Supprimer votre compte
-                </p>
+                <div v-on:click="toggleModale" class="btn btn-danger">
+                  Zone Danger
+                </div>
+                <modale
+                  class="pt-3"
+                  v-bind:display="display"
+                  v-bind:toggleModale="toggleModale"
+                  v-bind:logOut="logOut"
+                />
               </div>
               <div>
                 <button @click="logOut()" class="btn btn-danger">
@@ -67,14 +73,23 @@
 <script>
 import { mapState } from 'vuex'
 import profileService from '../services/profileService'
+import Modale from '../components/Modale.vue'
+
 export default {
   name: 'Profile',
+  components: {
+    modale: Modale,
+  },
   data() {
     return {
       user: null,
+      display: false,
     }
   },
   methods: {
+    toggleModale() {
+      this.display = !this.display
+    },
     logOut() {
       this.$store.commit('logout')
       this.$router.push('/login')

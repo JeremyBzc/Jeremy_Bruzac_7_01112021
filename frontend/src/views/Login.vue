@@ -165,12 +165,11 @@ export default {
           console.log(error)
         })
     },
-    ...mapState(['limitedAccess']),
   },
   mounted() {
     if (this.$store.state.users.user.userId != -1) {
       this.$router.push('/profile')
-      window.open('Bienvenue !')
+
       return
     }
   },
