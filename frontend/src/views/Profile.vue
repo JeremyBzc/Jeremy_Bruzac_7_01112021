@@ -22,12 +22,17 @@
                   </h3>
                 </div>
                 <div>
-                  <button @click="logOut()" class="btn btn-dark">
+                  <button @click="toggleModaleEditing" class="btn btn-dark">
                     Modifier
                   </button>
                 </div>
               </div>
             </div>
+            <modaleEdit
+              v-bind:displayEditing="displayEditing"
+              v-bind:toggleModaleEditing="toggleModaleEditing"
+              v-bind:editUserProfile="editUserProfile"
+            />
             <div class="card-body d-flex flex-column align-items-start">
               <h2>À propos de moi</h2>
               <div class="d-flex flex-column align-items-start">
@@ -57,8 +62,8 @@
                   v-bind:logOut="logOut"
                 />
               </div>
-              <div>
-                <button @click="logOut()" class="btn btn-danger">
+              <div class="d-flex align-items-end">
+                <button @click="logOut()" class="btn btn-dark">
                   Se Déconnecter
                 </button>
               </div>
@@ -74,26 +79,35 @@
 import { mapState } from 'vuex'
 import profileService from '../services/profileService'
 import Modale from '../components/Modale.vue'
+import ModaleEdit from '../components/ModaleEdit.vue'
 
 export default {
   name: 'Profile',
   components: {
     modale: Modale,
+    modaleEdit: ModaleEdit,
   },
   data() {
     return {
       user: null,
       display: false,
+      displayEditing: false,
+      firstName: '',
+      lastName: '',
+      bio: '',
     }
   },
   methods: {
     toggleModale() {
       this.display = !this.display
     },
+    toggleModaleEditing() {
+      this.displayEditing = !this.displayEditing
+    },
+    editProfile() {},
     logOut() {
       this.$store.commit('logout')
       this.$router.push('/login')
-      this.$store.dispatch('limitedAccess', true)
     },
   },
   async mounted() {
