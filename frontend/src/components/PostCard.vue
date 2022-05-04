@@ -1,5 +1,5 @@
 <template>
-  <div class="card-post rounded">
+  <div>
     <router-link
       style="text-decoration: none; color: inherit"
       :to="`forum/${post.id}`"
@@ -10,7 +10,7 @@
             {{ post.title }}
           </p>
           <p class="card-content text-truncate" for="description">
-            {{ post.description }}
+            {{ post.content }}
           </p>
         </div>
         <div class="d-flex justify-content-end border-top border-success pt-3">

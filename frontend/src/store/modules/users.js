@@ -48,6 +48,11 @@ export default {
       }
       localStorage.removeItem('userStorage')
     },
+    updateProfile(state, newInfos) {
+      state.user.firstName = newInfos.firstName
+      state.user.lastName = newInfos.lastName
+      state.user.bio = newInfos.bio
+    },
   },
   actions: {
     limitedAccess({ commit }, bool) {

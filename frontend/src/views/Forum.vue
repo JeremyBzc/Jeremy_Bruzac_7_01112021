@@ -5,7 +5,13 @@
         <h1 class="text-light">Le Forum</h1>
       </div>
       <div class="col-12 d-flex justify-content-between my-5">
-        <PostCard />
+        <div
+          class="card-post rounded"
+          v-for="(post, index) in posts"
+          :key="index"
+        >
+          <PostCard :post="post" />
+        </div>
       </div>
       <div class="my-5">
         <button
@@ -61,6 +67,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import postService from '../services/postService'
 import PostCard from '../components/PostCard.vue'
 
 export default {
@@ -76,6 +83,7 @@ export default {
         content: '',
         attachement: '',
       },
+      posts: null,
     }
   },
   methods: {
@@ -90,12 +98,16 @@ export default {
         .dispatch('createPost', this.post)
         .then(() => {
           console.log('success')
-          window.location.reload()
+          //window.location.reload()
         })
         .catch((error) => {
           console.log(error)
         })
     },
+  },
+  async mounted() {
+    const response = await postService.getAllPost()
+    this.posts = response.data
   },
   computed: {
     ...mapState({

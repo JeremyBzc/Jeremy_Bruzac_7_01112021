@@ -49,8 +49,6 @@ export default {
   data() {
     return {
       userId: this.$store.state.users.user.userId,
-      token: this.$store.state.users.user.token,
-      password: this.$store.state.users.user.password,
       firstName: '',
       lastName: '',
       bio: '',
@@ -61,8 +59,7 @@ export default {
       this.$store
         .dispatch('editUserProfile', {
           userId: this.userId,
-          token: this.token,
-          password: this.password,
+
           firstName: this.firstName,
           lastName: this.lastName,
           bio: this.bio,
