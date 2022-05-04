@@ -90,7 +90,7 @@ export default {
         .dispatch('createPost', this.post)
         .then(() => {
           console.log('success')
-          //self.$router.push('/')
+          window.location.reload()
         })
         .catch((error) => {
           console.log(error)

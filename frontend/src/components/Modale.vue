@@ -3,7 +3,7 @@
     <div class="overlay" v-on:click="toggleModale"></div>
     <div class="modale card">
       <div v-on:click="toggleModale" class="btn-modale btn btn-dark">x</div>
-      <button v-on:click="logOut" class="btn btn-danger">
+      <button v-on:click="deleteUserProfile" class="btn btn-danger">
         Supprimer le compte
       </button>
     </div>
@@ -11,9 +11,33 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'Modale',
-  props: ['display', 'toggleModale', 'logOut'],
+  props: ['display', 'toggleModale'],
+  data() {
+    return {
+      userId: this.$store.state.users.user.userId,
+    }
+  },
+  methods: {
+    deleteUserProfile() {
+      this.$store
+        .dispatch('deleteUserProfile', this.userId)
+        .then(() => {
+          console.log('success_delete')
+          window.location.reload()
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+  },
+  computed: {
+    ...mapState({
+      user: (state) => state.users.user,
+    }),
+  },
 }
 </script>
 <style scoped>

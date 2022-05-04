@@ -35,8 +35,8 @@ exports.editUserProfile = (req, res, next) => {
   const firstName = req.body.firstName;
 
   models.User.findOne({
-    attributes: ["id", "bio"],
-    where: { id: req.params.id },
+    attributes: ["id"],
+    where: { id: userId },
   })
     .then((userFound) => {
       if (!isAdmin && userFound.id != userId) {
@@ -44,14 +44,15 @@ exports.editUserProfile = (req, res, next) => {
       }
       userFound
         .update({
+          UserId: userId,
           bio: bio ? bio : userFound.bio,
           lastName: lastName ? lastName : userFound.lastName,
           firstName: firstName ? firstName : userFound.firstName,
         })
         .then(() => {
-          return res
-            .status(202)
-            .json({ Message: "Modifications effectuées !" });
+          return res.status(202).json({
+            Message: "Modifications effectuées !",
+          });
         })
         .catch(() => {
           return res.status(500).json({ error: "Échec de l'édit utilisateur" });

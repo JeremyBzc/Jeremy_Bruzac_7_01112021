@@ -48,6 +48,9 @@ export default {
   props: ['displayEditing', 'toggleModaleEditing'],
   data() {
     return {
+      userId: this.$store.state.users.user.userId,
+      token: this.$store.state.users.user.token,
+      password: this.$store.state.users.user.password,
       firstName: '',
       lastName: '',
       bio: '',
@@ -57,12 +60,16 @@ export default {
     editUserProfile() {
       this.$store
         .dispatch('editUserProfile', {
+          userId: this.userId,
+          token: this.token,
+          password: this.password,
           firstName: this.firstName,
           lastName: this.lastName,
           bio: this.bio,
         })
         .then(() => {
           console.log('Vos informations ont bien été modifiées !')
+          console.log(this.user)
           //window.location.reload()
         })
         .catch((error) => {
@@ -72,7 +79,7 @@ export default {
   },
   computed: {
     ...mapState({
-      computedUser: (state) => state.users.user,
+      user: (state) => state.users.user,
     }),
   },
 }

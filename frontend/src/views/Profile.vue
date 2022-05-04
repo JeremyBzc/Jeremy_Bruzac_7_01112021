@@ -100,20 +100,6 @@ export default {
     toggleModaleEditing() {
       this.displayEditing = !this.displayEditing
     },
-    // editUserProfile() {
-    //   this.$store
-    //     .dispatch('editUserProfile', {
-    //       firstName: this.firstName,
-    //       lastName: this.lastName,
-    //       bio: this.bio,
-    //     })
-    //     .then(() => {
-    //       console.log('Vos informations ont bien été modifiées !')
-    //     })
-    //     .catch((error) => {
-    //       console.log(error)
-    //     })
-    // },
     logOut() {
       this.$store.commit('logout')
       this.$router.push('/login')

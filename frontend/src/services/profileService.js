@@ -4,10 +4,10 @@ export default {
   getUserProfile(userId) {
     return apiGrp.get(`profiles/${userId}`)
   },
-  editUserProfile(userId, user) {
-    return apiGrp.put(`profiles/${userId}`, user)
+  editUserProfile(userId, userInfos) {
+    return apiGrp.put(`profiles/${userId}`, userInfos)
   },
-  deleteUserProfile(user) {
-    return apiGrp.delete(`profiles/${userId}`, user)
+  deleteUserProfile(userId) {
+    return apiGrp.delete(`profiles/${userId}`)
   },
 }

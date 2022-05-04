@@ -83,11 +83,18 @@ export default {
     },
     editUserProfile: async ({ commit }, userInfos) => {
       try {
-        console.log(userInfos)
-        const user = await profileService.editUserProfile(userInfos)
-        commit('logUser', user.data)
+        await profileService.editUserProfile(userInfos)
+        commit('logUser', userInfos)
       } catch {
         commit('setStatus', 'error_update')
+      }
+    },
+    deleteUserProfile: ({ commit }) => {
+      try {
+        profileService.deleteUserProfile()
+        commit('logout')
+      } catch (error) {
+        commit('setStatus', 'error_delete')
       }
     },
   },
