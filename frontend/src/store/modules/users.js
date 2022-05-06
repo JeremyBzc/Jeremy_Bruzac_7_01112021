@@ -89,7 +89,7 @@ export default {
     editUserProfile: async ({ commit }, userInfos) => {
       try {
         await profileService.editUserProfile(userInfos)
-        commit('logUser', userInfos)
+        commit('updateProfile', userInfos)
       } catch {
         commit('setStatus', 'error_update')
       }

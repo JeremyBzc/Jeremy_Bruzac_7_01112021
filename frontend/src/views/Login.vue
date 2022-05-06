@@ -156,10 +156,7 @@ export default {
           password: this.password,
         })
         .then(() => {
-          if (this.$store.state.users.user.userId != -1) {
-            self.$router.push('/profile')
-            self.$store.dispatch('limitedAccess', false)
-          }
+          self.$router.push('/profile')
         })
         .catch((error) => {
           console.log(error)
@@ -194,7 +191,7 @@ export default {
         }
       }
     },
-    ...mapState(['status', 'limitedAccess']),
+    ...mapState(['status']),
   },
 }
 </script>

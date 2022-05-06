@@ -111,6 +111,7 @@ export default {
     )
     this.user = response.data
   },
+
   computed: {
     ...mapState({
       computedUser: (state) => state.users.user,

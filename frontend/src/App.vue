@@ -13,17 +13,17 @@
           <b-navbar-nav>
             <b-nav-item class="pr-4" to="/">Accueil</b-nav-item>
             <b-nav-item class="pr-4" to="/about">L'entreprise</b-nav-item>
-            <b-nav-item class="pr-4" to="/forum" v-if="!isLimitedAccess"
+            <b-nav-item class="pr-4" to="/forum" v-if="autorisedUser"
               >Le Forum</b-nav-item
             >
             <!-- Navbar dropdowns -->
             <b-nav-item-dropdown text="Compte" right>
-              <b-dropdown-item v-if="!isLimitedAccess" to="/profile"
+              <b-dropdown-item v-if="autorisedUser" to="/profile"
                 ><b-button variant="outline-success"
                   >Votre profile</b-button
                 ></b-dropdown-item
               >
-              <b-dropdown-item v-if="isLimitedAccess" to="/login"
+              <b-dropdown-item v-if="!autorisedUser" to="/login"
                 ><b-button variant="outline-success"
                   >Se connecter</b-button
                 ></b-dropdown-item
@@ -91,6 +91,7 @@
 </style>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
@@ -99,9 +100,9 @@ export default {
     }
   },
   computed: {
-    isLimitedAccess() {
-      return this.$store.state.users.limitedAccess
-    },
+    ...mapState({
+      autorisedUser: (state) => state.users.user.userId != -1,
+    }),
   },
 }
 </script>

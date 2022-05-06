@@ -59,15 +59,13 @@ export default {
       this.$store
         .dispatch('editUserProfile', {
           userId: this.userId,
-
           firstName: this.firstName,
           lastName: this.lastName,
           bio: this.bio,
         })
         .then(() => {
           console.log('Vos informations ont bien été modifiées !')
-          console.log(this.user)
-          //window.location.reload()
+          window.location.reload()
         })
         .catch((error) => {
           console.log(error)
