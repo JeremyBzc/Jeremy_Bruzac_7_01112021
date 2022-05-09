@@ -17,8 +17,18 @@ export default {
     postInfos(state, postInfos) {
       state.posts = postInfos
     },
+    // logPost(state, post) {
+    //   localStorage.setItem('postStorage', JSON.stringify(post))
+    //   state.posts = post
+    // },
   },
   actions: {
+    getOnePost: ({ commit }) => {
+      try {
+        const post = postService.getOnePost()
+        commit('setCurrentPost', post.data)
+      } catch (error) {}
+    },
     getAllPost: ({ commit }) => {
       try {
         const post = postService.getAllPost()
@@ -26,10 +36,8 @@ export default {
       } catch (error) {}
     },
     createPost: async ({ commit }, postInfos) => {
-      console.log(postInfos)
       try {
         const post = await postService.createPost(postInfos)
-        console.log('created')
         commit('setStatus', 'Post created')
         commit('postInfos', post.data)
       } catch (error) {}

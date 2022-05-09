@@ -13,8 +13,8 @@
             {{ post.content }}
           </p>
         </div>
-        <div class="d-flex justify-content-end border-top border-success pt-3">
-          <p>Par {{ post.author }}</p>
+        <div class="d-flex justify-content-end border-top border-success">
+          <p>Par {{ post.User.firstName + ' ' + post.User.lastName }}</p>
         </div>
       </div>
     </router-link>
@@ -22,9 +22,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   props: {
     post: Object,
+  },
+  computed: {
+    ...mapState({
+      //post: (state) => state.posts.posts,
+      user: (state) => state.users.user,
+    }),
   },
 }
 </script>
@@ -33,10 +40,6 @@ export default {
   border: 2px solid #f0f0f0;
   margin-bottom: 10px;
   box-shadow: 10px 5px 15px rgba(128, 128, 128, 0.3);
-  width: 30%;
-  height: 150px;
-}
-.card-content {
-  width: 90%;
+  border-radius: 25px;
 }
 </style>

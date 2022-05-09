@@ -97,10 +97,9 @@ exports.login = (req, res, next) => {
                 ),
                 firstName: userFound.firstName,
                 lastName: userFound.lastName,
-                email: userFound.email,
+                // email: userFound.email,
                 bio: userFound.bio,
-                createdAt: userFound.createdAt,
-
+                // createdAt: userFound.createdAt,
                 Message:
                   "Vous êtes bien connecté " +
                   userFound.firstName +

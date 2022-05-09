@@ -16,7 +16,7 @@ export default {
   },
 }
 </script>
-<style>
+<style scoped>
 .card-actu {
   border: 1px solid gray;
   width: 30%;

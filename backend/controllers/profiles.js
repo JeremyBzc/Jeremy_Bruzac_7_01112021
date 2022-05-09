@@ -33,7 +33,6 @@ exports.editUserProfile = (req, res, next) => {
   const bio = req.body.bio;
   const lastName = req.body.lastName;
   const firstName = req.body.firstName;
-  console.log(req.body);
 
   models.User.findOne({
     attributes: ["id"],

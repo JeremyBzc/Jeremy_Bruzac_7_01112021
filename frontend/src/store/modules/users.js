@@ -49,9 +49,12 @@ export default {
       localStorage.removeItem('userStorage')
     },
     updateProfile(state, newInfos) {
-      state.user.firstName = newInfos.firstName
-      state.user.lastName = newInfos.lastName
-      state.user.bio = newInfos.bio
+      const newUserInfos = {
+        firstName: newInfos.firstName,
+        lastName: newInfos.lastName,
+        bio: newInfos.bio,
+      }
+      state.user = newUserInfos
     },
   },
   actions: {

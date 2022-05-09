@@ -1,12 +1,12 @@
 <template>
   <div class="forum">
     <div class="container mb-5">
-      <div class="col-lg-12 bg-success my-5">
-        <h1 class="text-light">Le Forum</h1>
+      <div class="col-lg-12 bg-success my-5 rounded">
+        <h1 class="text-light">Bienvenue sur le forum</h1>
       </div>
-      <div class="col-12 d-flex justify-content-between my-5">
+      <div class="col-12 justify-content-between bg-light p-5">
         <div
-          class="card-post rounded"
+          class="card-post rounded mb-5"
           v-for="(post, index) in posts"
           :key="index"
         >

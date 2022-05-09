@@ -1,12 +1,11 @@
 <template>
   <div class="row">
     <div class="col-12 col-lg-6 mx-auto mb-4">
-      <div class="card mb-4 mb-lg-0 border-dark shadow">
+      <div class="card mb-4 mb-lg-0">
         <div class="card-body text-center">
-          <h5 class="post-title">{{ posts.title }}</h5>
-          <p class="post-description">{{ posts.description }}</p>
-          <p class="post-author">{{ posts.author }}</p>
-          <p class="post-date">{{ posts.date }}</p>
+          <p>Lol</p>
+          <h5 class="post-title">{{ post.title }}</h5>
+          <p class="post-description">{{ post.content }}</p>
         </div>
       </div>
     </div>
@@ -15,23 +14,31 @@
 
 <script>
 import { mapState } from 'vuex'
+import postService from '../services/postService'
 export default {
   name: 'Post',
+  data() {
+    return {
+      post: {
+        postId: this.$store.state.posts.posts.id,
+        title: '',
+        content: '',
+        attachement: '',
+      },
+    }
+  },
 
-  created() {
-    this.$store.dispatch('setCurrentPost', this.computedPost.id)
-    // let postId = this.$route.params.id
-    // console.log(postId)
+  async mounted() {
+    const resPost = await postService.getOnePost()
+    this.post = resPost.data
   },
   computed: {
-    post: async () => {
-      return await this.$store.getters.getCurrentPost
-    },
+    ...mapState({
+      post: (state) => state.posts.post,
+      //user: (state) => state.users.user,
+    }),
   },
-  ...mapState({
-    computedPost: (state) => state.posts.posts,
-  }),
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>
