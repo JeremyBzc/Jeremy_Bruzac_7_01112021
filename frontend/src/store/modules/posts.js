@@ -23,9 +23,9 @@ export default {
     // },
   },
   actions: {
-    getOnePost: ({ commit }) => {
+    getOnePost: ({ commit }, id) => {
       try {
-        const post = postService.getOnePost()
+        const post = postService.getOnePost(id)
         commit('setCurrentPost', post.data)
       } catch (error) {}
     },

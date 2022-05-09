@@ -1,8 +1,8 @@
 import apiGrp from './axios'
 
 export default {
-  getOnePost(postId) {
-    return apiGrp.get(`posts/${postId}`)
+  getOnePost(id) {
+    return apiGrp.get(`posts/${id}`)
   },
   getAllPost() {
     return apiGrp.get('posts/')

@@ -35,7 +35,11 @@
       </div>
     </div>
     <div><h1>LA MÉTÉO DU JOUR</h1></div>
-    <div class="container-light"></div>
+    <div class="container-light">
+      <div class="row">
+        <WeatherCard />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -43,10 +47,11 @@
 // @ is an alias to /src
 import ActuCards from '../components/ActuCards.vue'
 import Pillars from '../components/Pillars.vue'
+import WeatherCard from '../components/WeatherCard.vue'
 
 export default {
   name: 'Home',
-  components: { ActuCards, Pillars },
+  components: { ActuCards, Pillars, WeatherCard },
   data() {
     return {
       Articles: [

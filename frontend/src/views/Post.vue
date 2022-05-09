@@ -6,6 +6,7 @@
           <p>Lol</p>
           <h5 class="post-title">{{ post.title }}</h5>
           <p class="post-description">{{ post.content }}</p>
+          <div class="post-comments">Ajouter des commentaires</div>
         </div>
       </div>
     </div>
@@ -20,7 +21,7 @@ export default {
   data() {
     return {
       post: {
-        postId: this.$store.state.posts.posts.id,
+        postId: this.$store.state.posts.post.id,
         title: '',
         content: '',
         attachement: '',
@@ -34,8 +35,8 @@ export default {
   },
   computed: {
     ...mapState({
-      post: (state) => state.posts.post,
-      //user: (state) => state.users.user,
+      post: (state) => state.posts.currentPost,
+      user: (state) => state.users.user,
     }),
   },
 }

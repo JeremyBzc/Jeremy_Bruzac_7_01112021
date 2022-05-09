@@ -58,7 +58,7 @@ const routes = [
     },
   },
   {
-    path: '/forum/:postId',
+    path: '/forum/:id',
     name: 'Forum',
     component: Post,
     meta: {
