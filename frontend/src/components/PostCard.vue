@@ -7,7 +7,10 @@
       <div class="p-3">
         <div class="d-flex flex-column align-items-start">
           <p class="card-title font-weight-bolder">
-            {{ post.title }}
+            <font-awesome-icon
+              :icon="['fas-solid', 'fa-globe']"
+              class="network-icon"
+            />{{ post.title }}
           </p>
           <p class="card-content text-truncate" for="description">
             {{ post.content }}
@@ -41,5 +44,9 @@ export default {
   margin-bottom: 10px;
   box-shadow: 10px 5px 15px rgba(128, 128, 128, 0.3);
   border-radius: 25px;
+}
+.network-icon {
+  color: #28a828;
+  padding: 5px;
 }
 </style>

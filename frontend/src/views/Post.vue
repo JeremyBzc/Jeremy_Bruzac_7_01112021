@@ -1,13 +1,47 @@
 <template>
-  <div class="row">
-    <div class="col-12 col-lg-6 mx-auto mb-4">
-      <div class="mb-4 mb-lg-0">
-        <div v-if="post" class="card-body text-center">
-          <h5 class="post-title">{{ post.title }}</h5>
-          <p class="post-description">{{ post.content }}</p>
-          <div class="post-comments">Ajouter des commentaires</div>
-          <textarea v-model="comment"></textarea>
-          <button @click="SubmitCom">Ajouter</button>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-6 mx-auto mb-4">
+        <div class="mb-4 mb-lg-0">
+          <div v-if="post" class="card-body">
+            <div
+              class="container-card p-3 d-flex flex-column align-items-start"
+            >
+              <div class="post-header d-flex justify-content-between">
+                <div class="post-user d-flex flex-column align-items-start">
+                  <h5>{{ post.User.firstName + ' ' + post.User.lastName }}</h5>
+                  <p>{{ post.createdAt }}</p>
+                </div>
+                <div v-if="!userPost">
+                  <font-awesome-icon
+                    :icon="['fa-solid', 'fa-trash']"
+                    class="icon-trash"
+                  />
+                </div>
+              </div>
+              <div class="post-content bg-light">
+                <h5>{{ post.title }}</h5>
+                <p>{{ post.content }}</p>
+              </div>
+            </div>
+            <div class="post-form d-flex">
+              <a href="#" @click="ShowFormComment">
+                <font-awesome-icon
+                  :icon="['fa-solid', 'fa-message']"
+                  class="icon-message"
+                />
+                0 commentaires</a
+              >
+            </div>
+            <div v-if="display" class="footer-card border-top border-success">
+              <div class="d-flex flex-column mt-3">
+                <textarea v-model="comment"></textarea>
+                <button class="btn btn-success" @click="SubmitCom">
+                  Ajouter
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -24,6 +58,9 @@ export default {
       post: null,
       comments: null,
       comment: '',
+      display: false,
+      count: '',
+      userPost: '',
     }
   },
 
@@ -49,8 +86,22 @@ export default {
       }
       await postService.createComment(payload)
     },
+    ShowFormComment() {
+      this.display = true
+    },
   },
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.post-form a {
+  text-decoration: none;
+  color: black;
+}
+.icon-message {
+  color: #c0c0c0;
+}
+.post-header {
+  width: 100%;
+}
+</style>

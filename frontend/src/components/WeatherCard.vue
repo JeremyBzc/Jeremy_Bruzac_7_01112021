@@ -39,7 +39,7 @@ export default {
     return {
       requete: '',
       temps: undefined,
-      api_code: 'aad5cd380529a325be6ae25f39925497',
+      api_code: '',
       url_search: 'https://api.openweathermap.org/data/2.5/weather?',
     }
   },
