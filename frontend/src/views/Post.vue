@@ -12,11 +12,19 @@
                   <h5>{{ post.User.firstName + ' ' + post.User.lastName }}</h5>
                   <p>{{ post.createdAt }}</p>
                 </div>
-                <div v-if="!userPost">
-                  <font-awesome-icon
-                    :icon="['fa-solid', 'fa-trash']"
-                    class="icon-trash"
-                  />
+                <div>
+                  <button class="user-settings">
+                    <font-awesome-icon
+                      :icon="['fa-solid', 'fa-trash']"
+                      class="icon-trash"
+                    />Supprimer
+                  </button>
+                  <button class="user-settings">
+                    <font-awesome-icon
+                      :icon="['fa-solid', 'fa-pen-to-square']"
+                      class="icon-trash mr-1"
+                    />Modifier
+                  </button>
                 </div>
               </div>
               <div class="post-content bg-light">
@@ -30,8 +38,8 @@
                   :icon="['fa-solid', 'fa-message']"
                   class="icon-message"
                 />
-                0 commentaires</a
-              >
+                Écrivez votre commentaire !
+              </a>
             </div>
             <div v-if="display" class="footer-card border-top border-success">
               <div class="d-flex flex-column mt-3">
@@ -39,6 +47,18 @@
                 <button class="btn btn-success" @click="SubmitCom">
                   Ajouter
                 </button>
+              </div>
+            </div>
+            <div
+              v-for="(comment, index) in comments"
+              :key="index"
+              class="comments-area card-body"
+            >
+              <div :comment="comment">
+                <div>{{}}</div>
+                <div>
+                  {{ comment.content }}
+                </div>
               </div>
             </div>
           </div>
@@ -59,8 +79,7 @@ export default {
       comments: null,
       comment: '',
       display: false,
-      count: '',
-      userPost: '',
+      // count: '',
     }
   },
 
@@ -80,7 +99,7 @@ export default {
   methods: {
     async SubmitCom() {
       const payload = {
-        userId: this.user.userId,
+        UserId: this.user.userId,
         PostId: this.$route.params.id,
         content: this.comment,
       }
@@ -101,7 +120,12 @@ export default {
 .icon-message {
   color: #c0c0c0;
 }
-.post-header {
+.user-settings {
+  border: none;
+  background-color: transparent;
+}
+.post-header,
+.post-content {
   width: 100%;
 }
 </style>

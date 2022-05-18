@@ -3,16 +3,16 @@ const models = require("../models");
 
 //Create comment
 exports.createComment = (req, res, next) => {
-  const userId = req.params.userId;
-  //   models.Post.findOne({
-  //     where: { id: req.params.postId },
-  //   });
+  const userId = res.locals.userId;
+  models.Post.findOne({
+    where: { id: req.params.postId },
+  });
   models.Comment.create({
-    userId: userId,
-    postId: req.params.postId,
+    UserId: userId,
+    PostId: req.params.postId,
     content: req.body.content,
   })
-    .then(() => res.status(201).json({ message: "Commentaire créé", comment }))
+    .then(() => res.status(201).json({ message: "Commentaire créé" }))
     .catch((error) => res.status(400).json({ error }));
 };
 
