@@ -7,27 +7,32 @@
             <div
               class="container-card p-3 d-flex flex-column align-items-start"
             >
-              <div class="post-header d-flex justify-content-between">
+              <div class="post-header d-flex justify-content-between mb-3">
                 <div class="post-user d-flex flex-column align-items-start">
                   <h5>{{ post.User.firstName + ' ' + post.User.lastName }}</h5>
                   <p>{{ post.createdAt }}</p>
                 </div>
-                <div>
-                  <button class="user-settings">
-                    <font-awesome-icon
-                      :icon="['fa-solid', 'fa-trash']"
-                      class="icon-trash"
-                    />Supprimer
+                <div class="d-flex flex-column align-items-end">
+                  <button @click="ShowSettings" class="user-settings">
+                    <font-awesome-icon :icon="['fa-solid', 'fa-ellipsis']" />
                   </button>
-                  <button class="user-settings">
-                    <font-awesome-icon
-                      :icon="['fa-solid', 'fa-pen-to-square']"
-                      class="icon-trash mr-1"
-                    />Modifier
-                  </button>
+                  <div v-if="settings" class="border card-body">
+                    <button class="user-settings">
+                      <font-awesome-icon
+                        :icon="['fa-solid', 'fa-trash']"
+                        class="icon-trash"
+                      />Supprimer
+                    </button>
+                    <button class="user-settings">
+                      <font-awesome-icon
+                        :icon="['fa-solid', 'fa-pen-to-square']"
+                        class="icon-trash mr-1"
+                      />Modifier
+                    </button>
+                  </div>
                 </div>
               </div>
-              <div class="post-content bg-light">
+              <div class="post-content bg-light rounded p-3">
                 <h5>{{ post.title }}</h5>
                 <p>{{ post.content }}</p>
               </div>
@@ -55,8 +60,8 @@
               class="comments-area card-body"
             >
               <div :comment="comment">
-                <div>{{}}</div>
-                <div>
+                <div></div>
+                <div class="bg-light rounded p-3">
                   {{ comment.content }}
                 </div>
               </div>
@@ -79,7 +84,7 @@ export default {
       comments: null,
       comment: '',
       display: false,
-      // count: '',
+      settings: false,
     }
   },
 
@@ -108,6 +113,9 @@ export default {
     ShowFormComment() {
       this.display = true
     },
+    ShowSettings() {
+      this.settings = true
+    },
   },
 }
 </script>
@@ -123,6 +131,13 @@ export default {
 .user-settings {
   border: none;
   background-color: transparent;
+}
+.user-settings:focus {
+  background-color: #c0c0c0;
+  width: 30px;
+  height: 30px;
+
+  border-radius: 100%;
 }
 .post-header,
 .post-content {
