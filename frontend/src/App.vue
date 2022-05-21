@@ -4,13 +4,12 @@
       <div>
         <b-navbar
           type="light"
-          variant="success"
-          class="d-flex justify-content-between"
+          class="d-flex justify-content-between bg-success"
         >
           <div class="Brand">
             <img src="@/assets/Logo_groupomania2.png" alt="Logo Groupomania" />
           </div>
-          <b-navbar-nav>
+          <b-navbar-nav class="">
             <b-nav-item class="pr-4" to="/">Accueil</b-nav-item>
             <b-nav-item class="pr-4" to="/about">L'entreprise</b-nav-item>
             <b-nav-item class="pr-4" to="/forum" v-if="autorisedUser"
@@ -34,18 +33,6 @@
       </div>
     </div>
     <router-view></router-view>
-    <footer class="bg-success text-center text-white">
-      <!-- Grid container -->
-      <div class="container p-4 pb-0"></div>
-      <!-- Grid container -->
-
-      <!-- Copyright -->
-      <div id="timestamp" class="text-center p-3">
-        © 2021 Copyright:
-        <a class="text-white" href="https://mdbootstrap.com/">Groupomania</a>
-      </div>
-      <!-- Copyright -->
-    </footer>
   </div>
 </template>
 

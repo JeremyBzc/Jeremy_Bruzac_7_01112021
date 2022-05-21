@@ -24,7 +24,7 @@ exports.getAllComment = (req, res, next) => {
     // include: [
     //   {
     //     model: models.User,
-    //     attributes: ["firstName", "LastName"],
+    //     attributes: ["firstName", "lastName"],
     //   },
     // ],
   })

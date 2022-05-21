@@ -4,7 +4,7 @@
       <div class="col-xl-8 m-auto order-xl-2 mb-5 mb-xl-0">
         <div class="card-profile mt-5">
           <div class="row justify-content-center">
-            <div class="col-lg-12 bg-success">
+            <div class="col-lg-12 bg-candy">
               <h1 class="text-light">Votre espace personnel</h1>
             </div>
           </div>
@@ -126,5 +126,11 @@ export default {
   border-radius: 25px;
   margin-bottom: 10px;
   box-shadow: 10px 5px 15px rgba(128, 128, 128, 0.3);
+}
+.bg-candy {
+  background-color: #be123c;
+}
+.candy {
+  color: #be123c;
 }
 </style>

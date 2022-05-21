@@ -9,7 +9,7 @@
           <p class="card-title font-weight-bolder">
             <font-awesome-icon
               :icon="['fas-solid', 'fa-globe']"
-              class="network-icon"
+              class="network-icon success"
             />{{ post.title }}
           </p>
           <p class="card-content text-truncate" for="description">
@@ -46,7 +46,6 @@ export default {
   border-radius: 25px;
 }
 .network-icon {
-  color: #28a828;
   padding: 5px;
 }
 </style>

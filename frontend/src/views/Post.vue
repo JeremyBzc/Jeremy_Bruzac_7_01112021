@@ -7,10 +7,10 @@
             <div
               class="container-card p-3 d-flex flex-column align-items-start"
             >
-              <div class="post-header d-flex justify-content-between mb-3">
+              <div class="post-header d-flex justify-content-between mb-4">
                 <div class="post-user d-flex flex-column align-items-start">
                   <h5>{{ post.User.firstName + ' ' + post.User.lastName }}</h5>
-                  <p>{{ post.createdAt }}</p>
+                  <p>{{ post.createdAt | formatDate }}</p>
                 </div>
                 <div class="d-flex flex-column align-items-end">
                   <button @click="ShowSettings" class="user-settings">

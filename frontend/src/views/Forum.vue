@@ -17,7 +17,7 @@
         <button
           v-if="mode == 'empty'"
           @click="switchToPost()"
-          class="btn btn-success"
+          class="btn bg-success text-white"
         >
           Écrire une publication
         </button>
@@ -117,4 +117,3 @@ export default {
   },
 }
 </script>
-<style></style>

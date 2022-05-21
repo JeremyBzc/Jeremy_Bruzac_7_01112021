@@ -5,8 +5,8 @@
         overlay
         img-src="https://www.bbva.com/wp-content/uploads/2018/04/equipo-startup-bbva-1-e1524492124593-1024x521.jpg"
         img-alt="Image Entreprise"
-        text-variant="success"
         title="Groupomania"
+        variant="success"
         class="Banner"
       >
         <b-card-text>
@@ -42,6 +42,15 @@
     </div>
   </div>
 </template>
+
+<style>
+.bg-candy {
+  background-color: #be123c;
+}
+.candy {
+  color: #be123c;
+}
+</style>
 
 <script>
 // @ is an alias to /src
