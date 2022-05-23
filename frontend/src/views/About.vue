@@ -1,8 +1,16 @@
 <template>
   <div class="about">
-    <div class="container">
+    <div class="container my-5">
       <div class="row">
-        <div class="col-12 bg-light">
+        <div>
+          <h3 class="mb-3">
+            <font-awesome-icon
+              :icon="['fa-solid', 'fa-globe']"
+              class="icon-grp mr-1"
+            />Notre entreprise
+          </h3>
+        </div>
+        <div class="col-12 bg-light border border-success">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
           pellentesque sit amet orci eget molestie. Duis ultricies vehicula
           augue, ac porta metus aliquam sit amet. Proin euismod ut eros et
@@ -51,3 +59,8 @@
     </div>
   </div>
 </template>
+<style>
+.icon-grp {
+  color: #be123c;
+}
+</style>

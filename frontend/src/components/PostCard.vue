@@ -5,19 +5,32 @@
       :to="`forum/${post.id}`"
     >
       <div class="p-3">
-        <div class="d-flex flex-column align-items-start">
+        <div class="d-flex justify-content-between">
           <p class="card-title font-weight-bolder">
             <font-awesome-icon
               :icon="['fas-solid', 'fa-globe']"
-              class="network-icon success"
+              class="icon-grp mr-3"
             />{{ post.title }}
           </p>
-          <p class="card-content text-truncate" for="description">
-            {{ post.content }}
-          </p>
-        </div>
-        <div class="d-flex justify-content-end border-top border-success">
-          <p>Par {{ post.User.firstName + ' ' + post.User.lastName }}</p>
+          <p>0 messages</p>
+          <div
+            class="
+              card-infos
+              d-flex
+              flex-column
+              align-items-end
+              border-left border-success
+              p-3
+            "
+          >
+            <p class="font-weight-bold">
+              Par {{ post.User.firstName + ' ' + post.User.lastName }}
+            </p>
+
+            <p class="font-weight-light">
+              Le {{ post.createdAt | formatDate }}
+            </p>
+          </div>
         </div>
       </div>
     </router-link>
@@ -45,7 +58,10 @@ export default {
   box-shadow: 10px 5px 15px rgba(128, 128, 128, 0.3);
   border-radius: 25px;
 }
-.network-icon {
-  padding: 5px;
+.card-infos {
+  line-height: 10px;
+}
+.icon-grp {
+  color: #be123c;
 }
 </style>

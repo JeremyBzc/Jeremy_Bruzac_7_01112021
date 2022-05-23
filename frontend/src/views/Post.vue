@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-12 col-lg-6 mx-auto mb-4">
         <div class="mb-4 mb-lg-0">
-          <div v-if="post" class="card-body">
+          <div v-if="post" class="card-post card-body">
             <div
               class="container-card p-3 d-flex flex-column align-items-start"
             >
@@ -16,7 +16,7 @@
                   <button @click="ShowSettings" class="user-settings">
                     <font-awesome-icon :icon="['fa-solid', 'fa-ellipsis']" />
                   </button>
-                  <div v-if="settings" class="border card-body">
+                  <div v-if="settings" class="modale-settings border card-body">
                     <button class="user-settings">
                       <font-awesome-icon
                         :icon="['fa-solid', 'fa-trash']"
@@ -142,5 +142,11 @@ export default {
 .post-header,
 .post-content {
   width: 100%;
+}
+.modale-settings {
+  z-index: 0;
+}
+.card-post {
+  z-index: 10;
 }
 </style>

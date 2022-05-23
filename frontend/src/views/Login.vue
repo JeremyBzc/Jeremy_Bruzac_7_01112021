@@ -205,4 +205,12 @@ export default {
 .card-log {
   border-radius: 25px;
 }
+.card__action {
+  text-decoration: none;
+  color: #be123c;
+  cursor: pointer;
+}
+.card__action:hover {
+  color: #be123c;
+}
 </style>
