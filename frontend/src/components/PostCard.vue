@@ -6,19 +6,30 @@
     >
       <div class="p-3">
         <div class="d-flex justify-content-between">
-          <p class="card-title font-weight-bolder">
+          <div
+            class="
+              card-title
+              d-flex
+              align-items-center
+              font-weight-bolder
+              text-truncate
+            "
+          >
             <font-awesome-icon
               :icon="['fas-solid', 'fa-globe']"
               class="icon-grp mr-3"
-            />{{ post.title }}
-          </p>
-          <p>0 messages</p>
+            />
+            <h5 class="text-truncate pl-5">{{ post.title }}</h5>
+          </div>
+          <div class="card-count d-flex align-items-center">
+            <p>0 messages</p>
+          </div>
           <div
             class="
               card-infos
               d-flex
               flex-column
-              align-items-end
+              align-items-start
               border-left border-success
               p-3
             "
@@ -39,15 +50,26 @@
 
 <script>
 import { mapState } from 'vuex'
+import postService from '../services/postService'
 export default {
   props: {
     post: Object,
+  },
+  data() {
+    return {
+      comments: this.post.Comment,
+    }
   },
   computed: {
     ...mapState({
       //post: (state) => state.posts.posts,
       user: (state) => state.users.user,
     }),
+  },
+  async created() {
+    const id = this.$route.params.id
+    const resCom = await postService.getComments(id)
+    this.comments = resCom.data
   },
 }
 </script>
@@ -59,9 +81,18 @@ export default {
   border-radius: 25px;
 }
 .card-infos {
+  width: 30%;
   line-height: 10px;
 }
+.card-title {
+  width: 40%;
+  position: relative;
+}
+
 .icon-grp {
   color: #be123c;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>

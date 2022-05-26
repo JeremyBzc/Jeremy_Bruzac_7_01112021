@@ -1,7 +1,7 @@
 <template>
   <div class="forum">
     <div class="container mb-5">
-      <div class="col-lg-12 bg-success my-5 rounded">
+      <div class="col-lg-12 bg-success my-5 py-1 rounded">
         <h1 class="text-light">Bienvenue sur le forum</h1>
       </div>
       <div class="col-12 justify-content-between bg-light p-5">

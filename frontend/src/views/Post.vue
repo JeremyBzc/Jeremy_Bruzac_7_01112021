@@ -12,7 +12,7 @@
                   <h5>{{ post.User.firstName + ' ' + post.User.lastName }}</h5>
                   <p>{{ post.createdAt | formatDate }}</p>
                 </div>
-                <div class="d-flex flex-column align-items-end">
+                <div v-if="creator" class="d-flex flex-column align-items-end">
                   <button @click="ShowSettings" class="user-settings">
                     <font-awesome-icon :icon="['fa-solid', 'fa-ellipsis']" />
                   </button>
@@ -43,7 +43,7 @@
                   :icon="['fa-solid', 'fa-message']"
                   class="icon-message"
                 />
-                Écrivez votre commentaire !
+                {{ post.length }}Écrivez votre commentaire !
               </a>
             </div>
             <div v-if="display" class="footer-card border-top border-success">
@@ -85,6 +85,8 @@ export default {
       comment: '',
       display: false,
       settings: false,
+      creator: true,
+      // count: this.comments.length,
     }
   },
 
@@ -95,6 +97,11 @@ export default {
 
     const resCom = await postService.getComments(id)
     this.comments = resCom.data
+
+    if (this.post.UserId != this.user.userId && !this.user.isAdmin) {
+      this.creator = false
+    }
+    console.log(this.user.isAdmin)
   },
   computed: {
     ...mapState({
