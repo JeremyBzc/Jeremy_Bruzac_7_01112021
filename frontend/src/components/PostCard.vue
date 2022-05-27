@@ -38,7 +38,7 @@
               Par {{ post.User.firstName + ' ' + post.User.lastName }}
             </p>
 
-            <p class="font-weight-light">
+            <p class="font-weight-light text-muted">
               Le {{ post.createdAt | formatDate }}
             </p>
           </div>

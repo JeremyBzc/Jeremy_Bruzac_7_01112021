@@ -127,12 +127,6 @@ export default {
   margin-bottom: 10px;
   box-shadow: 10px 5px 15px rgba(128, 128, 128, 0.3);
 }
-.bg-candy {
-  background-color: #be123c;
-}
-.candy {
-  color: #be123c;
-}
 .profile-section {
   font-size: 30px;
   color: rgb(190, 18, 60);

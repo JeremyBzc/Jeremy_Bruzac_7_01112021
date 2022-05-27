@@ -29,9 +29,9 @@
       <div v-else class="container-post">
         <div class="container d-flex justify-content-center">
           <div class="col-9 bg-light shadow p-3 mb-5 bg-white rounded">
-            <h1 class="h4 text-center mb-4">
+            <h4 class="text-center mb-4">
               Votre publication {{ user.firstName + ' ' + user.lastName }}
-            </h1>
+            </h4>
             <div class="form-row">
               <input
                 v-model="post.title"
@@ -54,6 +54,7 @@
                 @click.prevent="createPost()"
                 class="btn btn-success"
                 type="submit"
+                :disabled="!validatedFields"
               >
                 Envoyer
               </button>
@@ -110,6 +111,13 @@ export default {
     this.posts = response.data
   },
   computed: {
+    validatedFields() {
+      if (this.post.title != '' && this.post.content != '') {
+        return true
+      } else {
+        return false
+      }
+    },
     ...mapState({
       user: (state) => state.users.user,
       //post: (state) => state.posts.post,

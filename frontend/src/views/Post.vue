@@ -10,23 +10,26 @@
               <div class="post-header d-flex justify-content-between mb-4">
                 <div class="post-user d-flex flex-column align-items-start">
                   <h5>{{ post.User.firstName + ' ' + post.User.lastName }}</h5>
-                  <p>{{ post.createdAt | formatDate }}</p>
+                  <p class="text-muted">{{ post.createdAt | formatDate }}</p>
                 </div>
                 <div v-if="creator" class="d-flex flex-column align-items-end">
-                  <button @click="ShowSettings" class="user-settings">
+                  <button @click="ShowSettings" class="user-settings mb-2">
                     <font-awesome-icon :icon="['fa-solid', 'fa-ellipsis']" />
                   </button>
-                  <div v-if="settings" class="modale-settings border card-body">
-                    <button class="user-settings">
+                  <div
+                    v-if="settings"
+                    class="d-flex flex-column align-items-start modale-settings"
+                  >
+                    <button class="button-settings">
                       <font-awesome-icon
                         :icon="['fa-solid', 'fa-trash']"
-                        class="icon-trash"
+                        class="icon-settings"
                       />Supprimer
                     </button>
-                    <button class="user-settings">
+                    <button class="button-settings">
                       <font-awesome-icon
                         :icon="['fa-solid', 'fa-pen-to-square']"
-                        class="icon-trash mr-1"
+                        class="icon-settings mr-1"
                       />Modifier
                     </button>
                   </div>
@@ -37,21 +40,28 @@
                 <p>{{ post.content }}</p>
               </div>
             </div>
-            <div class="post-form d-flex">
-              <a href="#" @click="ShowFormComment">
+            <div
+              class="post-form d-flex justify-content-center pt-2 border-top"
+            >
+              <a @click="ShowFormComment">
                 <font-awesome-icon
                   :icon="['fa-solid', 'fa-message']"
                   class="icon-message"
                 />
-                {{ post.length }}Écrivez votre commentaire !
+                Commenter
               </a>
             </div>
-            <div v-if="display" class="footer-card border-top border-success">
+            <div v-if="display" class="footer-card">
               <div class="d-flex flex-column mt-3">
-                <textarea v-model="comment"></textarea>
-                <button class="btn btn-success" @click="SubmitCom">
-                  Ajouter
-                </button>
+                <textarea
+                  placeholder="Votre commentaire"
+                  v-model="comment"
+                ></textarea>
+                <div class="mt-2">
+                  <button class="btn btn-success" @click="SubmitCom">
+                    Ajouter
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -130,6 +140,10 @@ export default {
 .post-form a {
   text-decoration: none;
   color: black;
+  cursor: pointer;
+}
+.post-form a:hover {
+  background-color: #f0f0f0;
 }
 .icon-message {
   color: #c0c0c0;
@@ -142,7 +156,6 @@ export default {
   background-color: #c0c0c0;
   width: 30px;
   height: 30px;
-
   border-radius: 100%;
 }
 .post-header,
@@ -150,9 +163,28 @@ export default {
   width: 100%;
 }
 .modale-settings {
-  z-index: 0;
+  border: 2px solid #f0f0f0;
+  background-color: white;
+  padding: 20px;
+  border-radius: 25px;
+  box-shadow: 10px 5px 15px rgb(128 128 128 / 30%);
+  position: absolute;
+  top: 70px;
 }
 .card-post {
-  z-index: 10;
+  position: relative;
+}
+.icon-settings {
+  color: #be123c;
+  margin-right: 5px;
+}
+.button-settings {
+  border: none;
+  background-color: transparent;
+}
+.button-settings:hover {
+  background-color: rgba(190, 18, 60, 0.5);
+  color: white;
+  border-radius: 25px;
 }
 </style>
