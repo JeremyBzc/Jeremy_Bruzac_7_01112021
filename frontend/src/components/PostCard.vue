@@ -57,7 +57,7 @@ export default {
   },
   data() {
     return {
-      comments: this.post.Comment,
+      count: this.post,
     }
   },
   computed: {

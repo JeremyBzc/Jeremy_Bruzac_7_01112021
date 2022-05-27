@@ -105,6 +105,7 @@ exports.login = (req, res, next) => {
                   userFound.firstName +
                   " " +
                   userFound.lastName,
+                isAdmin: userFound.isAdmin,
               });
             } else {
               return res

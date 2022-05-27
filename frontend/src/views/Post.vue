@@ -54,16 +54,16 @@
                 </button>
               </div>
             </div>
-            <div
-              v-for="(comment, index) in comments"
-              :key="index"
-              class="comments-area card-body"
-            >
-              <div :comment="comment">
-                <div></div>
-                <div class="bg-light rounded p-3">
-                  {{ comment.content }}
-                </div>
+          </div>
+          <div
+            v-for="(comment, index) in comments"
+            :key="index"
+            class="comments-area card-body"
+          >
+            <div :comment="comment">
+              <div></div>
+              <div class="bg-light rounded p-3">
+                {{ comment.content }}
               </div>
             </div>
           </div>
@@ -98,10 +98,9 @@ export default {
     const resCom = await postService.getComments(id)
     this.comments = resCom.data
 
-    if (this.post.UserId != this.user.userId && !this.user.isAdmin) {
+    if (this.post.UserId != this.user.userId && this.user.isAdmin != true) {
       this.creator = false
     }
-    console.log(this.user.isAdmin)
   },
   computed: {
     ...mapState({
