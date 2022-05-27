@@ -17,9 +17,9 @@
                     src="../assets/Userdefault.png"
                     width="130"
                   />
-                  <h3 class="font-weight-bold">
+                  <h2 class="profile-section font-weight-bold">
                     {{ user.firstName + ' ' + user.lastName }}
-                  </h3>
+                  </h2>
                 </div>
                 <div>
                   <button @click="toggleModaleEditing" class="btn btn-dark">
@@ -33,7 +33,7 @@
               v-bind:toggleModaleEditing="toggleModaleEditing"
             />
             <div class="card-body d-flex flex-column align-items-start">
-              <h2>À propos de moi</h2>
+              <h2 class="profile-section">À propos de moi</h2>
               <div class="d-flex flex-column align-items-start">
                 <p>Prénom: {{ user.firstName }}</p>
                 <p>Nom: {{ user.lastName }}</p>
@@ -41,7 +41,7 @@
               </div>
             </div>
             <div class="card-body d-flex flex-column align-items-start">
-              <h2>Biographie</h2>
+              <h2 class="profile-section">Biographie</h2>
               <div class="d-flex flex-column align-items-start">
                 <p v-if="user.bio">{{ user.bio }}</p>
                 <p v-else>Je suis vide de sens :( Écrivez-moi !</p>
@@ -49,7 +49,7 @@
             </div>
             <div class="card-body d-flex justify-content-between">
               <div class="d-flex flex-column align-items-start">
-                <h2>Informations sur le compte</h2>
+                <h2 class="profile-section">Informations sur le compte</h2>
                 <p>Date d'inscription: {{ user.createdAt | formatDate }}</p>
                 <div v-on:click="toggleModale" class="btn btn-danger">
                   Zone Danger
@@ -132,5 +132,9 @@ export default {
 }
 .candy {
   color: #be123c;
+}
+.profile-section {
+  font-size: 30px;
+  color: rgb(190, 18, 60);
 }
 </style>

@@ -4,7 +4,7 @@
       style="text-decoration: none; color: inherit"
       :to="`forum/${post.id}`"
     >
-      <div class="p-3">
+      <div class="p-2 rounded">
         <div class="d-flex justify-content-between">
           <div
             class="
@@ -17,7 +17,7 @@
           >
             <font-awesome-icon
               :icon="['fas-solid', 'fa-globe']"
-              class="icon-grp mr-3"
+              class="icon-grp-forum mr-3"
             />
             <h5 class="text-truncate pl-5">{{ post.title }}</h5>
           </div>
@@ -89,7 +89,7 @@ export default {
   position: relative;
 }
 
-.icon-grp {
+.icon-grp-forum {
   color: #be123c;
   position: absolute;
   top: 0;

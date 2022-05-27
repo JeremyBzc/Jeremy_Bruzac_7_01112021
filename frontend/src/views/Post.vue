@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-12 col-lg-6 mx-auto mb-4">
+      <div class="col-12 col-lg-6 mx-auto my-5">
         <div class="mb-4 mb-lg-0">
           <div v-if="post" class="card-post card-body">
             <div

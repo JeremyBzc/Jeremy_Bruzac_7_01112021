@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid class="card-body border-success p-4">
+  <b-container fluid class="card-body border-success p-4 mb-5">
     <b-row>
       <b-col>
         <b-img
