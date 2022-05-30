@@ -46,7 +46,10 @@
               <div class="post-content bg-light rounded p-3">
                 <h5>{{ post.title }}</h5>
                 <p>{{ post.content }}</p>
-                <div class="border-top text-muted font-italic">
+                <div
+                  v-if="post.User.bio"
+                  class="border-top text-muted font-italic"
+                >
                   {{ post.User.bio }}
                 </div>
               </div>
