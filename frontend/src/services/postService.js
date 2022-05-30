@@ -8,11 +8,10 @@ export default {
     return apiGrp.get('posts/')
   },
   createPost(postInfos) {
-    console.log(postInfos)
     return apiGrp.post('posts/', postInfos)
   },
-  editPost(id) {
-    return apiGrp.put(`posts/${id}`)
+  editPost(payload) {
+    return apiGrp.put(`posts/${payload.postId}`, payload.post)
   },
   deletePost(postId) {
     return apiGrp.delete(`posts/${postId}`)

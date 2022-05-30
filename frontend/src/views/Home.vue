@@ -39,7 +39,7 @@
       <div class="row">
         <div class="col-12">
           <div class="home-section mb-5"><h2>La météo du jour</h2></div>
-          <WeatherCard />
+          <MapGroupomania />
         </div>
       </div>
     </div>
@@ -68,9 +68,10 @@
 // @ is an alias to /src
 import Pillars from '../components/Pillars.vue'
 import WeatherCard from '../components/WeatherCard.vue'
+import MapGroupomania from '../components/Map.vue'
 
 export default {
   name: 'Home',
-  components: { Pillars, WeatherCard },
+  components: { Pillars, WeatherCard, MapGroupomania },
 }
 </script>

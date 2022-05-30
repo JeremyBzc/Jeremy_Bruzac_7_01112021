@@ -42,5 +42,12 @@ export default {
         commit('postInfos', post.data)
       } catch (error) {}
     },
+    editPost: async ({ commit }, payload) => {
+      try {
+        const editPost = await postService.editPost(payload)
+        commit('setStatus', 'Post modified')
+        commit('postInfos', editPost.data)
+      } catch (error) {}
+    },
   },
 }

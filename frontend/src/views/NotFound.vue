@@ -6,7 +6,4 @@
   </div>
 </template>
 
-<style>
-.img-404 {
-}
-</style>
+<style></style>

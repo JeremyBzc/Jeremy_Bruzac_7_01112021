@@ -26,7 +26,10 @@
                         class="icon-settings"
                       />Supprimer
                     </button>
-                    <button class="button-settings">
+                    <button
+                      @click="toggleModaleEditingPost"
+                      class="button-settings"
+                    >
                       <font-awesome-icon
                         :icon="['fa-solid', 'fa-pen-to-square']"
                         class="icon-settings mr-1"
@@ -35,9 +38,17 @@
                   </div>
                 </div>
               </div>
+              <modaleEditPost
+                :displayEditingPost="displayEditingPost"
+                :toggleModaleEditingPost="toggleModaleEditingPost"
+                :postId="$route.params.id"
+              />
               <div class="post-content bg-light rounded p-3">
                 <h5>{{ post.title }}</h5>
                 <p>{{ post.content }}</p>
+                <div class="border-top text-muted font-italic">
+                  {{ post.User.bio }}
+                </div>
               </div>
             </div>
             <div
@@ -85,9 +96,13 @@
 
 <script>
 import { mapState } from 'vuex'
+import ModaleEditPost from '../components/ModaleEditPost.vue'
 import postService from '../services/postService'
 export default {
   name: 'Post',
+  components: {
+    modaleEditPost: ModaleEditPost,
+  },
   data() {
     return {
       post: null,
@@ -96,6 +111,7 @@ export default {
       display: false,
       settings: false,
       creator: true,
+      displayEditingPost: false,
       // count: this.comments.length,
     }
   },
@@ -131,6 +147,9 @@ export default {
     },
     ShowSettings() {
       this.settings = true
+    },
+    toggleModaleEditingPost() {
+      this.displayEditingPost = !this.displayEditingPost
     },
   },
 }

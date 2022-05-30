@@ -30,7 +30,7 @@ exports.getOnePost = (req, res, next) => {
     include: [
       {
         model: models.User,
-        attributes: ["firstName", "lastName"],
+        attributes: ["firstName", "lastName", "bio"],
       },
     ],
   })
@@ -73,18 +73,16 @@ exports.createPost = (req, res, next) => {
 
 // Edit Post
 exports.editPost = (req, res, next) => {
-  const postObject = req.file
-    ? {
-        ...JSON.parse(req.body.post),
-        attachment: `${req.protocol}://${req.get("host")}/images/${
-          req.file.filename
-        }`,
-      }
-    : { ...req.body };
-  models.Post.update(
-    { id: req.params.id },
-    { ...postObject, id: req.params.id }
-  )
+  const postObject = req.body;
+  console.log(req.params.id);
+  //   ? {
+  //       ...JSON.parse(req.body.post),
+  //       attachment: `${req.protocol}://${req.get("host")}/images/${
+  //         req.file.filename
+  //       }`,
+  //     }
+  //   : { ...req.body };
+  models.Post.update({ ...postObject }, { where: { id: req.params.id } })
     .then(() => res.status(200).json({ message: "Post modifié !" }))
     .catch((error) => res.status(400).json({ error }));
 };

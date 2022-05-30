@@ -17,7 +17,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 // Inmport Moment.js
 import moment from 'moment'
 import 'moment/locale/fr'
-
+// Import Vue Leaflet for Maps
+import 'leaflet/dist/leaflet'
 library.add(fas)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 // Make BootstrapVue available throughout your project
