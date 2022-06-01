@@ -6,6 +6,12 @@ exports.createComment = (req, res, next) => {
   const userId = res.locals.userId;
   models.Post.findOne({
     where: { id: req.params.postId },
+    include: [
+      {
+        model: models.User,
+        attributes: ["firstName", "lastName"],
+      },
+    ],
   });
   models.Comment.create({
     UserId: userId,
@@ -20,13 +26,13 @@ exports.createComment = (req, res, next) => {
 exports.getAllComment = (req, res, next) => {
   models.Comment.findAll({
     where: { postId: req.params.postId },
-    //order: [["createdAt"]],
-    // include: [
-    //   {
-    //     model: models.User,
-    //     attributes: ["firstName", "lastName"],
-    //   },
-    // ],
+    order: [["createdAt"]],
+    include: [
+      {
+        model: models.User,
+        attributes: ["firstName", "lastName"],
+      },
+    ],
   })
     .then((result) => {
       res.status(200).json(result);

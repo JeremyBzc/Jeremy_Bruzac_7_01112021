@@ -90,7 +90,14 @@
             class="comments-area card-body"
           >
             <div :comment="comment">
-              <div></div>
+              <div class="d-flex flex-column align-items-start">
+                <div class="d-flex flex-column align-items-start">
+                  <h6>
+                    {{ comment.User.firstName + ' ' + comment.User.lastName }}
+                  </h6>
+                  <p class="text-muted">{{ comment.createdAt | formatDate }}</p>
+                </div>
+              </div>
               <div class="bg-light rounded p-3">
                 {{ comment.content }}
               </div>
@@ -159,9 +166,6 @@ export default {
     toggleModaleEditingPost() {
       this.displayEditingPost = !this.displayEditingPost
     },
-    // toggleModaleSettings() {
-    //   this.displaySettings = !this.displaySettings
-    // },
   },
 }
 </script>
