@@ -2,13 +2,16 @@
   <div class="about">
     <div class="container my-5">
       <div class="row">
-        <div>
-          <h3 class="mb-3">
+        <div class="d-flex align-items-center justify-content-between">
+          <h3 class="mr-3">
             <font-awesome-icon
               :icon="['fa-solid', 'fa-globe']"
               class="icon-grp mr-1"
-            />Notre entreprise
+            />Une entreprise familiale
           </h3>
+          <div class="red-point"></div>
+          <div class="red-point"></div>
+          <div class="red-point"></div>
         </div>
         <div class="col-12 bg-light border border-success">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
@@ -55,6 +58,12 @@
           a et risus. Vestibulum ante ipsum primis in faucibus orci luctus et
           ultrices posuere cubilia curae;
         </div>
+        <div class="d-flex border align-items-center justify-content-end">
+          <div class="red-point"></div>
+          <div class="red-point"></div>
+          <div class="red-point"></div>
+          <h3 class="mr-3">Autour de l'humain</h3>
+        </div>
       </div>
     </div>
   </div>
@@ -62,5 +71,13 @@
 <style>
 .icon-grp {
   color: #be123c;
+}
+.red-point {
+  border: 1px solid #be123c;
+  background-color: #be123c;
+  border-radius: 100%;
+  height: 10px;
+  width: 10px;
+  margin-right: 5px;
 }
 </style>

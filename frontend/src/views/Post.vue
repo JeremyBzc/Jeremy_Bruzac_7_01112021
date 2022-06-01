@@ -17,7 +17,7 @@
                     <font-awesome-icon :icon="['fa-solid', 'fa-ellipsis']" />
                   </button>
                   <div
-                    v-if="settings"
+                    v-if="displaySettings"
                     class="d-flex flex-column align-items-start modale-settings"
                   >
                     <button class="button-settings">
@@ -112,7 +112,7 @@ export default {
       comments: null,
       comment: '',
       display: false,
-      settings: false,
+      displaySettings: false,
       creator: true,
       displayEditingPost: false,
       // count: this.comments.length,
@@ -146,14 +146,17 @@ export default {
       await postService.createComment(payload)
     },
     ShowFormComment() {
-      this.display = true
+      this.display = !this.display
     },
     ShowSettings() {
-      this.settings = true
+      this.displaySettings = !this.displaySettings
     },
     toggleModaleEditingPost() {
       this.displayEditingPost = !this.displayEditingPost
     },
+    // toggleModaleSettings() {
+    //   this.displaySettings = !this.displaySettings
+    // },
   },
 }
 </script>
