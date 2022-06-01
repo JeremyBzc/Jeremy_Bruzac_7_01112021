@@ -18,6 +18,11 @@
                   </button>
                   <div
                     v-if="displaySettings"
+                    class="overlay-settings"
+                    v-on:click="ShowSettings"
+                  ></div>
+                  <div
+                    v-if="displaySettings"
                     class="d-flex flex-column align-items-start modale-settings"
                   >
                     <button class="button-settings">
@@ -196,6 +201,15 @@ export default {
   position: absolute;
   top: 70px;
 }
+.overlay-settings {
+  background: transparent;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 .card-post {
   position: relative;
 }
