@@ -49,5 +49,11 @@ export default {
         commit('postInfos', editPost.data)
       } catch (error) {}
     },
+    deletePost: async ({ commit }, postId) => {
+      try {
+        await postService.deletePost(postId)
+        commit('setStatus', 'Post deleted')
+      } catch (error) {}
+    },
   },
 }

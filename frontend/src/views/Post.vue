@@ -23,7 +23,7 @@
                     v-if="displaySettings"
                     class="d-flex flex-column align-items-start modale-settings"
                   >
-                    <button class="button-settings">
+                    <button @click="deletePost" class="button-settings">
                       <font-awesome-icon
                         :icon="['fa-solid', 'fa-trash']"
                         class="icon-settings"
@@ -74,6 +74,7 @@
             <div v-if="display" class="footer-card">
               <div class="d-flex flex-column mt-3">
                 <textarea
+                  class="rounded"
                   placeholder="Votre commentaire"
                   v-model="comment"
                 ></textarea>
@@ -147,6 +148,7 @@ export default {
   computed: {
     ...mapState({
       user: (state) => state.users.user,
+      computedPost: (state) => state.posts.post,
     }),
   },
   methods: {
@@ -166,6 +168,16 @@ export default {
     },
     toggleModaleEditingPost() {
       this.displayEditingPost = !this.displayEditingPost
+    },
+    deletePost() {
+      this.$store
+        .dispatch('deletePost', this.post.id)
+        .then(() => {
+          // this.$router.push('/forum')
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     },
   },
 }

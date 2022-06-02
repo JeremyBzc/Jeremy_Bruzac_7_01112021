@@ -91,16 +91,16 @@ exports.editPost = (req, res, next) => {
 exports.deletePost = (req, res, next) => {
   models.Post.findOne({ id: req.params.id })
     .then((post) => {
-      const filename = post.attachment.split("/images/")[1];
-      fs.unlink(`image/${filename}`, () => {
-        models.Post.destroy({
-          where: {
-            id: req.params.id,
-          },
-        })
-          .then(() => res.status(200).json({ message: "Post supprimé !" }))
-          .catch((error) => res.status(400).json({ error }));
-      });
+      // const filename = post.attachment.split("/images/")[1];
+      // fs.unlink(`image/${filename}`, () => {
+      models.Post.destroy({
+        where: {
+          id: req.params.id,
+        },
+      })
+        .then(() => res.status(200).json({ message: "Post supprimé !" }))
+        .catch((error) => res.status(400).json({ error }));
+      // });
     })
     .catch((error) => res.status(500).json({ error: "Erreur supp" }));
 };
