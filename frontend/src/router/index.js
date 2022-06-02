@@ -11,13 +11,6 @@ import auth from '../middleware/auth'
 import VueRouterMiddleware from 'vue-route-middleware'
 
 Vue.use(VueRouter)
-// const isAuth = (to, from, next) => {
-//   if (store.state.userId) {
-//     next()
-//     return
-//   }
-//   next('/login')
-// }
 
 const routes = [
   {

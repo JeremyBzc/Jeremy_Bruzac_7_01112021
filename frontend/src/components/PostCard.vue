@@ -50,7 +50,6 @@
 
 <script>
 import { mapState } from 'vuex'
-import postService from '../services/postService'
 export default {
   props: {
     post: Object,
@@ -58,6 +57,7 @@ export default {
   data() {
     return {}
   },
+
   computed: {
     ...mapState({
       //post: (state) => state.posts.posts,

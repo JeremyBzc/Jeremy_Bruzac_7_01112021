@@ -1,7 +1,12 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-12 col-lg-6 mx-auto my-5">
+      <div class="d-flex align-items-start mt-5 return-arrow">
+        <button @click="ReturnForum" class="return-arrow">
+          <font-awesome-icon :icon="['fa-solid', 'fa-circle-arrow-left']" />
+        </button>
+      </div>
+      <div class="col-8 col-lg-6 mx-auto my-5">
         <div class="mb-4 mb-lg-0">
           <div v-if="post" class="card-post card-body">
             <div class="container-card p-3 d-flex flex-column align-items-end">
@@ -46,7 +51,7 @@
                 :toggleModaleEditingPost="toggleModaleEditingPost"
                 :postId="$route.params.id"
               />
-              <div class="post-content bg-light rounded p-3">
+              <div class="post-content rounded p-3">
                 <h5>{{ post.title }}</h5>
                 <p>{{ post.content }}</p>
                 <div
@@ -57,7 +62,9 @@
                 </div>
               </div>
               <div v-if="comments.length" class="text-muted mt-1">
-                {{ comments.length + ' ' }}Commentaires
+                <button @click="ShowComments" class="button-settings">
+                  {{ comments.length + ' ' }}Commentaires
+                </button>
               </div>
             </div>
             <div
@@ -86,22 +93,26 @@
               </div>
             </div>
           </div>
-          <div
-            v-for="(comment, index) in comments"
-            :key="index"
-            class="comments-area card-body"
-          >
-            <div :comment="comment">
-              <div class="d-flex flex-column align-items-start">
-                <div class="d-flex flex-column align-items-start">
-                  <h6>
-                    {{ comment.User.firstName + ' ' + comment.User.lastName }}
-                  </h6>
-                  <p class="text-muted">{{ comment.createdAt | formatDate }}</p>
+          <div v-if="displayComments" class="bloc-comments">
+            <div
+              v-for="(comment, index) in comments"
+              :key="index"
+              class="comments-area card-body"
+            >
+              <div :comment="comment">
+                <div class="d-flex flex-column align-items-start border-bottom">
+                  <div class="d-flex flex-column align-items-start">
+                    <h6>
+                      {{ comment.User.firstName + ' ' + comment.User.lastName }}
+                    </h6>
+                    <p class="text-muted mb-0">
+                      {{ comment.createdAt | formatDate }}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div class="bg-light rounded p-3">
-                {{ comment.content }}
+                <div class="mt-2">
+                  {{ comment.content }}
+                </div>
               </div>
             </div>
           </div>
@@ -126,9 +137,10 @@ export default {
       comments: null,
       comment: '',
       display: false,
-      displaySettings: false,
       creator: true,
+      displaySettings: false,
       displayEditingPost: false,
+      displayComments: false,
     }
   },
 
@@ -139,7 +151,6 @@ export default {
 
     const resCom = await postService.getComments(id)
     this.comments = resCom.data
-    this.$emit('commentsNumber', this.comments.length)
 
     if (this.post.UserId != this.user.userId && this.user.isAdmin != true) {
       this.creator = false
@@ -160,6 +171,9 @@ export default {
       }
       await postService.createComment(payload)
     },
+    ShowComments() {
+      this.displayComments = !this.displayComments
+    },
     ShowFormComment() {
       this.display = !this.display
     },
@@ -173,17 +187,31 @@ export default {
       this.$store
         .dispatch('deletePost', this.post.id)
         .then(() => {
-          // this.$router.push('/forum')
+          this.$router.push('/forum')
         })
         .catch((error) => {
           console.log(error)
         })
+    },
+    ReturnForum() {
+      this.$router.push('/forum')
     },
   },
 }
 </script>
 
 <style scoped>
+.return-arrow {
+  font-size: 50px;
+  border: none;
+  background-color: transparent;
+  color: #be123c;
+}
+.fa-circle-arrow-left:hover {
+  border-radius: 25px;
+  background-color: rgb(190, 18, 60);
+  color: white;
+}
 .post-form a {
   text-decoration: none;
   color: black;
@@ -241,6 +269,10 @@ export default {
 .button-settings:hover {
   background-color: rgba(190, 18, 60, 0.5);
   color: white;
+  border-radius: 25px;
+}
+.bloc-comments {
+  border-left: 5px solid #be123c;
   border-radius: 25px;
 }
 </style>
