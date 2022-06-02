@@ -56,20 +56,13 @@ export default {
     post: Object,
   },
   data() {
-    return {
-      count: this.post,
-    }
+    return {}
   },
   computed: {
     ...mapState({
       //post: (state) => state.posts.posts,
       user: (state) => state.users.user,
     }),
-  },
-  async created() {
-    const id = this.$route.params.id
-    const resCom = await postService.getComments(id)
-    this.comments = resCom.data
   },
 }
 </script>

@@ -4,10 +4,8 @@
       <div class="col-12 col-lg-6 mx-auto my-5">
         <div class="mb-4 mb-lg-0">
           <div v-if="post" class="card-post card-body">
-            <div
-              class="container-card p-3 d-flex flex-column align-items-start"
-            >
-              <div class="post-header d-flex justify-content-between mb-4">
+            <div class="container-card p-3 d-flex flex-column align-items-end">
+              <div class="post-header d-flex justify-content-between">
                 <div class="post-user d-flex flex-column align-items-start">
                   <h5>{{ post.User.firstName + ' ' + post.User.lastName }}</h5>
                   <p class="text-muted">{{ post.createdAt | formatDate }}</p>
@@ -57,6 +55,9 @@
                 >
                   {{ post.User.bio }}
                 </div>
+              </div>
+              <div v-if="comments.length" class="text-muted mt-1">
+                {{ comments.length + ' ' }}Commentaires
               </div>
             </div>
             <div
@@ -127,7 +128,6 @@ export default {
       displaySettings: false,
       creator: true,
       displayEditingPost: false,
-      // count: this.comments.length,
     }
   },
 
@@ -138,6 +138,7 @@ export default {
 
     const resCom = await postService.getComments(id)
     this.comments = resCom.data
+    this.$emit('commentsNumber', this.comments.length)
 
     if (this.post.UserId != this.user.userId && this.user.isAdmin != true) {
       this.creator = false
