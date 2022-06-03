@@ -65,7 +65,7 @@ export default {
         })
         .then(() => {
           console.log('Vos informations ont bien été modifiées !')
-          window.location.reload()
+          this.$router.go()
         })
         .catch((error) => {
           console.log(error)

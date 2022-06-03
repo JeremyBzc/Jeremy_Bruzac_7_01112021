@@ -49,6 +49,17 @@
                 class="form-control"
               />
             </div>
+            <div class="form-row">
+              <input
+                type="file"
+                name="image"
+                id="File"
+                ref="file"
+                accept=".jpg, .jpeg, .png"
+                @change="onFileSelected"
+                class="form-control"
+              />
+            </div>
             <div class="text-center mt-4">
               <button
                 @click.prevent="createPost()"
@@ -82,7 +93,7 @@ export default {
         userId: this.$store.state.users.user.userId,
         title: '',
         content: '',
-        attachement: '',
+        attachment: '',
       },
       posts: null,
     }
@@ -94,12 +105,21 @@ export default {
     switchToEmpty() {
       this.mode = 'empty'
     },
+    onFileSelected() {
+      this.post.attachment = this.$refs.file.files[0]
+      console.log(this.post.attachment)
+    },
     createPost() {
+      const fd = new FormData()
+      fd.append('title', this.post.title)
+      fd.append('content', this.post.content)
+      fd.append('attachment', this.post.attachment)
       this.$store
-        .dispatch('createPost', this.post)
+        .dispatch('createPost', fd)
         .then(() => {
           console.log('success')
-          //window.location.reload()
+          console.log(this.post.attachment)
+          //this.$router.go()
         })
         .catch((error) => {
           console.log(error)
@@ -112,7 +132,11 @@ export default {
   },
   computed: {
     validatedFields() {
-      if (this.post.title != '' && this.post.content != '') {
+      if (
+        this.post.title != '' &&
+        this.post.content != '' &&
+        this.post.attachment != ''
+      ) {
         return true
       } else {
         return false

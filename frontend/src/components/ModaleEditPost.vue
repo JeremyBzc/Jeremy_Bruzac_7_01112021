@@ -53,7 +53,7 @@ export default {
         .dispatch('editPost', payload)
         .then(() => {
           console.log('success')
-          //window.location.reload()
+          this.$router.go()
         })
         .catch((error) => {
           console.log(error)

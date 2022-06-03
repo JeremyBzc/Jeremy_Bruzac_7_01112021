@@ -41,6 +41,7 @@ exports.getOnePost = (req, res, next) => {
 // Create Post
 exports.createPost = (req, res, next) => {
   const userId = res.locals.userId;
+
   console.log(req.body);
   if (!req.body) {
     res.status(400).send({

@@ -108,6 +108,14 @@
                     <p class="text-muted mb-0">
                       {{ comment.createdAt | formatDate }}
                     </p>
+                    <div v-if="creator">
+                      <button @click="deletePost" class="button-settings">
+                        <font-awesome-icon
+                          :icon="['fa-solid', 'fa-trash']"
+                          class="icon-settings"
+                        />Supprimer
+                      </button>
+                    </div>
                   </div>
                 </div>
                 <div class="mt-2">
@@ -155,6 +163,9 @@ export default {
     if (this.post.UserId != this.user.userId && this.user.isAdmin != true) {
       this.creator = false
     }
+    // if (this.comments.userId != this.user.userId && this.user.isAdmin != true) {
+    //   this.creator = false
+    // }
   },
   computed: {
     ...mapState({
