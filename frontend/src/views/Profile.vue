@@ -8,7 +8,7 @@
               <h1 class="text-light">Votre espace personnel</h1>
             </div>
           </div>
-          <div class="col-lg-12">
+          <div v-if="user" class="col-lg-12">
             <div class="text-center pt-8 pt-md-4 pb-0 pb-md-4">
               <div class="card-body rounded-0 d-flex justify-content-between">
                 <div class="d-flex align-items-center">
