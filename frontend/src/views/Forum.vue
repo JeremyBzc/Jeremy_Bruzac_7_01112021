@@ -119,7 +119,7 @@ export default {
         .then(() => {
           console.log('success')
           console.log(this.post.attachment)
-          //this.$router.go()
+          this.$router.go()
         })
         .catch((error) => {
           console.log(error)
@@ -132,11 +132,7 @@ export default {
   },
   computed: {
     validatedFields() {
-      if (
-        this.post.title != '' &&
-        this.post.content != '' &&
-        this.post.attachment != ''
-      ) {
+      if (this.post.title != '' && this.post.content != '') {
         return true
       } else {
         return false

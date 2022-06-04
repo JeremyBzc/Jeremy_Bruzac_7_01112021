@@ -25,6 +25,17 @@
             class="form-control text-center"
           />
         </div>
+        <div class="form-row">
+          <input
+            type="file"
+            name="image"
+            id="File"
+            ref="file"
+            accept=".jpg, .jpeg, .png"
+            @change="onFileSelected"
+            class="form-control"
+          />
+        </div>
       </div>
       <button @click.prevent="editPost()" class="btn btn-success">
         Modifier la publication
@@ -43,6 +54,7 @@ export default {
         //postId: this.post.id,
         title: '',
         content: '',
+        attachment: '',
       },
     }
   },

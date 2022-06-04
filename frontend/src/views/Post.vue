@@ -61,7 +61,10 @@
                   {{ post.User.bio }}
                 </div>
               </div>
-              <div v-if="comments.length" class="text-muted mt-1">
+              <div class="post-image">
+                <img v-if="post.attachment" :src="post.attachment" />
+              </div>
+              <div v-if="comments && comments.length" class="text-muted mt-1">
                 <button @click="ShowComments" class="button-settings">
                   {{ comments.length + ' ' }}Commentaires
                 </button>
@@ -157,8 +160,7 @@ export default {
     const resPost = await postService.getOnePost(id)
     this.post = resPost.data
 
-    const resCom = await postService.getComments(id)
-    this.comments = resCom.data
+    this.getComments(id)
 
     if (this.post.UserId != this.user.userId && this.user.isAdmin != true) {
       this.creator = false
@@ -180,7 +182,13 @@ export default {
         PostId: this.$route.params.id,
         content: this.comment,
       }
-      await postService.createComment(payload)
+      const id = this.$route.params.id
+      try {
+        await postService.createComment(payload)
+        this.getComments(id)
+      } catch (e) {
+        console.log(e)
+      }
     },
     ShowComments() {
       this.displayComments = !this.displayComments
@@ -206,6 +214,10 @@ export default {
     },
     ReturnForum() {
       this.$router.push('/forum')
+    },
+    async getComments(id) {
+      const resCom = await postService.getComments(id)
+      this.comments = resCom.data
     },
   },
 }

@@ -41,7 +41,6 @@ exports.getOnePost = (req, res, next) => {
 // Create Post
 exports.createPost = (req, res, next) => {
   const userId = res.locals.userId;
-
   console.log(req.body);
   if (!req.body) {
     res.status(400).send({
@@ -93,7 +92,7 @@ exports.deletePost = (req, res, next) => {
   models.Post.findOne({ id: req.params.id })
     .then((post) => {
       // const filename = post.attachment.split("/images/")[1];
-      // fs.unlink(`image/${filename}`, () => {
+      // fs.unlink(`attachment/${filename}`, () => {
       models.Post.destroy({
         where: {
           id: req.params.id,
