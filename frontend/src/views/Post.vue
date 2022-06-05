@@ -51,7 +51,7 @@
                 :toggleModaleEditingPost="toggleModaleEditingPost"
                 :postId="$route.params.id"
               />
-              <div class="post-content rounded p-3">
+              <div class="post-content rounded p-3 border">
                 <h5>{{ post.title }}</h5>
                 <p>{{ post.content }}</p>
                 <div
@@ -64,27 +64,31 @@
               <div class="post-image">
                 <img v-if="post.attachment" :src="post.attachment" />
               </div>
-              <div v-if="comments && comments.length" class="text-muted mt-1">
-                <button @click="ShowComments" class="button-settings">
-                  {{ comments.length + ' ' }}Commentaires
-                </button>
+              <div class="post-infos d-flex align-items-ends">
+                <div v-if="!post.likes" class="text-muted">
+                  {{ post.likes }}J'aimes
+                </div>
+                <div v-if="comments && comments.length" class="text-muted mt-1">
+                  <button @click="ShowComments" class="button-settings">
+                    {{ comments.length + ' ' }}Commentaires
+                  </button>
+                </div>
               </div>
             </div>
             <div
               class="post-form d-flex justify-content-around pt-2 border-top"
             >
-              <button class="button-settings">
+              <button class="button-infos">
                 <font-awesome-icon
                   :icon="['fa-solid', 'fa-thumbs-up']"
-                  class="icon-settings"
-                />J'aime
-              </button>
-              <button class="button-settings" @click="ShowFormComment">
-                <font-awesome-icon
-                  :icon="['fa-solid', 'fa-message']"
-                  class="icon-settings"
+                  class="infos-icon"
                 />
-                Commenter
+              </button>
+              <button class="button-infos" @click="ShowFormComment">
+                <font-awesome-icon
+                  :icon="['fa-solid', 'fa-comment']"
+                  class="infos-icon"
+                />
               </button>
             </div>
             <div v-if="display" class="footer-card">
@@ -267,12 +271,13 @@ export default {
   border: none;
   background-color: transparent;
 }
+.user-settings:hover,
 .user-settings:focus {
-  background-color: #c0c0c0;
-  width: 30px;
-  height: 30px;
+  background-color: rgba(190, 18, 60, 0.5);
+  color: white;
   border-radius: 100%;
 }
+
 .post-header,
 .post-content {
   width: 100%;
@@ -301,7 +306,17 @@ export default {
   color: #be123c;
   margin-right: 5px;
 }
-
+.infos-icon {
+  font-size: 20px;
+  color: #6c767d;
+}
+.infos-icon:hover {
+  color: rgba(190, 18, 60, 0.5);
+}
+.button-infos {
+  border: none;
+  background-color: transparent;
+}
 .button-settings {
   border: none;
   background-color: transparent;
