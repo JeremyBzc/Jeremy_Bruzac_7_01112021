@@ -157,14 +157,9 @@ export default {
 
   async created() {
     const id = this.$route.params.id
-    const resPost = await postService.getOnePost(id)
-    this.post = resPost.data
-
+    this.getOnePost(id)
     this.getComments(id)
 
-    if (this.post.UserId != this.user.userId && this.user.isAdmin != true) {
-      this.creator = false
-    }
     // if (this.comments.userId != this.user.userId && this.user.isAdmin != true) {
     //   this.creator = false
     // }
@@ -206,7 +201,8 @@ export default {
       this.$store
         .dispatch('deletePost', this.post.id)
         .then(() => {
-          this.$router.push('/forum')
+          alert('Message supprimé !')
+          this.ReturnForum()
         })
         .catch((error) => {
           console.log(error)
@@ -218,6 +214,24 @@ export default {
     async getComments(id) {
       const resCom = await postService.getComments(id)
       this.comments = resCom.data
+    },
+    async getOnePost(id) {
+      const resPost = await postService.getOnePost(id)
+      this.post = resPost.data
+      try {
+        if (this.post.UserId != this.user.userId && this.user.isAdmin != true) {
+          this.creator = false
+        }
+      } catch (e) {
+        console.log(e)
+        alert("Ce n'est pas chez vous !")
+      }
+    },
+    showUserSettings() {
+      try {
+      } catch (e) {
+        console.log(e)
+      }
     },
   },
 }

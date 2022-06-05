@@ -13,18 +13,6 @@
           <PostCard :post="post" />
         </div>
       </div>
-      <div v-if="posts" class="my-5">
-        <button
-          v-if="mode == 'empty'"
-          @click="switchToPost()"
-          class="btn bg-success text-white"
-        >
-          Écrire une publication
-        </button>
-        <button v-else @click="switchToEmpty()" class="btn btn-danger">
-          Annuler la publication
-        </button>
-      </div>
       <div v-if="mode == 'empty'" class="container-empty"></div>
       <div v-else class="container-post">
         <div class="container d-flex justify-content-center">
@@ -72,6 +60,18 @@
             </div>
           </div>
         </div>
+      </div>
+      <div v-if="posts" class="my-5">
+        <button
+          v-if="mode == 'empty'"
+          @click="switchToPost()"
+          class="btn bg-success text-white"
+        >
+          Écrire une publication
+        </button>
+        <button v-else @click="switchToEmpty()" class="btn btn-danger">
+          Annuler la publication
+        </button>
       </div>
     </div>
   </div>
