@@ -71,15 +71,21 @@
               </div>
             </div>
             <div
-              class="post-form d-flex justify-content-center pt-2 border-top"
+              class="post-form d-flex justify-content-around pt-2 border-top"
             >
-              <a @click="ShowFormComment">
+              <button class="button-settings">
+                <font-awesome-icon
+                  :icon="['fa-solid', 'fa-thumbs-up']"
+                  class="icon-settings"
+                />J'aime
+              </button>
+              <button class="button-settings" @click="ShowFormComment">
                 <font-awesome-icon
                   :icon="['fa-solid', 'fa-message']"
-                  class="icon-message"
+                  class="icon-settings"
                 />
                 Commenter
-              </a>
+              </button>
             </div>
             <div v-if="display" class="footer-card">
               <div class="d-flex flex-column mt-3">
@@ -160,7 +166,10 @@ export default {
     this.getOnePost(id)
     this.getComments(id)
 
-    // if (this.comments.userId != this.user.userId && this.user.isAdmin != true) {
+    // if (
+    //   this.comments.User.id != this.user.userId &&
+    //   this.user.isAdmin != true
+    // ) {
     //   this.creator = false
     // }
   },
@@ -181,6 +190,7 @@ export default {
       try {
         await postService.createComment(payload)
         this.getComments(id)
+        this.ShowFormComment()
       } catch (e) {
         console.log(e)
       }
@@ -224,15 +234,10 @@ export default {
         }
       } catch (e) {
         console.log(e)
-        alert("Ce n'est pas chez vous !")
       }
     },
-    showUserSettings() {
-      try {
-      } catch (e) {
-        console.log(e)
-      }
-    },
+    // CRÉER UNE MÉTHODE POIR ALLER AU DERNIER COMM
+    // CRÉER UNE MÉTHODE POUR CLEAR LE CHAMP
   },
 }
 </script>
@@ -257,9 +262,7 @@ export default {
 .post-form a:hover {
   background-color: #f0f0f0;
 }
-.icon-message {
-  color: #c0c0c0;
-}
+
 .user-settings {
   border: none;
   background-color: transparent;
@@ -291,7 +294,6 @@ export default {
   left: 0;
   right: 0;
 }
-
 .card-post {
   position: relative;
 }
@@ -299,6 +301,7 @@ export default {
   color: #be123c;
   margin-right: 5px;
 }
+
 .button-settings {
   border: none;
   background-color: transparent;
@@ -307,6 +310,7 @@ export default {
   background-color: rgba(190, 18, 60, 0.5);
   color: white;
   border-radius: 25px;
+  font-weight: bold;
 }
 .bloc-comments {
   border-left: 5px solid #be123c;
