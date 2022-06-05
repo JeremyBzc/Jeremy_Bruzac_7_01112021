@@ -37,7 +37,7 @@
                 class="form-control"
               />
             </div>
-            <div class="form-row">
+            <div class="form-row mt-4">
               <input
                 type="file"
                 name="image"
@@ -145,3 +145,11 @@ export default {
   },
 }
 </script>
+<style scoped>
+.form-control {
+  border-radius: 25px;
+}
+#File {
+  border: none;
+}
+</style>

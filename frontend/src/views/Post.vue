@@ -51,27 +51,29 @@
                 :toggleModaleEditingPost="toggleModaleEditingPost"
                 :postId="$route.params.id"
               />
-              <div class="post-content rounded p-3 border">
+              <div class="post-content rounded p-3">
                 <h5>{{ post.title }}</h5>
                 <p>{{ post.content }}</p>
+                <div class="post-image bg-light">
+                  <img v-if="post.attachment" :src="post.attachment" />
+                </div>
                 <div
                   v-if="post.User.bio"
-                  class="border-top text-muted font-italic"
+                  class="border-top text-muted font-italic mt-2"
                 >
                   {{ post.User.bio }}
                 </div>
               </div>
-              <div class="post-image">
-                <img v-if="post.attachment" :src="post.attachment" />
+            </div>
+            <div
+              class="post-infos d-flex justify-content-between align-items-end"
+            >
+              <div v-if="!post.likes" class="text-muted p-1">
+                {{ post.likes }}J'aimes
               </div>
-              <div class="post-infos d-flex align-items-ends">
-                <div v-if="!post.likes" class="text-muted">
-                  {{ post.likes }}J'aimes
-                </div>
-                <div v-if="comments && comments.length" class="text-muted mt-1">
-                  <button @click="ShowComments" class="button-settings">
-                    {{ comments.length + ' ' }}Commentaires
-                  </button>
+              <div v-if="comments && comments.length" class="text-muted mt-1">
+                <div @click="ShowComments" class="infos-comment p-1">
+                  {{ comments.length + ' ' }}Commentaires
                 </div>
               </div>
             </div>
@@ -94,8 +96,8 @@
             <div v-if="display" class="footer-card">
               <div class="d-flex flex-column mt-3">
                 <textarea
-                  class="rounded"
-                  placeholder="Votre commentaire"
+                  class="input-area"
+                  placeholder="Ajouter un commentaire..."
                   v-model="comment"
                 ></textarea>
                 <div class="mt-2">
@@ -195,6 +197,8 @@ export default {
         await postService.createComment(payload)
         this.getComments(id)
         this.ShowFormComment()
+        this.ShowComments()
+        this.clearForm()
       } catch (e) {
         console.log(e)
       }
@@ -224,6 +228,9 @@ export default {
     },
     ReturnForum() {
       this.$router.push('/forum')
+    },
+    clearForm() {
+      this.comment = ''
     },
     async getComments(id) {
       const resCom = await postService.getComments(id)
@@ -266,7 +273,6 @@ export default {
 .post-form a:hover {
   background-color: #f0f0f0;
 }
-
 .user-settings {
   border: none;
   background-color: transparent;
@@ -277,7 +283,6 @@ export default {
   color: white;
   border-radius: 100%;
 }
-
 .post-header,
 .post-content {
   width: 100%;
@@ -306,6 +311,12 @@ export default {
   color: #be123c;
   margin-right: 5px;
 }
+.infos-comment {
+  cursor: pointer;
+}
+.infos-comment:hover {
+  color: black;
+}
 .infos-icon {
   font-size: 20px;
   color: #6c767d;
@@ -330,5 +341,10 @@ export default {
 .bloc-comments {
   border-left: 5px solid #be123c;
   border-radius: 25px;
+}
+.input-area {
+  border-radius: 20px;
+  height: 35px;
+  padding-left: 10px;
 }
 </style>
