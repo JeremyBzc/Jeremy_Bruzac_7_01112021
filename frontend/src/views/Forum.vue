@@ -139,7 +139,6 @@ export default {
     },
     ...mapState({
       user: (state) => state.users.user,
-      //post: (state) => state.posts.post,
     }),
   },
 }

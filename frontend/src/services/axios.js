@@ -6,8 +6,6 @@ const apiGrp = axios.create({
     Accept: 'application/json',
     'Content-Type': 'application/json',
   },
-  // Authorization: `Bearer ${userToken}`, DEFINIR ?
-  // Authorizarion: 'Bearer ' + localStorage.getItem('userToken')
 })
 
 export default apiGrp

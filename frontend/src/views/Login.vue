@@ -122,7 +122,6 @@ export default {
       }
       return
     },
-    // CRÉER UNE MÉTHODE CheckUp Validité pour vérifier si l'email et le pass = bon pour éviter le then en cas d'error
 
     switchToCreatedAccount() {
       this.mode = 'create'
