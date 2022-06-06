@@ -39,7 +39,7 @@
       <div class="row">
         <div class="col-12">
           <div class="home-section mb-5"><h2>La météo du jour</h2></div>
-          <MapGroupomania />
+          <weather-card />
         </div>
       </div>
     </div>

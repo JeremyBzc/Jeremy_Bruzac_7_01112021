@@ -1,10 +1,10 @@
 <template>
   <div class="forum">
     <div class="container mb-5">
-      <div class="col-lg-12 bg-success my-5 py-1 rounded">
+      <div class="border bg-success my-5 py-1 rounded">
         <h1 class="text-light">Bienvenue sur le forum</h1>
       </div>
-      <div class="col-lg-12 justify-content-between p-5">
+      <div class="col-sm-12 justify-content-between p-5">
         <div
           class="card-post rounded mb-5"
           v-for="(post, index) in posts"
@@ -118,7 +118,6 @@ export default {
         .dispatch('createPost', fd)
         .then(() => {
           console.log('success')
-          console.log(this.post.attachment)
           this.$router.go()
         })
         .catch((error) => {

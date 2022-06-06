@@ -5,8 +5,6 @@ const fs = require("fs");
 // Get All Post
 exports.getAllPost = (req, res, next) => {
   const fields = req.query.fields;
-  // const limit = parseInt(req.query.limit);
-  // const offset = parseInt(req.query.offset);
   const order = req.query.order;
 
   models.Post.findAll({
@@ -74,14 +72,14 @@ exports.createPost = (req, res, next) => {
 // Edit Post
 exports.editPost = (req, res, next) => {
   const postObject = req.body;
-  console.log(req.params.id);
-  //   ? {
-  //       ...JSON.parse(req.body.post),
-  //       attachment: `${req.protocol}://${req.get("host")}/images/${
-  //         req.file.filename
-  //       }`,
-  //     }
-  //   : { ...req.body };
+  console.log(req.params.id)
+    ? {
+        ...JSON.parse(req.body.post),
+        attachment: `${req.protocol}://${req.get("host")}/images/${
+          req.file.filename
+        }`,
+      }
+    : { ...req.body };
   models.Post.update({ ...postObject }, { where: { id: req.params.id } })
     .then(() => res.status(200).json({ message: "Post modifié !" }))
     .catch((error) => res.status(400).json({ error }));
@@ -107,4 +105,17 @@ exports.deletePost = (req, res, next) => {
     })
     .catch((error) => res.status(500).json({ error: "Erreur supp" }));
 };
-exports.likePost = (req, res, next) => {};
+exports.likePost = (req, res) => {
+  models.Post.findOne({ id: req.params.id }).then((post) => {
+    try {
+      let { likes, userId, postId } = req.body;
+      models.Post.create(likes, userId, postId)
+        .then((newLike) => {
+          res.status(201).json(newLike);
+        })
+        .catch((error) => res.status(400).json(error));
+    } catch {
+      (error) => res.status(500).json(error);
+    }
+  });
+};

@@ -51,7 +51,6 @@ export default {
     return {
       post: {
         userId: this.$store.state.users.user.userId,
-        //postId: this.post.id,
         title: '',
         content: '',
         attachment: '',
@@ -59,8 +58,16 @@ export default {
     }
   },
   methods: {
+    onFileSelected() {
+      this.post.attachment = this.$refs.file.files[0]
+      console.log(this.post.attachment)
+    },
     editPost() {
-      const payload = { post: this.post, postId: this.postId }
+      const fd = new FormData()
+      fd.append('title', this.post.title)
+      fd.append('content', this.post.content)
+      fd.append('attachment', this.post.attachment)
+      const payload = { post: fd, postId: this.postId }
       this.$store
         .dispatch('editPost', payload)
         .then(() => {

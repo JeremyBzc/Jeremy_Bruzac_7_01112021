@@ -4,43 +4,45 @@
       style="text-decoration: none; color: inherit"
       :to="`forum/${post.id}`"
     >
-      <div class="p-2 rounded">
-        <div class="d-flex justify-content-between">
-          <div
-            class="
-              card-title
-              d-flex
-              align-items-center
-              font-weight-bolder
-              text-truncate
-            "
-          >
-            <font-awesome-icon
-              :icon="['fas-solid', 'fa-globe']"
-              class="icon-grp-forum mr-3"
-            />
-            <h5 class="text-truncate pl-5">{{ post.title }}</h5>
-          </div>
-          <div class="card-count d-flex align-items-center">
-            <p>0 messages</p>
-          </div>
-          <div
-            class="
-              card-infos
-              d-flex
-              flex-column
-              align-items-start
-              border-left border-success
-              p-3
-            "
-          >
-            <p class="font-weight-bold">
-              Par {{ post.User.firstName + ' ' + post.User.lastName }}
-            </p>
+      <div class="col-lg-12 col-md-10">
+        <div class="p-2 rounded">
+          <div class="d-flex justify-content-between">
+            <div
+              class="
+                card-title
+                d-flex
+                align-items-center
+                font-weight-bolder
+                text-truncate
+              "
+            >
+              <font-awesome-icon
+                :icon="['fas-solid', 'fa-globe']"
+                class="icon-grp-forum mr-3"
+              />
+              <h5 class="text-truncate pl-5">{{ post.title }}</h5>
+            </div>
+            <div class="card-count d-flex align-items-center">
+              <font-awesome-icon :icon="['fa-solid', 'fa-atom']" />
+            </div>
+            <div
+              class="
+                card-infos
+                d-flex
+                flex-column
+                align-items-start
+                border-left border-success
+                p-3
+              "
+            >
+              <p class="font-weight-bold">
+                Par {{ post.User.firstName + ' ' + post.User.lastName }}
+              </p>
 
-            <p class="font-weight-light text-muted">
-              Le {{ post.createdAt | formatDate }}
-            </p>
+              <p class="font-weight-light text-muted">
+                Le {{ post.createdAt | formatDate }}
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -54,10 +56,6 @@ export default {
   props: {
     post: Object,
   },
-  data() {
-    return {}
-  },
-
   computed: {
     ...mapState({
       //post: (state) => state.posts.posts,
@@ -75,7 +73,7 @@ export default {
 }
 .card-infos {
   width: 30%;
-  line-height: 10px;
+  line-height: 20px;
 }
 .card-title {
   width: 40%;
@@ -87,5 +85,11 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
+}
+@media screen and (max-width: 900px) {
+  .card-infos {
+    width: 50%;
+    line-height: 20px;
+  }
 }
 </style>

@@ -58,7 +58,9 @@
           a et risus. Vestibulum ante ipsum primis in faucibus orci luctus et
           ultrices posuere cubilia curae;
         </div>
-        <div class="d-flex border align-items-center justify-content-end">
+      </div>
+      <div class="row d-flex justify-content-end">
+        <div class="d-flex align-items-center justify-content-end">
           <div class="red-point"></div>
           <div class="red-point"></div>
           <div class="red-point"></div>

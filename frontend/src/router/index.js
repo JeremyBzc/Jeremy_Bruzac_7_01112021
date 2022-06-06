@@ -52,7 +52,7 @@ const routes = [
   },
   {
     path: '/forum/:id',
-    name: 'Forum',
+    name: 'Publication',
     component: Post,
     meta: {
       title: 'Publication',

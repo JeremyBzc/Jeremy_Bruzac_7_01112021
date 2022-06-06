@@ -39,9 +39,8 @@ exports.getAllComment = (req, res, next) => {
     })
     .catch((error) => res.status(400).json({ error }));
 };
-
 // Delete comment
-exports.deleteComment = (req, res, next) => {
+exports.deleteComment = (req, res) => {
   models.Comment.destroy({
     where: {
       id: req.params.id,

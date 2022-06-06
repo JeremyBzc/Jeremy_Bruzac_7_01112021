@@ -68,7 +68,7 @@
             <div
               class="post-infos d-flex justify-content-between align-items-end"
             >
-              <div v-if="!post.likes" class="text-muted p-1">
+              <div v-if="post.likes" class="text-muted p-1">
                 {{ post.likes }}J'aimes
               </div>
               <div v-if="comments && comments.length" class="text-muted mt-1">
@@ -80,7 +80,7 @@
             <div
               class="post-form d-flex justify-content-around pt-2 border-top"
             >
-              <button class="button-infos">
+              <button v-if="AxeImproved" class="button-infos" @click="likePost">
                 <font-awesome-icon
                   :icon="['fa-solid', 'fa-thumbs-up']"
                   class="infos-icon"
@@ -115,7 +115,7 @@
               class="comments-area card-body"
             >
               <div :comment="comment">
-                <div class="d-flex flex-column align-items-start border-bottom">
+                <div class="d-flex justify-content-between border-bottom">
                   <div class="d-flex flex-column align-items-start">
                     <h6>
                       {{ comment.User.firstName + ' ' + comment.User.lastName }}
@@ -123,14 +123,14 @@
                     <p class="text-muted mb-0">
                       {{ comment.createdAt | formatDate }}
                     </p>
-                    <div v-if="creator">
-                      <button @click="deletePost" class="button-settings">
-                        <font-awesome-icon
-                          :icon="['fa-solid', 'fa-trash']"
-                          class="icon-settings"
-                        />Supprimer
-                      </button>
-                    </div>
+                  </div>
+                  <div v-if="user.idAdmin">
+                    <button @click="deleteComment" class="button-infos">
+                      <font-awesome-icon
+                        :icon="['fa-solid', 'fa-trash']"
+                        class="infos-icon"
+                      />
+                    </button>
                   </div>
                 </div>
                 <div class="mt-2">
@@ -164,6 +164,7 @@ export default {
       displaySettings: false,
       displayEditingPost: false,
       displayComments: false,
+      AxeImproved: false,
     }
   },
 
@@ -171,13 +172,6 @@ export default {
     const id = this.$route.params.id
     this.getOnePost(id)
     this.getComments(id)
-
-    // if (
-    //   this.comments.User.id != this.user.userId &&
-    //   this.user.isAdmin != true
-    // ) {
-    //   this.creator = false
-    // }
   },
   computed: {
     ...mapState({
@@ -219,13 +213,22 @@ export default {
       this.$store
         .dispatch('deletePost', this.post.id)
         .then(() => {
-          alert('Message supprimé !')
+          confirm('Êtes-vous certain de supprimer la publication ?')
           this.ReturnForum()
         })
         .catch((error) => {
           console.log(error)
         })
     },
+    deleteComment(id, index) {
+      postService
+        .deleteComment(id, index)
+        .then(() => {
+          this.comments.splice(index, 1)
+        })
+        .catch((error) => console.log('Cannot delete comment ' + error))
+    },
+    likePost() {},
     ReturnForum() {
       this.$router.push('/forum')
     },
@@ -235,6 +238,12 @@ export default {
     async getComments(id) {
       const resCom = await postService.getComments(id)
       this.comments = resCom.data
+      for (let i = 0; i < this.comments.length; i++) {
+        let CommentId = this.comments[i].userId
+        if (CommentId === this.user.userId) {
+          this.creator = true
+        }
+      }
     },
     async getOnePost(id) {
       const resPost = await postService.getOnePost(id)
@@ -247,8 +256,8 @@ export default {
         console.log(e)
       }
     },
-    // CRÉER UNE MÉTHODE POIR ALLER AU DERNIER COMM
-    // CRÉER UNE MÉTHODE POUR CLEAR LE CHAMP
+    // CRÉER UNE MÉTHODE POIR ALLER AU DERNIER COMM ( Axe amélioration après formation)
+    // CRÉER UNE MÉTHODE POUR CLEAR LE CHAMP ( Axe amélioration après formation)
   },
 }
 </script>
