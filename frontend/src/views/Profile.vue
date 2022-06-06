@@ -17,6 +17,10 @@
                     src="../assets/Userdefault.png"
                     width="130"
                   />
+                  <modaleEdit
+                    v-bind:displayEditing="displayEditing"
+                    v-bind:toggleModaleEditing="toggleModaleEditing"
+                  />
                   <h2 class="profile-section font-weight-bold">
                     {{ user.firstName + ' ' + user.lastName }}
                   </h2>
@@ -28,10 +32,6 @@
                 </div>
               </div>
             </div>
-            <modaleEdit
-              v-bind:displayEditing="displayEditing"
-              v-bind:toggleModaleEditing="toggleModaleEditing"
-            />
             <div class="card-body d-flex flex-column align-items-start">
               <h2 class="profile-section">À propos de moi</h2>
               <div class="d-flex flex-column align-items-start">

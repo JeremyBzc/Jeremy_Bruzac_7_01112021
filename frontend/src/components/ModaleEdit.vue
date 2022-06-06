@@ -34,9 +34,11 @@
           />
         </div>
       </div>
-      <button v-on:click="editUserProfile" class="btn btn-success col-2">
-        Modifier
-      </button>
+      <div class="d-flex justify-content-center mt-3">
+        <button v-on:click="editUserProfile" class="btn btn-success">
+          Modifier
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -89,13 +91,14 @@ export default {
   right: 0;
 }
 .modale {
-  background: #f1f1f1;
+  position: absolute;
   color: #333;
   padding: 50px;
   border-radius: 25px;
 }
 .modale input {
   margin-bottom: 20px;
+  border-radius: 25px;
 }
 .btn-modale {
   position: absolute;
