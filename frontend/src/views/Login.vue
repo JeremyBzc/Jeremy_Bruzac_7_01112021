@@ -42,7 +42,7 @@
             v-model="lastName"
             placeholder="Nom"
             type="text"
-            class="form-control"
+            class="form-control mt-4"
           />
         </div>
         <br />

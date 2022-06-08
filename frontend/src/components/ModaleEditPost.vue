@@ -37,7 +37,12 @@
           />
         </div>
       </div>
-      <button @click.prevent="editPost()" class="btn btn-success">
+      <button
+        @click.prevent="editPost()"
+        :disabled="!validatedFields"
+        type="submit"
+        class="btn btn-success"
+      >
         Modifier la publication
       </button>
     </div>
@@ -68,6 +73,7 @@ export default {
       fd.append('content', this.post.content)
       fd.append('attachment', this.post.attachment)
       const payload = { post: fd, postId: this.postId }
+      console.log(payload)
       this.$store
         .dispatch('editPost', payload)
         .then(() => {
@@ -77,6 +83,15 @@ export default {
         .catch((error) => {
           console.log(error)
         })
+    },
+  },
+  computed: {
+    validatedFields() {
+      if (this.post.title != '' && this.post.content != '') {
+        return true
+      } else {
+        return false
+      }
     },
   },
 }

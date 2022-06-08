@@ -72,7 +72,7 @@ exports.createPost = (req, res, next) => {
 // Edit Post
 exports.editPost = (req, res, next) => {
   const postObject = req.body;
-  console.log(req.params.id)
+  console.log(req.body)
     ? {
         ...JSON.parse(req.body.post),
         attachment: `${req.protocol}://${req.get("host")}/images/${
@@ -87,12 +87,10 @@ exports.editPost = (req, res, next) => {
 
 // Delete Post
 exports.deletePost = (req, res, next) => {
-  models.Post.findOne({ id: req.params.id })
+  models.Post.findOne({ where: { id: req.params.id } })
     .then((post) => {
       if (post.attachment) {
-        const filename = post.attachment.split(
-          "http://localhost:3000/images/"
-        )[1];
+        const filename = post.attachment.split("/images/")[1];
         fs.unlink(`images/${filename}`, () => {});
       }
       models.Post.destroy({

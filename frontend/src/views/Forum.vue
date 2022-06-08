@@ -4,6 +4,7 @@
       <div class="border bg-success my-5 py-1 rounded">
         <h1 class="text-light">Bienvenue sur le forum</h1>
       </div>
+      <div v-if="!posts">Aucune publication pour le moment :(</div>
       <div class="col-sm-12 justify-content-between p-5">
         <div
           class="card-post rounded mb-5"

@@ -41,6 +41,10 @@ exports.getAllComment = (req, res, next) => {
 };
 // Delete comment
 exports.deleteComment = (req, res) => {
+  const userId = res.locals.userId;
+  models.Comment.findOne({
+    where: { postId: req.params.postId },
+  });
   models.Comment.destroy({
     where: {
       id: req.params.id,

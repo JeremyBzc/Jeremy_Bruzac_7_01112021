@@ -101,7 +101,12 @@
                   v-model="comment"
                 ></textarea>
                 <div class="mt-2">
-                  <button class="btn btn-success" @click="SubmitCom">
+                  <button
+                    class="btn btn-success"
+                    @click="SubmitCom"
+                    :disabled="!validatedFields"
+                    type="submit"
+                  >
                     Ajouter
                   </button>
                 </div>
@@ -111,7 +116,7 @@
           <div v-if="displayComments" class="bloc-comments">
             <div
               v-for="(comment, index) in comments"
-              :key="index"
+              :key="comment.id"
               class="comments-area card-body"
             >
               <div :comment="comment">
@@ -124,8 +129,11 @@
                       {{ comment.createdAt | formatDate }}
                     </p>
                   </div>
-                  <div v-if="user.idAdmin">
-                    <button @click="deleteComment" class="button-infos">
+                  <div v-if="comment.userId == user.userId || user.isAdmin">
+                    <button
+                      @click.prevent="deleteComment(comment.id, index)"
+                      class="button-infos"
+                    >
                       <font-awesome-icon
                         :icon="['fa-solid', 'fa-trash']"
                         class="infos-icon"
@@ -178,6 +186,13 @@ export default {
       user: (state) => state.users.user,
       computedPost: (state) => state.posts.post,
     }),
+    validatedFields() {
+      if (this.comment != '') {
+        return true
+      } else {
+        return false
+      }
+    },
   },
   methods: {
     async SubmitCom() {
@@ -222,7 +237,7 @@ export default {
     },
     deleteComment(id, index) {
       postService
-        .deleteComment(id, index)
+        .deleteComment(id)
         .then(() => {
           this.comments.splice(index, 1)
         })
@@ -238,12 +253,6 @@ export default {
     async getComments(id) {
       const resCom = await postService.getComments(id)
       this.comments = resCom.data
-      for (let i = 0; i < this.comments.length; i++) {
-        let CommentId = this.comments[i].userId
-        if (CommentId === this.user.userId) {
-          this.creator = true
-        }
-      }
     },
     async getOnePost(id) {
       const resPost = await postService.getOnePost(id)
