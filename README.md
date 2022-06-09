@@ -10,8 +10,8 @@ Spécifications fonctionnelles : https://s3-eu-west-1.amazonaws.com/course.oc-st
 
 ## La Stack
 
-- Vuejs + Vuex + Bootstrap
-- Nodejs + Express
+- Vuejs + Vuex + Bootstrap Vue
+- Nodejs + Express + ORM Sequelize
 - Mysqsl
 
 # Installation
@@ -53,13 +53,15 @@ Pour accéder à la base de données, il faudra installer **MySql** sur votre po
 
     https://www.mysql.com/downloads/
 
+Dans le terminal, à la racine du dossier backend:
+
 - Créer la base de données avec Sequelize:
 
-  `npx sequelize-cli db:create` (Dans le terminal, à la racine du dossier backend)
+  `npx sequelize-cli db:create`
 
 - Migrer les tables nécessaires avec Sequelize:
 
-  `npx sequelize-cli db:migrate` (Dans le terminal, à la racine du dossier backend)
+  `npx sequelize-cli db:migrate`
 
 ## Profil Administrateur du projet
 
