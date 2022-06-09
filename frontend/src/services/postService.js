@@ -22,7 +22,7 @@ export default {
   createComment(params) {
     return apiGrp.post(`posts/${params.PostId}/comment`, params)
   },
-  deleteComment(id) {
-    return apiGrp.delete(`posts/${id}/comments/${id}`)
+  deleteComment(commentId) {
+    return apiGrp.delete(`posts/${commentId}/comments/${commentId}`)
   },
 }

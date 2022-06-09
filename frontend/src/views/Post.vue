@@ -235,9 +235,9 @@ export default {
           console.log(error)
         })
     },
-    deleteComment(id, index) {
+    deleteComment(commentId, index) {
       postService
-        .deleteComment(id)
+        .deleteComment(commentId)
         .then(() => {
           this.comments.splice(index, 1)
         })

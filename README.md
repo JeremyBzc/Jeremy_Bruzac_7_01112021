@@ -10,30 +10,58 @@ Spécifications fonctionnelles : https://s3-eu-west-1.amazonaws.com/course.oc-st
 
 ## La Stack
 
--Vuejs + Vuex
--Nodejs + Express + Mysqsl
+- Vuejs + Vuex + Bootstrap
+- Nodejs + Express
+- Mysqsl
 
-## Installation
+# Installation
 
-Pour accéder à la base de données, il faudra installer MySql sur votre poste.
+Dans un premier temps:
 
-Créer les bases de données :
+- Clonez ce projet depuis Github
+- Ouvrir un terminal à la racine du projet qui comporte les dossiers suivants: frontend et backend
 
-CREATE DATABASE database_development_groupomania;
-CREATE DATABASE database_test_groupomania;
-CREATE DATABASE database_production_groupomania;.
+## Frontend
 
-Dans le Backend => npm install
+Ouvrir le dossier **frontend** dans le terminal puis exécuter la commande:
 
-Lancer la migration => sequelize db:migrate.
+`npm install` (pour installer toutes les dépendances du Frontend)
 
-Lancez node server ou nodemon server. La console doit vous indiquer 'Listening on port 3000'.
+puis
 
-Dans le Frontend "grouporama-app" => npm install.
+`npm run serve`
 
-Local: http://localhost:8080/
+Si le navigateur ne s'ouvre pas automatiquement allez à :
 
-## Profil Administrateur
+- http://localhost:8080
 
-Mail: Admin@Groupomania.fr
-MDP: AdminGr5
+## Backend
+
+Ouvrir le dossier **backend** dans le terminal puis exécuter la commande:
+
+`npm install` (pour installer toutes les dépendances du Backend)
+
+puis
+
+`node server`
+ou
+`nodemon server` selon votre préférence (`npm install -g nodemon` => pour installer nodemon globalement sur votre machine)
+
+## La base de données
+
+Pour accéder à la base de données, il faudra installer **MySql** sur votre poste:
+
+    https://www.mysql.com/downloads/
+
+- Créer la base de données avec Sequelize:
+
+  `npx sequelize-cli db:create` (Dans le terminal, à la racine du dossier backend)
+
+- Migrer les tables nécessaires avec Sequelize:
+
+  `npx sequelize-cli db:migrate` (Dans le terminal, à la racine du dossier backend)
+
+## Profil Administrateur du projet
+
+- Mail: _Admin@Groupomania.fr_
+- Mot de Passe: _AdminGr5_
